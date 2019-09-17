@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-vendor-page">
+    <div layout:fragment = "main_content">
+
+
+        <div> <h4> Answer <small>Home>Answer> Add</small></h4>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Answer</div>
+                            <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-question/answer-by-question/{qid}(qid=${answer.question.id})}">Close</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/instructor-answer/save/{qid}(qid=${answer.question.id})}" th:object="${answer}" enctype="multipart/form-data" method="post" >
+
+                            <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('*')}">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h4><i class="icon fa fa-ban"></i> Error </h4>
+                                <ul th:if="${#fields.hasErrors('*')}">
+                                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                                </ul>
+                            </div>
+                            <div class="row" th:if="${!#strings.isEmpty(success)}"> 
+                                <span  class="text-success"th:text="success"> </span>
+                            </div> 
+                            <div class="form-group">
+                                <input type="hidden" class="form-control"  th:field="*{id}" />
+
+                                <input type="hidden" class="form-control"  th:field="*{question}" />
+
+                                <input type="hidden" class="form-control"  th:field="*{answerno}" />
+
+                                <input type="hidden" class="form-control"  th:field="*{questionno}" />
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Question No :<span class="text-danger"> </span></label>
+                                <span  th:text="${answer.questionno}"</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Answer No :<span class="text-danger"> </span></label>
+                                <span  th:text="${answer.answerno}"</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Answer :<span class="text-danger"> *</span></label>
+                                <input type="text"  minlength=" 2" required="true" class="form-control col-sm-5" th:field="*{title}" aria-describedby="emailHelp" placeholder="Enter Answer">
+                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Book Name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mark:<span class="text-danger"> </span></label>
+                                <input type="number"  minlength=" 2" min="0" max="1" required="true" class="form-control col-sm-5" th:field="*{value}" aria-describedby="emailHelp" placeholder="Enter sub title">
+                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Book Name</span>
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>

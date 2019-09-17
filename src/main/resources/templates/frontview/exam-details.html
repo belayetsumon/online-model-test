@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="front-layout-inner-page">
+    <div layout:fragment="main_content">
+
+        <section  class="border-bottom" style="padding: 50px 0px 50px 0px;background-color: #992337;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">  
+                        <h3 class="font-weight-bold" style="color: #fff;">   <span th:text="${exam.title}"></span>  </h3>
+                        <h5 class="font-weight-bold" style="color: #fff;">   <span th:text="${exam.subtitle}"></span>  </h5>
+                        <h6 class="text-white"> <b>Instructor :</b> <span th:text="${exam.userId.name}"></span><b> Test:</b> <span th:text="${exam.test.size()}"></span><b> Price:</b><span th:text="${exam.price}"></span></h6>
+                        <div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                        <a type="button" class="btn btn-light btn-block text-danger" th:href="@{/}"><i class="far fa-heart"></i> Add Wishlist </a>
+                        <a type="button" class="btn btn-danger btn-block" th:href="@{/}"> <i class="fas fa-cart-plus"></i> Buy Now </a>
+                        
+                    </div>
+                    </section>
+
+                    <section>
+                        <div class="container">
+                            <div class="row mt-4">
+
+                                <div class="col-sm-9">
+                                    <div class="card mb-4 border-danger">
+
+                                        <div class="card-header border-danger ">
+                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Description</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="card mb-4 border-danger">
+
+                                        <div class="card-header border-danger ">
+                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Syllabus</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <div class="card mb-4 border-danger">
+
+                                        <div class="card-header border-danger ">
+                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Featured Review </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-3">
+
+                                    <div class="card border-danger" >
+                                        <div class="card-header border-danger">
+                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Category</h5>
+                                        </div>
+                                    
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>

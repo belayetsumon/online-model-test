@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-page">
+    <div layout:fragment = "main_content">
+
+
+        <section  class="border-bottom" style="padding: 50px 0px 50px 0px;background-color: #ffc107;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">  <h1 class="font-weight-bold" style="color: #fff;">   Donations </h1></div>
+                    <div class="col-sm-5 text-right" style="color: #ffffff">Home/Member/Donations</div>
+                </div>
+            </div>
+        </section>
+        
+        <section style="padding: 40px 0px 100px 0px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 ">
+                        <h1 class="text-center">Donations </h1>
+                        <div class=" row justify-content-center" style="padding: 20px 0px 80px 0px">
+                            <div class="col-md-7 text-center"> You Can Donate Us Multi Way
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-sm-6 col-md-6 ">
+
+
+                        <img  class="img-fluid img-thumbnail " th:src="@{/img/textbooks.jpg}" />
+
+                    </div> 
+                    <div class="col-sm-6 col-md-6 ">
+
+                        <div style="padding-bottom: 30px"> <h2 class="textGreen text-center"> Providing Any Charity and Educational Resource 
+                        </h2></div>
+                         <div style="padding-bottom: 30px"> <h4 class="textR text-center"> OR
+                        </h4></div>
+                         <div style="padding-bottom: 30px"> <h3 class="text-center"> Our Bank Account
+                        </h3></div>
+                        <ul class="list-unstyled">
+                            <li> Account Name: Thanar hat High School Alumni Associations</li>
+                            <li> Account Number:1234567890</li>
+                            <li> Branch:Ramna</li>
+                            <li> Bank Name: Sonali Bank bangladesh</li>
+                        </ul>
+                 
+                    </div>  
+                </div>  
+            </div>
+        </section>
+    </div>
+</div>

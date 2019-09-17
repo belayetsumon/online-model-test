@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+    <div layout:fragment = "main_content">
+        <div> <h4> Test <small>Home>Test</small></h4>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Question </div>
+                            <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/test/testdashboard/{tid}(tid=${testinfo.id})}"> Close  </a></div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <form th:action="@{/mark/save/{tid}(tid=${testinfo.id})}" th:object="${mark}" enctype="multipart/form-data" method="post" >
+                            <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('*')}">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h4><i class="icon fa fa-ban"></i> Error </h4>
+                                <ul th:if="${#fields.hasErrors('*')}">
+                                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                                </ul>
+                            </div>
+
+                            <div class="row" th:if="${!#strings.isEmpty(success)}"> 
+                                <span  class="text-success"th:text="success"> </span>
+                            </div> 
+                            <div class="form-group">
+                                <input type="hidden" class="form-control"  th:field="*{id}"  />
+                                <input type="hidden" class="form-control"  th:field="*{test}" />
+                                <input type="hidden" class="form-control"  th:field="*{question}" />
+                                <input type="hidden" class="form-control"  th:field="*{questionno}" />
+                                <input type="hidden" class="form-control"  th:field="*{questionTitle}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">  Exam name:<span class="text-danger"> </span></label>
+
+                                <span th:text="${qinfo.exam.title}"> </span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Question No:<span class="text-danger"> </span></label>
+                                <span  class=" text-danger" th:text="${qinfo.questionno}">Book Name</span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Question Title:<span class="text-danger"> </span></label>
+                                <span th:text="${qinfo.title}"> </span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Question Sub Title:<span class="text-danger"> </span></label>
+                                <span th:text="${qinfo.subtitle}"> </span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Question description:<span class="text-danger"> </span></label>
+                                <span th:text="${qinfo.description}"> </span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">  Select Answer:<span class="text-danger"> </span></label>
+
+                                <ul class="list-unstyled">
+                                    <li th:each="answerlists : ${qinfo.answer}">
+                                        <input type="radio" th:field="*{value}" th:value="${answerlists.id}" />
+                                        <label th:for="${#ids.prev('value')}" th:text="${answerlists.title}">Wireframe</label>
+                                    </li>
+                                </ul>
+
+                                <!--
+                                                                <table class="table ">
+                                                                    <tr>
+                                                                        <th scope="col">#</th>
+                                                                        <th scope="col">#</th>
+                                                                        <th scope="col">Value</th>
+                                                                        <th scope="col">Title</th>                              
+                                                                    </tr>
+                                
+                                                                    <tr th:each="answerlists,status:${qinfo.answer}">
+                                
+                                                                        <th th:text="${answerlists.id}">1</th>
+                                
+                                                                        <th th:text="${answerlists.answerno}">1</th>
+                                
+                                                                        <td th:text="${answerlists.value}">Otto</td>
+                                
+                                                                        <td th:text="${answerlists.title}"> </td>
+                                                                    </tr>
+                                
+                                                                </table>-->
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div><!--  Card body end-->
+                </div><!--  Card  end-->
+            </div><!--  Main Content  end-->
+        </div>   <!--  Layout end-->

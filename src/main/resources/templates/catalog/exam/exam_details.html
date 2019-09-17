@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+    <div layout:fragment = "main_content">
+
+        <div> <h4> Exam <small>Home>Exam </small></h4>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam Details</div>
+                            <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/exam/index}">Close</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <td> Name</td>
+                                <td> :</td>
+                                <td th:text="${exam_details.title}">Otto</td>
+
+                            </tr>
+
+                            <tr>
+                                <td> Slug</td>
+                                <td>: </td>
+                                <td th:text="${exam_details.slug}">Otto</td>
+
+                            </tr>
+
+                            <tr> <td> Image</td>
+                                <td> :</td>
+                                <td> 
+                                    <span th:if="${ not #strings.isEmpty(exam_details.imageName)}" class="badge bg-green pull-right"> 
+                                        <img  class="img-responsive" th:src="@{/files/}+${exam_details.imageName}" width="300px"  height="250px"/>
+                                    </span>
+
+                                    <span th:if="${#strings.isEmpty(exam_details.imageName)}" > Image Not Found </span></td>
+                            </tr>
+
+                            <tr> <td> Description</td>
+                                <td> :</td>
+                                <td th:text="${exam_details.description}"> </td>
+
+                            </tr>
+
+                            <tr> <td> Created</td>
+                                <td> :</td>
+                                <td>  <span th:text="${exam_details.created}"> </span> </td>
+
+                            </tr>
+
+                            <tr> <td> Created By</td>
+                                <td> :</td>
+                                <td>  <span th:text="${exam_details.createdBy}"> </span> </td>
+                            </tr>
+
+                            <tr> <td>Updated </td>
+                                <td> :</td>
+                                <td>  <span th:text="${exam_details.modified}"> </span></td>
+                            </tr>
+
+                            <tr> <td> Updated By</td>
+                                <td> :</td>
+                                <td> <span th:text="${exam_details.modifiedBy}"> </span></td>
+                            </tr>
+                            <tr> 
+                                <td> <a th:href="@{/exam/edit/{id}(id=${exam_details.id})}"> Edit  </a></td>
+
+                                <td> </td>
+
+                                <td><a th:href="@{/exam/delete/{id}(id=${exam_details.id})}"> Delete </a></td>
+                            </tr>
+
+                            <tr> 
+
+                                <td> 
+
+                                    <a  type="button" class="btn btn-sm" th:href="@{/test/save/{eid}(eid=${exam_details.id})}"> Test Start </a> 
+
+                                </td>
+
+                                <td> :</td>
+                                <td> 
+
+                                    <table class="table table-bordered">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+
+                                                <th scope="col">Test Title</th>
+                                                <th scope="col">User</th>
+
+                                                <th scope="col"> Answer List </th>
+                                                <th scope="col"> Status </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="testlists,status:${testlist}">
+                                                <td th:text="${status.count}">   </td>
+                                                <td>  
+                                                    <a th:href="@{/test/testdashboard/{tid}(tid=${testlists.id})}"> 
+
+                                                        <span th:text="${testlists.exam.title}"></span>
+
+                                                    </a> 
+
+                                                </td>
+                                                <td  th:text="${testlists.userId.name}">   </td>
+                                                <td>
+                                                    <span th:text="${testlists.mark.size()}"></span>
+                                                </td>
+                                                <td th:text="${testlists.status}"> </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div><!--  Card body end-->
+
+                    <div class="card-footer">
+                    </div> <!--  Card footer end-->
+                </div><!--  Card  end-->
+
+
+            </div>
+        </div>
+    </div></div>

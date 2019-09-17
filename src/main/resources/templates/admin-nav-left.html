@@ -1,0 +1,244 @@
+<div  th:fragment="nav-left">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h6 class="p-3"> <i class="fas fa-bars"></i> Navigation</h6>
+        </div>
+        <ul class="list-unstyled components">
+
+            <li class="active">
+                <a class="nav-link" th:href="@{/admin}">
+                    <span data-feather="file"></span>
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </li>
+
+            <li >
+                <a  href="#calalog" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+                    <i class="fas fa-tags"></i> Catalog 
+                </a>
+
+                <ul class="list-unstyled collapse" id="calalog"  >
+                    <li >
+                        <a class="nav-link" th:href="@{/productcategory/index}">
+                            <i class="far fa-file"></i>
+                            Exam Category
+                        </a>
+                    </li>
+
+                    <li >
+                        <a class="nav-link" th:href="@{/productsubcategory/index}">
+                            <i class="far fa-file"></i>
+                            Exam  Sub Category
+                        </a>
+                    </li>
+                    <li >
+                        <a class="nav-link" th:href="@{/ourproduct/index}">
+                            <i class="far fa-file"></i>
+                            Product
+                        </a>
+                    </li>
+
+                    <li >
+                        <a class="nav-link" th:href="@{/exam/index}">
+                            <i class="far fa-file"></i>
+                            Exam 
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a  href="#sales" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+                    <i class="fas fa-shopping-cart"></i> Sales 
+                </a>
+                <ul class="list-unstyled collapse" id="sales"  >
+                    <li >
+                        <a class="nav-link" th:href="@{/order/index}">
+                            <i class="far fa-file"></i>
+                            Order
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" th:href="@{/ourproduct/index}">
+                            <i class="far fa-file"></i>
+                            Return
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" th:href="@{/ourproduct/index}">
+                            <i class="far fa-file"></i>
+                            Gift
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li >
+                <a  href="#customers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+                    <i class="fas fa-user"></i> Customers
+                </a>
+
+                <ul class="list-unstyled collapse" id="customers"  >
+                    <li >
+                        <a class="nav-link" th:href="@{/productcategory/index}">
+                            <i class="far fa-file"></i>
+                            Product Category
+                        </a>
+                    </li>
+                    <li >
+                        <a class="nav-link" th:href="@{/ourproduct/index}">
+                            <i class="far fa-file"></i>
+                            Product
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a class="" th:href="@{/services/index}">
+                    <span data-feather="layers"></span>
+                    <i class="fas fa-hand-holding"></i>  Services
+                </a>
+            </li>
+
+            <li >
+                <a class="" th:href="@{/news/index}">
+                    <span data-feather="layers"></span>
+                    <i class="far fa-newspaper"></i>  News
+                </a>
+            </li>
+
+
+            <li >
+                <a href="#gallery" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-camera"></i>  Gallery
+                </a>
+                <ul class="list-unstyled collapse " id="gallery"  >
+                    <li class="">
+                        <a class="" th:href="@{/gallery/index}">
+                            <i class="far fa-file"></i>  Gallery
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" th:href="@{/images/index}">
+                            <i class="far fa-file"></i>  Gallery Image
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li >
+                <a class="" th:href="@{/contact/index}">
+                    <i class="fas fa-id-card"></i>  Contact
+                </a>
+            </li>
+
+            <li >
+                <a class="" th:href="@{/clients/index}">
+                    <span data-feather="layers"></span>
+                    <i class="fas fa-users-cog"></i>  Clients
+                </a>
+            </li>
+
+            <li class="">
+                <a class="" th:href="@{/faq/index}">
+                    <span data-feather="layers"></span>
+                    <i class="fab fa-quora"></i>  FAQ
+                </a>
+            </li>
+            <li class="">
+                <a class="" th:href="@{/testimonial/index}">
+                    <span data-feather="layers"></span>
+                    <i class="fas fa-certificate"></i>  Testimonial
+                </a>
+            </li>
+
+            <li>
+                <a href="#career" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+                    <i class="fas fa-users"></i> Career
+                </a>
+
+                <ul class="list-unstyled collapse " id="career"  >
+                    <li class="">
+                        <a class="" th:href="@{/jobcategory/index}">
+                            <i class="far fa-file"></i>
+                            Jobs Category
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" th:href="@{/jobs/index}">
+                            <i class="far fa-file"></i>
+                            Jobs
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/subscriber/index}">
+                    <span data-feather="layers"></span>
+                    <i class="fas fa-user-tag"></i> Subscribers 
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/images/index}">
+                    <span data-feather="layers"></span>
+                    <i class="far fa-file"></i>  Company Info
+                </a>
+            </li>
+            <li>
+                <a href="#user" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-users"></i> User 
+                </a>
+
+                <ul class="list-unstyled collapse " id="user"  >
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/privilege/index}">
+                            <i class="far fa-file"></i>
+                            Privilege 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/role/index}">
+                            <i class="far fa-file"></i>
+                            Role
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users/index}">
+                            <i class="far fa-file"></i>
+                            User
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="far fa-file"></i>
+                            Change Password
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="far fa-file"></i>
+                            Profile
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <ul class="list-unstyled CTAs">
+
+            <li>
+                <a href="#top" class="article">Back to Top</a>
+            </li>
+        </ul>
+    </nav>   
+
+
+</div>

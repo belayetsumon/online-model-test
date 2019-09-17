@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-vendor-page">
+    <div layout:fragment = "main_content">
+        <div> <h4> Instructor Question By Exam  <small>Home>Question By Exam</small></h4>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Question List.</div>
+                            <div class="col-sm-7 "> 
+
+                                <span th:if="${examinfo.question.size()<50}">
+                                    <a class="btn btn-success btn-sm float-right" th:href="@{/instructor-question/create/{examid}(examid=${examinfo.id})}"> Add Question</a>
+                                </span>
+                                <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/index}">Close</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <span th:if="${ not #strings.isEmpty(message)}">
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span th:text="${message}" > </span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </span>
+                        <div class="m-1">
+
+                            Exam Name:  <span th:text="${examinfo.title}"></span><br/>
+                            Total Question: <span th:text="${questionlist.size()}"></span>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+
+                                        <th scope="col">Question</th>
+                                        <th scope="col">Add Answer </th>
+
+                                        <th scope="col"> Answer List </th>
+                                        <th scope="col"> Status </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="questionlists,status:${questionlist}">
+
+                                        <th th:text="${questionlists.questionno}">1</th>
+
+
+                                        <td> <a th:href="@{/instructor-question/details/{id}(id=${questionlists.id})}" th:text="${questionlists.title}">    </a></td>
+
+                                        <td>  <a th:href="@{/instructor-question/answer-by-question/{qid}(qid=${questionlists.id})}"> Add Answer( <span th:text="${questionlists.answer.size()}"></span>) </a> </td>
+
+                                        <td>
+                                            <table class="table table-bordered">
+
+                                                <tr>
+                                                    <th scope="col">#</th>
+
+                                                    <th scope="col">Title</th> 
+                                                    <th scope="col">Value</th>
+                                                </tr>
+                                                <tbody>
+                                                    <tr th:each="answerlists,status:${questionlists.answer}">
+                                                        <th th:text="${answerlists.answerno}">1</th>
+                                                        <td th:text="${answerlists.title}"> </td>
+                                                        <td th:text="${answerlists.value}">Otto</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td th:text="${questionlists.status}">Otto</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div><!--  Card body end-->
+
+
+                </div><!--  Card  end-->
+            </div></div>
+
+    </div><!--  Main Content  end-->
+</div>   <!--  Layout end-->

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-home">
+    <div layout:fragment = "main_content">
+
+        <section class="" style="background-color: #992337;">
+            <div class="container-fluid p-5">
+
+                <h1 class="text-center text-white font-weight-bold">Attend Model Test On Your Schedule </h1>
+
+                <h3 class="text-center text-white font-weight-bold">Anywhere, Anytime </h3>
+            </div>
+        </section>
+
+
+        <section class=" pt-5 pb-5 bg-light" >
+            <div class="container ">
+
+                <div class="col-sm-12 col-md-12 ">
+                    <h1 class="text-center text-danger font-weight-bold">Exam Category</h1>
+                    
+                    <div class=" row justify-content-center" style="padding: 0px 0px 50px 0px">
+                        <div class="col-md-7 text-center"> 
+                        </div></div></div>
+
+                <div  class="row" th:if="${ not #strings.isEmpty(productcategorylist)}">
+
+                    <div class="col-sm-3 " th:each="productcategorylists,status:${productcategorylist}">
+
+                        <div class="card mb-1 bg-light" style="border:none;">
+                            <div class="card-body"> 
+                                <div class="row">
+                                    <a   type="button" class=" btn  btn-sm btn-block btn-danger" th:href="@{/front-view/sub-category-by-category/{catid}(catid=${productcategorylists.id})}" > <h4>  <span  th:text="${productcategorylists.name}">    </span> </h4> </a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div  class="row" th:if="${#strings.isEmpty(productcategorylist)}"> 
+                        <div class="col-sm-12 col-md-12 ">
+                            <h2 class="text-center text-muted"> Sorry! No  Categories Are Found. </h2>
+                        </div>
+                    </div>
+                </div>
+
+        </section>
+
+
+        <!--Contact Start -->
+        <section style="background-color: #992337;color: #ffffff;">
+            <div class="container p-4" >
+                <div class="row">
+
+                    <div class="col-sm-3 col-md-3 border-right">
+                        <div class="media ">
+                            <i class="fas fa-graduation-cap fa-2x align-self-center m-1 "></i>
+                            <div class="media-body ml-3">
+                                <h5 class="mt-0  text-white font-weight-bold">Total Student</h5>
+                                0000000
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-3 col-md-3 border-right">
+
+                        <div class="media">
+                            <i class="fas fa-user-graduate fa-2x align-self-center m-1"></i>
+                            <div class="media-body ml-3">
+                                <h5 class="mt-0  text-white font-weight-bold">Total Instructor </h5>
+                                000000
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 border-right">
+
+                        <div class="media">
+                            <i class="fas fa-chalkboard-teacher fa-2x align-self-center m-1"></i>
+                            <div class="media-body ml-3">
+                                <h5 class=" text-white font-weight-bold"> Total Exam</h5>
+                                <span th:text="${totalExam}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-3 ">
+                        <div class="media">
+                            <i class="fas fa-question fa-2x align-self-center m-1"></i>
+                            <div class="media-body ml-3">
+                                <h5 class="mt-0 text-white font-weight-bold"> Total Question</h5>
+                                <span th:text="${totalQuestion}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+
+
+
+        <!--        <section   class="bg-dark"style="padding: 40px 0px 100px 0px">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 mb-5">
+                                <h1 class="text-center text-warning font-weight-bold">
+                                    What people say?</h1>
+                            </div>
+                            <div class="col-sm-6 col-md-6 " th:each="testimoniallists,status:${testimoniallist}">
+                                <div class="media">
+        
+        
+                                    <span th:if="${ not #strings.isEmpty(testimoniallists.imageName)}" class="badge bg-green pull-right"> 
+                                        <img  class="img-responsive img-thumbnail rounded-circle" th:src="@{/files/}+${testimoniallists.imageName}" width="200" height="125"/>
+                                    </span>
+                                    <span th:if="${#strings.isEmpty(testimoniallists.imageName)}" > 
+                                        <img  class="img-responsive img-circle" th:src="@{/img/image-not-available.png}"  width="200" height="150"/> 
+                                    </span>
+        
+                                    <div class="media-body">
+        
+                                        <p class=" p-2 text-white" th:text="${testimoniallists.description}">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                        <h5 class=" text-warning text-right"  th:text="${testimoniallists.name}">Top-aligned media</h5>
+                                        <h6 class="  text-right text-white"><span th:text="${testimoniallists.designation}">Chairman</span> ,<span th:text="${testimoniallists.companyname}">Chairman</span> ,<span th:text="${testimoniallists.country}">Chairman</span></h6>
+                                    </div>
+                                </div>
+                            </div> 
+        
+        
+                        </div>  
+                    </div>
+                </section>-->
+
+
+        <section   class="pt-5 pb-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white font-weight-bold">
+                                Top Exam
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6 col-md-6 "><div class="card">
+                            <div class="card-header bg-danger text-white font-weight-bold">
+                                New Exam
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>  
+            </div>
+        </section>
+
+
+        <section   class="pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white font-weight-bold">
+                                Top Student
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 "><div class="card">
+                            <div class="card-header bg-danger text-white font-weight-bold">
+                                Top Instructor
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+
+                    </div>  
+                </div>
+        </section>
+
+        <!--  Clients Slide -->
+<!--        <section   class=""style="padding: 40px 0px 100px 0px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 ">
+                        <h1 class="text-center text-warning font-weight-bold">Latest Join Student</h1>
+                        <div class=" row justify-content-center" style="padding: 0px 0px 50px 0px">
+                            <div class="col-md-7 text-center">  .
+                            </div></div></div>
+
+                    <div class="owl-carousel owl-theme">
+
+                        <div class="item  border-warning border" th:each="clientslists,status:${clientslist}" >
+
+                            <span th:if="${ not #strings.isEmpty(clientslists.imageName)}" class="badge bg-green pull-right"> 
+                                <img  class="img-responsive" th:src="@{/files/}+${clientslists.imageName}" width="200" height="125"/>
+                            </span>
+                            <span th:if="${#strings.isEmpty(clientslists.imageName)}" > 
+                                <img  class="img-responsive" th:src="@{/img/image-not-available.png}"  width="200" height="150"/> 
+                            </span>
+
+                        </div>
+                    </div>  
+                </div>  
+            </div>
+        </section>-->
+    </div>
+</div>

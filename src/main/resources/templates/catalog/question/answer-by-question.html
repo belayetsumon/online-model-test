@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+    <div layout:fragment = "main_content">
+        <div> <h4> Answer By Question <small>Home>Answer By Question</small></h4>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Answer List </div>
+                            <div class="col-sm-7 "> 
+
+                                <span th:if="${qinfo.answer.size()<4}">
+                                    <a class="btn btn-success btn-sm float-right" th:href="@{/answer/create/{qid}(qid=${qinfo.id})}"> Add Answer</a>
+                                </span>
+                                <a class="btn btn-danger btn-sm float-right" th:href="@{/exam/question-by-exam/{examid}(examid=${qinfo.exam.id})}">Close</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <span th:if="${ not #strings.isEmpty(message)}">
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span th:text="${message}" > </span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </span>
+                        <h5>    Question No :<span th:text="${qinfo.questionno}"></span></h5>
+                        <h5>    Question Title :<span th:text="${qinfo.title}"></span></h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Value</th>
+                                        <th scope="col">Title</th>                              
+
+                                        <th scope="col"> Created </th>
+                                        <th scope="col"> Updated </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr th:each="answerlists,status:${answerlist}">
+                                        <th th:text="${answerlists.answerno}">1</th>
+                                        <td th:text="${answerlists.value}">Otto</td>
+                                        <td> <a th:href="@{/answer/details/{id}(id=${answerlists.id})}" th:text="${answerlists.title}">    </a></td>
+                                        <td th:text="${answerlists.created}">Otto</td>
+                                        <td th:text="${answerlists.modified}">@mdo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div><!--  Card body end-->
+
+
+                </div><!--  Card  end-->
+
+
+            </div><!--  Main Content  end-->
+        </div>   <!--  Layout end-->

@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+
+<!-- Nav Bar -->
+ .navbar {
+  min-height: 80px;
+}
+
+.navbar-brand {
+  padding: 0 15px;
+  height: 80px;
+  line-height: 80px;
+}
+
+.navbar-toggle {
+  /* (80px - button height 34px) / 2 = 23px */
+  margin-top: 23px;
+  padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    /* (80px - line-height of 27px) / 2 = 26.5px */
+    padding-top: 26.5px;
+    padding-bottom: 26.5px;
+    line-height: 27px;
+  }
+}
+
+
+/*.textRed{ color:#ff6347;}*/
+.textRed{ color:#c82333;}
+
+.textGreen{ color:#179813;}
+
+.textOrange{ color:#fab702;}
+
+.textR{ color:#df0d00;}

@@ -1,0 +1,66 @@
+<div   th:fragment="footer" >
+    <section   class="mt-5"style="background-color: #191919;color: #fff; padding: 50px 0px 50px 0px; border-top: 4px solid #992337; ">
+        <div class="container">
+            <div class="row" >
+
+                <div class="col-sm-4 col-md-4 ">
+                    <h5 class="text-center">Menu</h5>
+                    <ul class="list-unstyled fa-ul">
+                        <li> <span class="fa-li" ><i class="fas fa-home text-danger"></i></span><a class="text-white"
+                                                                                                       th:href="@{/}">Home</a></li>  
+                        <li> <span class="fa-li" ><i class="fas fa-registered text-danger"></i></span><a class="text-white"
+                                                                                                             th:href="@{/front-view/services}">Services</a></li> 
+                        <li><span class="fa-li" ><i class="fas fa-donate text-danger"></i></span> <a class="text-white"
+                                                                                                         th:href="@{/front-view/gallery}">Gallery</a></li>
+                        <li> <span class="fa-li" ><i class="fas fa-users text-danger"></i></span><a class="text-white"
+                                                                                                        th:href="@{/front-view/clients}">Our Clients</a></li>  
+                        <li> <span class="fa-li" ><i class="fas fa-donate text-danger"></i></span><a class="text-white"
+                                                                                                         th:href="@{/front-view/testimonial}">Testimonial</a></li> 
+                        <li><span class="fa-li" ><i class="fas fa-donate text-danger"></i></span><a class="text-white"
+                                                                                                        th:href="@{/front-view/jobs}">Career</a></li>
+                        <li><span class="fa-li" ><i class="fas fa-donate text-danger"></i></span><a class="text-white"
+                                                                                                        th:href="@{/front-view/faq}">FAQ</a></li>
+
+                        <li> <span class="fa-li" ><i class="fas fa-tty text-danger"></i></span>
+                            <a class="text-white"
+                               th:href="@{/front-view/news-events}"> News</a></li> 
+
+                        <li> <span class="fa-li" ><i class="fas fa-tty text-danger"></i></span>
+                            <a class="text-white"
+                               th:href="@{/front-view/contactUs}">  Contact Us</a></li>
+                    </ul>
+                </div> 
+
+                <div class="col-sm-4 col-md-4">
+                    <h5 class="text-center">Contact Us</h5>
+                    <ul class="list-unstyled fa-ul">
+                        <li> <span class="fa-li" ><i class="fas fa-map-marker-alt text-danger"></i></span>Address:118(1st floor) Lake Circus, Kalabagan , Dhaka-1205 </li> 
+                        <li><span class="fa-li" ><i class="fas fa-mobile-alt text-danger"></i></span>Mobile: +880-1714-117032</li>
+                        <li><span class="fa-li" ><i class="fas fa-envelope-open text-danger"></i></span>Email:itgarden2007@gmail.com</li>
+                    </ul>
+                </div> 
+
+                <div class="col-sm-4 col-md-4  text-center">
+
+                    <h5 class="text-center">Social Network</h5>
+
+                    <ul class="list-inline mt-5 fa-ul">
+                        <li class="list-inline-item"> <i  style="color: #3c5a99;" class="fab fa-facebook-f  fa-3x"></i></li> 
+                        <li  class="list-inline-item"><i style="color: #FF0000;" class="fab fa-youtube textR fa-3x"></i></li>
+                        <li  class="list-inline-item"><i style="color: #1da1f2;" class="fab fa-twitter-square textR fa-3x"></i></li>
+                    </ul>
+
+                </div> 
+
+            </div>
+        </div>
+    </section> <!--  End Footer Top-->
+    <section style="background-color: #992337;color: #fff; min-height:50px; padding-top: 15px">
+        <div class="container">
+            <div  class="row justify-content-center ">
+                <span class="align-middle">   Powered By : <a  class="textOrange"href="http://www.itgardenltd.com" target="_blank" >IT Garden</a> .&nbsp;  Privacy Policy | Terms of Use | License | Support 
+                </span>
+            </div>
+        </div>
+    </section>  <!--  End Footer bottom-->
+</div>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+    <div layout:fragment = "main_content">
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row">  <div class="col-sm-5">  <h4> User  List   Total Employee :  <span th:text="${alluser.size()}"></span></h4> </div>
+                    <div class="col-sm-7 ">  
+                        <div class="btn-group float-right">
+                            <a th:href="@{/users/registrations}" type="button" class="btn  btn-warning btn-default bg-green">New Employee Registration</a>
+                            <a th:href="@{/users/index}" type="button" class="btn  btn-warning btn-default">Close</a>
+                        </div></div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="basictable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+
+
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Remark</th>
+
+                            <th>Edit</th>
+                            <th style="width: 40px">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="alluser,status:${alluser}">
+                            <td th:text="${status.count}">2.</td>
+                            <td th:text="${alluser.name}">Chakma</td>
+                            <td th:text="${alluser.mobile}">Chakma</td>
+                            <td th:text="${alluser.email}">Chakma</td>
+                            <td> <span th:each="role :${alluser.role}">
+                                    <span th:text="${role.name}+' ,'">  </span>
+                                </span>
+                            </td>
+                            <td th:text="${alluser.status}">Chakma</td> 
+                            <td th:text="${alluser.remarks}">Chakma</td>
+                            <td>
+                                <a type="button" class="btn  btn-warning btn-xs bg-maroon" th:href="@{/users/edit/{id} (id=${alluser.id})}" > Edit</a>
+                            </td>
+                            <td> <a  type="button" class="btn  btn-warning btn-xs bg-red " th:href="@{/users/delete/{id} (id=${alluser.id})}" > Delete </a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+
+            <div class="card-footer">
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

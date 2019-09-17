@@ -1,0 +1,242 @@
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+    <div layout:fragment = "main_content">
+
+        <div class="border rounded bg-white" >
+            <!--            Box title-->
+            <div class="border-bottom" style="padding: 5px">  
+                <div class="row">
+                    <h4 class=" col-sm-5"> Role </h4>
+                    <h4 class=" col-sm-1 float-right"> Role</h4>
+                </div>
+            </div>
+
+            <!--            Box Body-->
+            <div class="" style="padding: 5px">
+                <form action="#" th:action="@{/role/save}" th:object="${role}" method="post"  class="">
+                    <input type="hidden" class="form-control"  th:field="*{id}" /> 
+                    <div class="form-group row">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Name<span class="text-danger">*</span>:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control col-sm-3" id="colFormLabel" placeholder="Name" th:field="*{name}">
+                            <span  class="help-block text-danger col-sm-8" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">First Name Error</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label  text-right">Slug<span class="text-danger">*</span>:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control col-sm-3" id="colFormLabel" placeholder="Slug" th:field="*{slug}" >
+                            <span  class="help-block text-danger col-sm-8" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">First Name Error</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label  text-right">Privilege<span class="text-danger">*</span>:</label>
+                        <div class="col-sm-10">
+                            <ul class="list-unstyled" style="margin-left: 30px;">
+
+                                <li th:each="privilegelists : ${privilegelist}" >
+                                    <input class="form-check-input" type="checkbox" id="gridCheck" th:field="*{privilege}"  th:value="${privilegelists.id}" >
+                                    <label class="form-check-label" for="customCheck1"><span  th:text="${privilegelists.name}">Admin</span></label>
+                                </li>
+                            </ul>
+                            <span  class="help-block text-danger col-sm-8" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">First Name Error</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-5">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div> </div>
+                </form>
+                <table class="table table-bordered ">
+                    <tr class="bg-success text-white">
+                        <th style="width: 10px">#</th>
+                        <th>Name</th>
+                        <th>Slug</th>
+                        <th>Privilege</th>
+                        <th>Edit</th>
+
+                        <th >Delete</th>
+                    </tr>
+                    <tr th:each="list,status:${list}">
+                        <td th:text="${status.count}">2.</td>
+                        <td th:text="${list.name}">Chakma</td>
+                        <td th:text="${list.slug}">Chakma</td>
+                        <td>
+                            
+                            <span th:each="listprivilege :${list.privilege}">
+                                                    <span th:text="${listprivilege.name}+' ,'">  </span>
+                                                </span>
+                            
+                        </td>
+                        <td>
+                            <a th:href="@{/role/edit/{id} (id=${list.id})}" > Edit</a>
+                        </td>
+                        <td> <a th:href="@{/role/delete/{id} (id=${list.id})}" > Delete </a></td>
+                    </tr>                              
+                </table>
+            </div>
+            <!--Box footer-->
+            <div class="border-top" style="padding: 5px">  
+                <h1 > </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!DOCTYPE html>
+<!--<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+
+    <div layout:fragment = "main_content">
+         Content Wrapper. Contains page content 
+        <div class="content-wrapper">
+             Content Header (Page header) 
+            <section class="content-header">
+                <h1>
+                    Administration
+
+                    <small></small>
+                </h1>
+
+            </section>
+
+             Main content 
+            <section class="content">
+
+                 Default box 
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"> Settings </h3>
+                        <div class="box-tools pull-right">
+                            <div class="btn-group">
+                                <a th:href="@{/settings/lookupindex}" type="button" class="btn  btn-warning btn-xs">Close</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+
+                        <div class="col-sm-6 col-sm-offset-3">
+
+                             Default box 
+                            <div class="box box-warning box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"> Add/ Edit Role and Privilege </h3>
+
+                                    <div class="box-tools pull-right">
+                                        <div class="btn-group">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <form action="#" th:action="@{/role/save}" th:object="${role}" method="post"  class="form-horizontal">
+                                        <div class="row">
+                                            <input type="hidden" class="form-control"  th:field="*{id}" />   
+                                            <label for="name" class=" control-label col-sm-3 "> Name<span class="text-red"> * </span></label>
+                                            <input type="text" class="form-contro col-sm-6"  th:field="*{name}"   />
+                                            <span  class="help-block text-red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">First Name Error</span>
+                                        </div>
+                                        <div class="row">
+                                            <label for="name" class=" control-label col-sm-3"> Slug <span class="text-red"> * </span></label>
+                                            <input type="text" class="form-contro col-sm-6"  th:field="*{slug}"   />
+
+                                            <span  class="help-block text-red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">First Name Error</span>
+                                        </div>
+                                        <div class="row">
+                                            <label for="name" class=" control-label col-sm-3"> Privilege <span class="text-red"> * </span></label>
+                                            <span  class="help-block text-red" th:if="${#fields.hasErrors('privilege')}" th:errors="*{privilege}">First Name Error</span>
+                                            <div class="col-sm-8">    
+                                                <ul class="list-unstyled" style=" margin-top: 50px; " >
+
+                                                    <li  style=" margin-left: 10px; " th:each="modulelist : ${modulelist}" >
+
+                                                        <label  th:text="${modulelist.name}">Admin</label>
+
+                                                        <ul class="list-unstyled" style="margin-left: 30px;">
+
+                                                            <li th:each="modulelisprivilege : ${modulelist.privilege}" >
+
+                                                                <input type="checkbox" th:field="*{privilege}"  th:value="${modulelisprivilege.id}" />
+
+                                                                <span  th:text="${modulelisprivilege.name}">Admin</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>                   
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center">
+                                            <div class="box-tools">
+                                                <div class="btn-group text-center">
+                                                    <button type="submit" class="btn  btn-primary btn-xs">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                 /.box-body 
+                                <div class="box-footer">
+                                    <div class="box-tools pull-right">
+                                        <div class="btn-group">
+                                        </div>
+                                    </div>
+                                </div>
+                                 /.box-footer
+                            </div>
+                             /.box               
+                        </div>
+
+                        <div class="col-sm-12">    
+                            <div class="box box-primary box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"><span th:text="${table_name}"> ..</span>Role  List</h3>
+                                </div>
+                                 /.box-header 
+                                <div class="box-body">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Name</th>
+                                            <th>Slug</th>
+                                            <th>Privilege</th>
+                                            <th>Edit</th>
+                                            <th style="width: 40px">Delete</th>
+                                        </tr>
+                                        <tr th:each="list,status:${list}">
+                                            <td th:text="${status.count}">2.</td>
+                                            <td th:text="${list.name}">Chakma</td>
+                                            <td th:text="${list.slug}">Chakma</td>
+                                            <td>
+                                                <span th:each="listprivilege :${list.privilege}">
+                                                    <span th:text="${listprivilege.name}+' ,'">  </span>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a th:href="@{/role/edit/{id} (id=${list.id})}" > Edit</a>
+                                            </td>
+                                            <td> <a th:href="@{/role/delete/{id} (id=${list.id})}" > Delete </a></td>
+                                        </tr>                                
+                                    </table>
+                                </div>
+                                 /.box-body 
+                            </div>                      
+                        </div>             
+                    </div>
+                     /.box-body 
+                    <div class="box-footer">
+                        <div class="box-tools pull-right">
+
+                        </div>
+                    </div>
+                     /.box-footer
+                </div>
+                 /.box 
+
+            </section>
+             /.content 
+        </div>
+         /.content-wrapper 
+    </div>
+</div>-->
