@@ -5,6 +5,7 @@
  */
 package com.itgarden.website.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/vendor")
+@PreAuthorize("hasAuthority('vendor')")
 public class VendorController {
-    
-   @RequestMapping(value = {"","/", "/index"})
+
+    @RequestMapping(value = {"", "/", "/index"})
     public String page(Model model) {
         model.addAttribute("attribute", "value");
         return "view.name";
     }
-    
+
 }

@@ -8,6 +8,7 @@ package com.itgarden.website.exam.model;
 import com.itgarden.website.model.Productsubcategory;
 import com.itgarden.website.model.enumvalue.Status;
 import com.itgarden.website.module.user.model.Users;
+import com.itgarden.website.order.model.SalesOrder;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,9 +108,12 @@ public class Exam {
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Question> question = new ArrayList<>();
-    
-     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Test> test = new ArrayList<>();
+
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<SalesOrder> salesOrder = new ArrayList<>();
 
     public Exam(Long id, Users userId, Productsubcategory productsubcategory, String title, String slug, String subtitle, String syllabus, int orderno, String description, double price, double discount, String imageName, Lavelstatus level, Status status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
         this.id = id;

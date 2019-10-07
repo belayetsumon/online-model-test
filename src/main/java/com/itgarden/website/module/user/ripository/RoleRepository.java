@@ -5,8 +5,8 @@
  */
 package com.itgarden.website.module.user.ripository;
 
-
 import com.itgarden.website.module.user.model.Role;
+import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,5 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Md Belayet Hossin
  */
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    
+
+//    Set<Role> findBySlug(String slug);
+    Role findBySlug(String slug);
 }

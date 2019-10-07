@@ -5,6 +5,7 @@
  */
 package com.itgarden.website.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author User
  */
 @Controller
+@RequestMapping("/admin")
+@PreAuthorize("hasAuthority('admin')")
 public class AdminController {
-    
-    @RequestMapping("/admin")
+
+    @RequestMapping(value = {"", "/", "/index"})
+
     public String page(Model model) {
+
         model.addAttribute("attribute", "value");
+
         return "/admin/index";
     }
-    
+
 }

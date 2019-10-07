@@ -19,35 +19,34 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/forgotpassword")
+
 public class ForgotPasswordController {
 
 //    @Autowired
 //    private JavaMailSender sender;
-
     @Autowired
     UsersRepository usersRepository;
 
-    @RequestMapping("/userforgotpassword")
+    @RequestMapping(value = {"", "/", "/index", "/userforgotpassword"})
     public String userforgotpassword(Model model) {
         model.addAttribute("attribute", "value");
         return "user/forgotpassword";
     }
 
     @RequestMapping("/showemail")
-    public String showemail( @RequestParam(required=false,name="email" ) String email, Model model) {
+    public String showemail(@RequestParam(required = false, name = "email") String email, Model model) {
 
-         Users user = usersRepository.findByEmail("email");
+        Users user = usersRepository.findByEmail("email");
 
-         if(user==null){
-         
-          model.addAttribute("emailNotFound", "This email is not exist.");
-          
-           return "user/forgotpassword";
-         }
-         
-         
-        model.addAttribute("user", "Hello Mr "+user.getName()+"  Your password has been sent successfully! Please check your email. <br>");
-          return "user/showemail";
+        if (user == null) {
+
+            model.addAttribute("emailNotFound", "This email is not exist.");
+
+            return "user/forgotpassword";
+        }
+
+        model.addAttribute("user", "Hello Mr " + user.getName() + "  Your password has been sent successfully! Please check your email. <br>");
+        return "user/showemail";
     }
 
 //    @RequestMapping("/simpleemail")

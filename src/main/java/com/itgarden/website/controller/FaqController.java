@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package com.itgarden.website.controller;
+
 import com.itgarden.website.model.Faq;
 import com.itgarden.website.model.enumvalue.Status;
 import com.itgarden.website.ripository.FaqRepository;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,19 +30,21 @@ public class FaqController {
     @Autowired
     FaqRepository faqRepository;
 
-    @RequestMapping(value = {"","/", "/index"})
+    @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model) {
         model.addAttribute("faqlist", faqRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
         return "faq/index";
     }
 
     @RequestMapping("/create")
+    @PreAuthorize("hasAuthority('faq')")
     public String create(Model model, Faq faq) {
         model.addAttribute("statuslist", Status.values());
         return "faq/add";
     }
 
     @RequestMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('faq')")
     public String edit(Model model, @PathVariable Long id, Faq faq) {
         model.addAttribute("faq", faqRepository.getOne(id));
         model.addAttribute("statuslist", Status.values());
@@ -48,6 +52,7 @@ public class FaqController {
     }
 
     @RequestMapping("/save")
+    @PreAuthorize("hasAuthority('faq')")
     public String create(Model model, @Valid Faq faq, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("statuslist", Status.values());
@@ -58,13 +63,14 @@ public class FaqController {
     }
 
     @RequestMapping("/details/{id}")
+    @PreAuthorize("hasAuthority('faq')")
     public String create(Model model, @PathVariable Long id, Faq faq) {
         model.addAttribute("faq_details", faqRepository.getOne(id));
         return "faq/faq_details";
     }
 
     @RequestMapping("/delete/{id}")
-
+    @PreAuthorize("hasAuthority('faq')")
     public String delete(Model model, @PathVariable Long id, Faq faq, RedirectAttributes redirectAttributes) {
 
         faqRepository.deleteById(id);

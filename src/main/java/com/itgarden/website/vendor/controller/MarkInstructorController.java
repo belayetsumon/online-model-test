@@ -16,6 +16,7 @@ import com.itgarden.website.exam.ripository.MarkRepository;
 import com.itgarden.website.exam.ripository.QuestionRepository;
 import com.itgarden.website.exam.ripository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 
 @RequestMapping("/instructor-mark")
+@PreAuthorize("hasAuthority('instructor-mark')")
 public class MarkInstructorController {
 
     @Autowired
@@ -101,12 +103,12 @@ public class MarkInstructorController {
 
             redirectAttributes.addFlashAttribute("message", "Successfully Completed Your Test.");
 
-            return "redirect:/test/testdashboard/{tid}";
+            return "redirect:/instructor-test/testdashboard/{tid}";
 
         } else {
             redirectAttributes.addFlashAttribute("message", "Successfully saved.");
 
-            return "redirect:/test/openquestion/{tid}";
+            return "redirect:/instructor-test/openquestion/{tid}";
         }
 
     }

@@ -20,6 +20,7 @@ import com.itgarden.website.ripository.TestimonialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +63,7 @@ public class WelcomeController {
     QuestionRepository questionRepository;
 
     @RequestMapping(value = {"", "/", "/index"})
+   
     public String index(Model model, Contact contact) {
         model.addAttribute("contact", contact);
         Pageable pageable = new PageRequest(0, 15);
@@ -74,10 +76,9 @@ public class WelcomeController {
         Pageable testimonial_pageable = new PageRequest(0, 2);
         model.addAttribute("testimoniallist", testimonialRepository.findByStatusOrderByIdDesc(com.itgarden.website.model.enumvalue.Status.Active, testimonial_pageable));
 
-        
         model.addAttribute("totalExam", examRepository.count());
         model.addAttribute("totalQuestion", questionRepository.count());
-        
+
         return "welcome/welcome";
     }
 

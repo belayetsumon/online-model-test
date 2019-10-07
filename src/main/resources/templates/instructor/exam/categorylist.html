@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-vendor-page">
+    <div layout:fragment = "main_content">
+        <div> <h4> Product Category <small>Home>Product Category</small></h4>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam Category List </div>
+                            <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor/}"> Close</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+           
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="productcategorylists,status:${productcategorylist}">
+
+                                        <th th:text="${status.count}">1</th>
+
+                                        <td> <a th:href="@{/instructor-exam/sub-categorylist/{cid}(cid=${productcategorylists.id})}" th:text="${productcategorylists.name}">    </a></td>
+
+                                   </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div><!--  Card body end-->
+                </div>
+            </div>
+
+        </div><!--  Card  end-->
+
+
+    </div><!--  Main Content  end-->
+</div>   <!--  Layout end-->

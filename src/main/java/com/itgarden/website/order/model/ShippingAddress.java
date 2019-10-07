@@ -35,7 +35,7 @@ public class ShippingAddress {
 
     @NotNull(message = "User cannot be blank.")
     @OneToOne(optional = true)
-    private Order orderId;
+    private SalesOrder order;
 
     private String firstName;
 
@@ -81,9 +81,9 @@ public class ShippingAddress {
     public ShippingAddress() {
     }
 
-    public ShippingAddress(Long id, Order orderId, String firstName, String lastName, String email, String mobile, String company, String addressOne, String addresstwo, String city, String postCode, String country, String district, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
+    public ShippingAddress(Long id, SalesOrder order, String firstName, String lastName, String email, String mobile, String company, String addressOne, String addresstwo, String city, String postCode, String country, String district, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
         this.id = id;
-        this.orderId = orderId;
+        this.order = order;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -109,12 +109,12 @@ public class ShippingAddress {
         this.id = id;
     }
 
-    public Order getOrderId() {
-        return orderId;
+    public SalesOrder getOrder() {
+        return order;
     }
 
-    public void setOrderId(Order orderId) {
-        this.orderId = orderId;
+    public void setOrder(SalesOrder order) {
+        this.order = order;
     }
 
     public String getFirstName() {

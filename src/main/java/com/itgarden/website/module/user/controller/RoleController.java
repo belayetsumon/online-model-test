@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package com.itgarden.website.module.user.controller;
+
 import com.itgarden.website.module.user.model.Role;
+import com.itgarden.website.module.user.ripository.ModuleRepository;
 import com.itgarden.website.module.user.ripository.PrivilegeRepository;
 import com.itgarden.website.module.user.ripository.RoleRepository;
 import javax.validation.Valid;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/role")
+//@PreAuthorize("hasAuthority('role')")
 public class RoleController {
 
     @Autowired
@@ -29,13 +32,18 @@ public class RoleController {
     @Autowired
     PrivilegeRepository privilegeRepository;
 
-    @RequestMapping("/index")
+    @Autowired
+    ModuleRepository moduleRepository;
+
+    @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model, Role role) {
         model.addAttribute("list", roleRepository.findAll());
 
         model.addAttribute("privilegelist", privilegeRepository.findAll());
 
-       return "user/role";
+        model.addAttribute("modulelist", moduleRepository.findAll());
+
+        return "user/role";
     }
 
     @RequestMapping("/edit/{id}")
@@ -45,6 +53,8 @@ public class RoleController {
         model.addAttribute("list", roleRepository.findAll());
 
         model.addAttribute("privilegelist", privilegeRepository.findAll());
+
+        model.addAttribute("modulelist", moduleRepository.findAll());
 
         return "user/role";
     }
@@ -58,7 +68,9 @@ public class RoleController {
 
             model.addAttribute("privilegelist", privilegeRepository.findAll());
 
-              return "user/role";
+            model.addAttribute("modulelist", moduleRepository.findAll());
+
+            return "user/role";
         }
 
         roleRepository.save(role);

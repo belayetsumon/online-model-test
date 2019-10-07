@@ -13,8 +13,10 @@ import com.itgarden.website.model.News;
 import com.itgarden.website.model.Ourproduct;
 import com.itgarden.website.model.Productcategory;
 import com.itgarden.website.model.Productsubcategory;
+import com.itgarden.website.module.user.model.Role;
 import com.itgarden.website.module.user.model.Status;
 import com.itgarden.website.module.user.model.Users;
+import com.itgarden.website.module.user.ripository.RoleRepository;
 import com.itgarden.website.module.user.ripository.UsersRepository;
 import com.itgarden.website.ripository.BatchRepository;
 import com.itgarden.website.ripository.ContactRepository;
@@ -28,6 +30,7 @@ import com.itgarden.website.ripository.OurservicesRepository;
 import com.itgarden.website.ripository.ProductcategoryRepository;
 import com.itgarden.website.ripository.ProductsubcategoryRepository;
 import com.itgarden.website.ripository.ProfileRepository;
+import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -92,78 +95,70 @@ public class FrontController {
     @Autowired
     ExamRepository examRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
+
     @RequestMapping("/about-us")
     public String aboutUs(Model model) {
         model.addAttribute("attribute", "value");
         return "frontview/aboutUs";
     }
 
-    @RequestMapping("/mission-vision")
-    public String missionVvision(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/mission-vision";
-    }
-
-    @RequestMapping("/ceo-message")
-    public String ceomessage(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/ceo-message";
-    }
-
-    @RequestMapping("/agent-division")
-    public String agentdivision(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/agent_division";
-    }
-
-    @RequestMapping("/trade-division")
-    public String tradedivision(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/trade_division";
-    }
-
-    @RequestMapping("/corporate-value")
-    public String corporatevalue(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/corporate_value";
-    }
-
-    @RequestMapping("/code-conduct")
-    public String codeconduct(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/code_conduct";
-    }
-
-    @RequestMapping("/executive-committee")
-    public String executiveCommittee(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/executive-committee";
-    }
-
-    @RequestMapping("/constitution")
-    public String constitution(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/constitution";
-    }
-
-    @RequestMapping("/advisory-council")
-    public String advisoryCouncil(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/advisory-council";
-    }
-
-    @RequestMapping("/all-member")
-    public String allmember(Model model) {
-        model.addAttribute("allmember", usersRepository.findByStatus(Status.Active));
-        return "frontview/all-member";
-    }
-
-    @RequestMapping("/member-search")
-    public String membersearch(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/all-search";
-    }
-
+//    @RequestMapping("/mission-vision")
+//    public String missionVvision(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/mission-vision";
+//    }
+//    @RequestMapping("/ceo-message")
+//    public String ceomessage(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/ceo-message";
+//    }
+//    @RequestMapping("/agent-division")
+//    public String agentdivision(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/agent_division";
+//    }
+//    @RequestMapping("/trade-division")
+//    public String tradedivision(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/trade_division";
+//    }
+//    @RequestMapping("/corporate-value")
+//    public String corporatevalue(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/corporate_value";
+//    }
+//    @RequestMapping("/code-conduct")
+//    public String codeconduct(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/code_conduct";
+//    }
+//    @RequestMapping("/executive-committee")
+//    public String executiveCommittee(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/executive-committee";
+//    }
+//    @RequestMapping("/constitution")
+//    public String constitution(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/constitution";
+//    }
+//    @RequestMapping("/advisory-council")
+//    public String advisoryCouncil(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/advisory-council";
+//    }
+//    @RequestMapping("/all-member")
+//    public String allmember(Model model) {
+//        model.addAttribute("allmember", usersRepository.findByStatus(Status.Active));
+//        return "frontview/all-member";
+//    }
+//    @RequestMapping("/member-search")
+//    public String membersearch(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/all-search";
+//    }
     @RequestMapping("/member-login")
     public String memberlogin(Model model) {
         model.addAttribute("attribute", "value");
@@ -176,39 +171,27 @@ public class FrontController {
         return "frontview/forgot-password";
     }
 
-    @RequestMapping("/member-registration")
-    public String memberRegistration(Model model, Users users) {
-
-        model.addAttribute("batch", batchRepository.findAll());
-        model.addAttribute("attribute", "value");
-        return "frontview/member-registration";
-    }
-
-    @RequestMapping("/batch-modaretor")
-    public String batchmodaretor(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/batch-modaretor";
-    }
-
-    @RequestMapping("/resourses")
-    public String resourses(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/resourses";
-    }
-
-    @RequestMapping("/wholesale")
-    public String wholesale(Model model) {
-        model.addAttribute("attribute", "value");
-        return "frontview/wholesale";
-    }
-
-    @RequestMapping("/product")
-    public String product(Model model) {
-        model.addAttribute("productlist", ourproductRepository.findByStatusOrderByIdDesc(com.itgarden.website.model.enumvalue.Status.Active));
-        model.addAttribute("productcategorylist", productcategoryRepository.findByStatusAndOurproductStatus(com.itgarden.website.model.enumvalue.Status.Active, com.itgarden.website.model.enumvalue.Status.Active));
-        return "frontview/product";
-    }
-
+//    @RequestMapping("/batch-modaretor")
+//    public String batchmodaretor(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/batch-modaretor";
+//    }
+//    @RequestMapping("/resourses")
+//    public String resourses(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/resourses";
+//    }
+//    @RequestMapping("/wholesale")
+//    public String wholesale(Model model) {
+//        model.addAttribute("attribute", "value");
+//        return "frontview/wholesale";
+//    }
+//    @RequestMapping("/product")
+//    public String product(Model model) {
+//        model.addAttribute("productlist", ourproductRepository.findByStatusOrderByIdDesc(com.itgarden.website.model.enumvalue.Status.Active));
+//        model.addAttribute("productcategorylist", productcategoryRepository.findByStatusAndOurproductStatus(com.itgarden.website.model.enumvalue.Status.Active, com.itgarden.website.model.enumvalue.Status.Active));
+//        return "frontview/product";
+//    }
     @RequestMapping("/product-by-category/{prodcatid}")
     public String productByCategory(Model model, @PathVariable long prodcatid, Productcategory productcategory) {
 
@@ -359,9 +342,35 @@ public class FrontController {
 
     @RequestMapping("/exam-details/{examid}")
     public String exam_details(Model model, @PathVariable Long examid, Exam exam) {
-        
+
         model.addAttribute("exam", examRepository.getOne(examid));
-        
+
         return "frontview/exam-details";
     }
+
+    @RequestMapping("/all-exam")
+    public String allexam(Model model, Exam exam) {
+
+        model.addAttribute("categorylist", productcategoryRepository.findAll());
+
+        model.addAttribute("examlist", examRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
+
+        return "frontview/all-exam";
+    }
+
+    @RequestMapping("/front-registration")
+    public String studentRegistration(Model model, Users users) {
+
+        Role instructor = roleRepository.findBySlug("instructor");
+
+        model.addAttribute("instructor", instructor);
+
+        Role customer = roleRepository.findBySlug("customer");
+
+        model.addAttribute("customer", customer);
+
+        return "frontview/front-registration";
+    }
+
+  
 }

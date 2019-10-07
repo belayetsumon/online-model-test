@@ -5,7 +5,7 @@
     <div layout:fragment="main_content">
 
         <section  class="border-bottom" style="padding: 50px 0px 50px 0px;background-color: #992337;">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-8">  
                         <h3 class="font-weight-bold" style="color: #fff;">   <span th:text="${exam.title}"></span>  </h3>
@@ -15,16 +15,16 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-2">
                         <a type="button" class="btn btn-light btn-block text-danger" th:href="@{/}"><i class="far fa-heart"></i> Add Wishlist </a>
-                        <a type="button" class="btn btn-danger btn-block" th:href="@{/}"> <i class="fas fa-cart-plus"></i> Buy Now </a>
-                        
+                        <a type="button" class="btn btn-danger btn-block" th:href="@{/customer-order/save/{examid}(examid=${exam.id})}"> <i class="fas fa-cart-plus"></i> Buy Now </a>
+
                     </div>
                     </section>
 
                     <section>
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row mt-4">
 
                                 <div class="col-sm-9">
@@ -35,6 +35,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
+
+                                                <span th:text="${exam.description}"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -47,6 +49,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
+                                                <span th:text="${exam.syllabus}"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -56,10 +59,23 @@
                                     <div class="card mb-4 border-danger">
 
                                         <div class="card-header border-danger ">
-                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Featured Review </h5>
+                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Instructor Profile </h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
+
+                                                <div class="media">
+                                                    <img  class="mr-3 rounded-circle border border-secondary" th:src="@{/img/image-not-available.png}"  width="150" height="150"/> 
+
+                                                    <div class="media-body">
+
+                                                        <h5 class="mt-0"><span th:text="${exam.userId.name}"></span></h5>
+
+                                                        <span th:text="${exam.userId.name}"></span>
+
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +89,7 @@
                                         <div class="card-header border-danger">
                                             <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Category</h5>
                                         </div>
-                                    
+
                                     </div> 
                                 </div>
                             </div>

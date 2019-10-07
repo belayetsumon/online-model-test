@@ -10,49 +10,50 @@ and open the template in the editor.
         <section class="" style="background-color: #992337;">
             <div class="container-fluid p-5">
 
-                <h1 class="text-center text-white font-weight-bold">Attend Model Test On Your Schedule </h1>
+                           <h1 class="text-center text-white font-weight-bold">Attend Model Test On Your Schedule </h1>
+                
+                          <h3 class="text-center text-white font-weight-bold">Anywhere, Anytime </h3> 
 
-                <h3 class="text-center text-white font-weight-bold">Anywhere, Anytime </h3>
             </div>
         </section>
 
 
         <section class=" pt-5 pb-5 bg-light" >
-            <div class="container ">
+            <div class="container-fluid ">
 
                 <div class="col-sm-12 col-md-12 ">
-                    <h1 class="text-center text-danger font-weight-bold">Exam Category</h1>
-                    
+                    <h1 class="text-center textMaroon font-weight-bold">Exam Category </h1>
+
                     <div class=" row justify-content-center" style="padding: 0px 0px 50px 0px">
                         <div class="col-md-7 text-center"> 
                         </div></div></div>
 
-                <div  class="row" th:if="${ not #strings.isEmpty(productcategorylist)}">
+                <ul class="row list-unstyled" th:if="${ not #strings.isEmpty(productcategorylist)}" >
+                    <li class="col-sm-3 mb-1 "  th:each="productcategorylists,status:${productcategorylist}">
 
-                    <div class="col-sm-3 " th:each="productcategorylists,status:${productcategorylist}">
+                        <div class="card bgMaroon text-white" >
+                            <div class="card-body">
 
-                        <div class="card mb-1 bg-light" style="border:none;">
-                            <div class="card-body"> 
-                                <div class="row">
-                                    <a   type="button" class=" btn  btn-sm btn-block btn-danger" th:href="@{/front-view/sub-category-by-category/{catid}(catid=${productcategorylists.id})}" > <h4>  <span  th:text="${productcategorylists.name}">    </span> </h4> </a> 
-                                </div>
+
+                                <a    class="text-white text-center" th:href="@{/front-view/sub-category-by-category/{catid}(catid=${productcategorylists.id})}" > <h5>  <span  th:text="${productcategorylists.name}">    </span> </h5> </a> 
+
                             </div>
                         </div>
-                    </div>
 
-                    <div  class="row" th:if="${#strings.isEmpty(productcategorylist)}"> 
-                        <div class="col-sm-12 col-md-12 ">
-                            <h2 class="text-center text-muted"> Sorry! No  Categories Are Found. </h2>
-                        </div>
+
+                    </li>
+                </ul>
+                <div  class="row" th:if="${#strings.isEmpty(productcategorylist)}"> 
+                    <div class="col-sm-12 col-md-12 ">
+                        <h2 class="text-center text-muted"> Sorry! No  Categories Are Found. </h2>
                     </div>
                 </div>
-
         </section>
 
 
         <!--Contact Start -->
         <section style="background-color: #992337;color: #ffffff;">
-            <div class="container p-4" >
+            <div class="container-fluid p-4" >
                 <div class="row">
 
                     <div class="col-sm-3 col-md-3 border-right">
@@ -60,7 +61,7 @@ and open the template in the editor.
                             <i class="fas fa-graduation-cap fa-2x align-self-center m-1 "></i>
                             <div class="media-body ml-3">
                                 <h5 class="mt-0  text-white font-weight-bold">Total Student</h5>
-                                0000000
+                                <h6 class=" text-center">0000000</h6>
                             </div>
                         </div>
                     </div>
@@ -71,8 +72,8 @@ and open the template in the editor.
                         <div class="media">
                             <i class="fas fa-user-graduate fa-2x align-self-center m-1"></i>
                             <div class="media-body ml-3">
-                                <h5 class="mt-0  text-white font-weight-bold">Total Instructor </h5>
-                                000000
+                                <h5 class="mt-0  text-white font-weight-bold">Total Instructor</h5>
+                                <h6 class=" text-center">000000</h6>
                             </div>
                         </div>
                     </div>
@@ -82,7 +83,7 @@ and open the template in the editor.
                             <i class="fas fa-chalkboard-teacher fa-2x align-self-center m-1"></i>
                             <div class="media-body ml-3">
                                 <h5 class=" text-white font-weight-bold"> Total Exam</h5>
-                                <span th:text="${totalExam}"></span>
+                                <h6 class=" text-center" th:text="${totalExam}"></h6>
                             </div>
                         </div>
                     </div>
@@ -91,8 +92,8 @@ and open the template in the editor.
                         <div class="media">
                             <i class="fas fa-question fa-2x align-self-center m-1"></i>
                             <div class="media-body ml-3">
-                                <h5 class="mt-0 text-white font-weight-bold"> Total Question</h5>
-                                <span th:text="${totalQuestion}"></span>
+                                <h5 class="mt-0 text-white font-weight-bold">Total Question</h5>
+                                <h6 class=" text-center" th:text="${totalQuestion}"></h6>
                             </div>
                         </div>
                     </div>
@@ -143,11 +144,11 @@ and open the template in the editor.
 
 
         <section   class="pt-5 pb-5 bg-light">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6 col-md-6 ">
                         <div class="card">
-                            <div class="card-header bg-danger text-white font-weight-bold">
+                            <div class="card-header bgMaroon text-white font-weight-bold">
                                 Top Exam
                             </div>
                             <div class="card-body">
@@ -160,9 +161,8 @@ and open the template in the editor.
 
 
                     <div class="col-sm-6 col-md-6 "><div class="card">
-                            <div class="card-header bg-danger text-white font-weight-bold">
-                                New Exam
-                            </div>
+                            <div class="card-header bgMaroon text-white font-weight-bold">
+                                New Exam                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -178,11 +178,11 @@ and open the template in the editor.
 
 
         <section   class="pt-5 pb-5">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6 col-md-6 ">
                         <div class="card">
-                            <div class="card-header bg-danger text-white font-weight-bold">
+                            <div class="card-header bgMaroon text-white font-weight-bold">
                                 Top Student
                             </div>
                             <div class="card-body">
@@ -194,7 +194,7 @@ and open the template in the editor.
                     </div>
 
                     <div class="col-sm-6 col-md-6 "><div class="card">
-                            <div class="card-header bg-danger text-white font-weight-bold">
+                            <div class="card-header bgMaroon text-white font-weight-bold">
                                 Top Instructor
                             </div>
                             <div class="card-body">
@@ -210,30 +210,30 @@ and open the template in the editor.
         </section>
 
         <!--  Clients Slide -->
-<!--        <section   class=""style="padding: 40px 0px 100px 0px">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 ">
-                        <h1 class="text-center text-warning font-weight-bold">Latest Join Student</h1>
-                        <div class=" row justify-content-center" style="padding: 0px 0px 50px 0px">
-                            <div class="col-md-7 text-center">  .
-                            </div></div></div>
-
-                    <div class="owl-carousel owl-theme">
-
-                        <div class="item  border-warning border" th:each="clientslists,status:${clientslist}" >
-
-                            <span th:if="${ not #strings.isEmpty(clientslists.imageName)}" class="badge bg-green pull-right"> 
-                                <img  class="img-responsive" th:src="@{/files/}+${clientslists.imageName}" width="200" height="125"/>
-                            </span>
-                            <span th:if="${#strings.isEmpty(clientslists.imageName)}" > 
-                                <img  class="img-responsive" th:src="@{/img/image-not-available.png}"  width="200" height="150"/> 
-                            </span>
-
-                        </div>
-                    </div>  
-                </div>  
-            </div>
-        </section>-->
+        <!--        <section   class=""style="padding: 40px 0px 100px 0px">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 ">
+                                <h1 class="text-center text-warning font-weight-bold">Latest Join Student</h1>
+                                <div class=" row justify-content-center" style="padding: 0px 0px 50px 0px">
+                                    <div class="col-md-7 text-center">  .
+                                    </div></div></div>
+        
+                            <div class="owl-carousel owl-theme">
+        
+                                <div class="item  border-warning border" th:each="clientslists,status:${clientslist}" >
+        
+                                    <span th:if="${ not #strings.isEmpty(clientslists.imageName)}" class="badge bg-green pull-right"> 
+                                        <img  class="img-responsive" th:src="@{/files/}+${clientslists.imageName}" width="200" height="125"/>
+                                    </span>
+                                    <span th:if="${#strings.isEmpty(clientslists.imageName)}" > 
+                                        <img  class="img-responsive" th:src="@{/img/image-not-available.png}"  width="200" height="150"/> 
+                                    </span>
+        
+                                </div>
+                            </div>  
+                        </div>  
+                    </div>
+                </section>-->
     </div>
 </div>

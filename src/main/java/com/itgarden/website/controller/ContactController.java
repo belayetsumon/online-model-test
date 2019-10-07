@@ -11,12 +11,14 @@ import com.itgarden.website.ripository.ContactRepository;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 /**
  *
  * @author User
@@ -28,7 +30,7 @@ public class ContactController {
     @Autowired
     ContactRepository contactRepository;
 
-    @RequestMapping(value = {"","/", "/index"})
+    @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model) {
         model.addAttribute("contactlist", contactRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
         return "contact/index";
@@ -41,6 +43,7 @@ public class ContactController {
     }
 
     @RequestMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('edit')")
     public String edit(Model model, @PathVariable Long id, Contact contact) {
 
         model.addAttribute("contact", contactRepository.getOne(id));
@@ -61,6 +64,7 @@ public class ContactController {
     }
 
     @RequestMapping("/details/{id}")
+    @PreAuthorize("hasAuthority('edit')")
     public String create(Model model, @PathVariable Long id, Contact contact) {
 
         model.addAttribute("contact_details", contactRepository.getOne(id));
@@ -70,7 +74,7 @@ public class ContactController {
     }
 
     @RequestMapping("/delete/{id}")
-
+    @PreAuthorize("hasAuthority('edit')")
     public String delete(Model model, @PathVariable Long id, Contact contact, RedirectAttributes redirectAttributes) {
 
         contactRepository.deleteById(id);

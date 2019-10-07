@@ -6,6 +6,7 @@
 package com.itgarden.website.module.user.controller;
 
 import com.itgarden.website.module.user.model.Privilege;
+import com.itgarden.website.module.user.ripository.ModuleRepository;
 import com.itgarden.website.module.user.ripository.PrivilegeRepository;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +23,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 
 @RequestMapping("/privilege")
-
+//@PreAuthorize("hasAuthority('privilege')")
 public class PrivilegeController {
+    
+     @Autowired
+    ModuleRepository moduleRepository;
 
     @Autowired
     PrivilegeRepository privilegeRepository;
 
-   
-
-    @RequestMapping("/index")
+    @RequestMapping(value = {"", "/", "/index"})
 
     public String index(Model model, Privilege privilege) {
 
         model.addAttribute("list", privilegeRepository.findAll());
+        model.addAttribute("modulelist", moduleRepository.findAll());
 
-   
         return "/user/privilege";
 
     }
@@ -47,8 +49,7 @@ public class PrivilegeController {
         model.addAttribute("privilege", privilegeRepository.findById(id));
 
         model.addAttribute("list", privilegeRepository.findAll());
-
-      
+        model.addAttribute("modulelist", moduleRepository.findAll());
 
         return "/user/privilege";
     }
@@ -59,9 +60,10 @@ public class PrivilegeController {
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("list", privilegeRepository.findAll());
-          return "/user/privilege";
+            model.addAttribute("modulelist", moduleRepository.findAll());
+            return "/user/privilege";
         }
-        
+
         privilegeRepository.save(privilege);
 
         return "redirect:/privilege/index";

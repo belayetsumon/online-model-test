@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/front-view/**","/cart/**","/order/create", "/users/uregistrations", "/users/usave", "/users/userforgotpassword", "/forgotpassword/**").permitAll()
+                .antMatchers("/","/front-view/**","/cart/**","/order/create", "/users/uregistrations", "/users/usave",  "/users/front-registration-save", "/users/userforgotpassword", "/forgotpassword/**").permitAll()
                 //                .antMatchers("/dashboards/index").hasRole("admin")
                 .anyRequest().authenticated()
                 .and()
@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/users/login")
+                .logoutSuccessUrl("/front-view/member-login")
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/access-denied");
@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/bootstrap/**", "/bootstrap/dist/css/**", "/bootstrap/dist/js/**", "/plugin/owlcarousel/**", "/plugin/owlcarousel/assets/**", "/js/**", "/img/**", "/webjars/**", "/files/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/bootstrap/**", "/bootstrap/dist/css/**", "/bootstrap/dist/js/**", "/plugin/owlcarousel/**", "/fontawesome/css/**","/fontawesome/webfonts/**","/plugin/owlcarousel/assets/**", "/js/**", "/img/**", "/webjars/**", "/files/**");
     }
 
     @Autowired

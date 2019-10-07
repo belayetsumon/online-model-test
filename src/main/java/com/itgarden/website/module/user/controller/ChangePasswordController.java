@@ -8,6 +8,7 @@ package com.itgarden.website.module.user.controller;
 import com.itgarden.website.module.user.model.Users;
 import com.itgarden.website.module.user.ripository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,7 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 
 @RequestMapping("/changepassword")
-
+@PreAuthorize("hasAuthority('changepassword')")
 public class ChangePasswordController {
 
     @Autowired
@@ -33,7 +34,8 @@ public class ChangePasswordController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @RequestMapping("/changepassword")
+ 
+    @RequestMapping(value = {"","/", "/index","/changepassword"})
 
     public String changepassword(Model model) {
 

@@ -83,9 +83,31 @@
 
                 <ul class="list-unstyled collapse" id="customers"  >
                     <li >
-                        <a class="nav-link" th:href="@{/productcategory/index}">
+                        <a class="nav-link" th:href="@{/admin-customer/index}">
                             <i class="far fa-file"></i>
-                            Product Category
+                            Customer List
+                        </a>
+                    </li>
+                    <li >
+                        <a class="nav-link" th:href="@{/ourproduct/index}">
+                            <i class="far fa-file"></i>
+                            Product
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+                  <li >
+                <a  href="#instructor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+                    <i class="fas fa-user"></i> Instructor
+                </a>
+
+                <ul class="list-unstyled collapse" id="instructor"  >
+                    <li >
+                        <a class="nav-link" th:href="@{/admin-vendor/index}">
+                            <i class="far fa-file"></i>
+                            Instructor List
                         </a>
                     </li>
                     <li >
@@ -197,6 +219,14 @@
                 </a>
 
                 <ul class="list-unstyled collapse " id="user"  >
+                          <li class="nav-item">
+                        <a class="nav-link" th:href="@{/module/index}">
+                            <i class="far fa-file"></i>
+                            Module
+                        </a>
+                    </li>
+                    
+                    
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/privilege/index}">
                             <i class="far fa-file"></i>

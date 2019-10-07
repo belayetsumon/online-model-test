@@ -46,7 +46,7 @@
                                         <li class="list-group-item" th:each="examlists,status:${examlist}">
 
                                             <a    class="text-muted" th:href="@{/front-view/exam-details/{examid}(examid=${examlists.id})}" > 
-                                                <span  th:text="${examlists.title}">    </span> <span  class="float-right badge badge-danger">  </span></a>
+                                                <span  th:text="${examlists.title}">    </span> <span  class="float-right badge badge-danger"><span  th:text="${examlists.test.size()}">    </span>  </span></a>
                                         </li>
                                     </ul>
                                 </div>

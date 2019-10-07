@@ -1,9 +1,13 @@
 package com.itgarden.website.module.user.model;
 
+import com.itgarden.website.exam.model.Exam;
 import com.itgarden.website.model.Profile;
 import com.itgarden.website.model.ProfileImage;
+import com.itgarden.website.order.model.SalesOrder;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -97,12 +102,17 @@ public class Users {
     @OneToOne(mappedBy = "userId")
     public ProfileImage profileImage;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<SalesOrder> salesOrder;
+    
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<Exam> exam;
+
     public Users() {
     }
 
-    public Users(Long id, String name, String email, String mobile, String password, Set<Role> role, Status status, String remarks, Date lastLogin, Date lastLogOut, String createdBy, Date updatedOn, String updatedBy, Profile profile, ProfileImage profileImage) {
+    public Users(Long id, String name, String email, String mobile, String password, Set<Role> role, Status status, String remarks, Date lastLogin, Date lastLogOut, String createdBy, Date updatedOn, String updatedBy, Profile profile, ProfileImage profileImage, List<SalesOrder> salesOrder, List<Exam> exam) {
         this.id = id;
-
         this.name = name;
         this.email = email;
         this.mobile = mobile;
@@ -117,6 +127,8 @@ public class Users {
         this.updatedBy = updatedBy;
         this.profile = profile;
         this.profileImage = profileImage;
+        this.salesOrder = salesOrder;
+        this.exam = exam;
     }
 
     public Long getId() {
@@ -253,5 +265,21 @@ public class Users {
 
     public void setProfileImage(ProfileImage profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public List<SalesOrder> getSalesOrder() {
+        return salesOrder;
+    }
+
+    public void setSalesOrder(List<SalesOrder> salesOrder) {
+        this.salesOrder = salesOrder;
+    }
+
+    public List<Exam> getExam() {
+        return exam;
+    }
+
+    public void setExam(List<Exam> exam) {
+        this.exam = exam;
     }
 }

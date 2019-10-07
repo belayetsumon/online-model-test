@@ -16,7 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+
 
 /**
  *
@@ -34,7 +35,7 @@ public class Role {
     public String name;
 
     @NotEmpty(message = "This field cannot be blank.")
-    public String Slug;
+    public String slug;
 
     @ManyToMany(mappedBy = "role")
     private Set<Users> users;
@@ -45,10 +46,10 @@ public class Role {
             inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
     private Set<Privilege> privilege;
 
-    public Role(Long id, String name, String Slug, Set<Users> users, Set<Privilege> privilege) {
+    public Role(Long id, String name, String slug, Set<Users> users, Set<Privilege> privilege) {
         this.id = id;
         this.name = name;
-        this.Slug = Slug;
+        this.slug = slug;
         this.users = users;
         this.privilege = privilege;
     }
@@ -73,11 +74,11 @@ public class Role {
     }
 
     public String getSlug() {
-        return Slug;
+        return slug;
     }
 
-    public void setSlug(String Slug) {
-        this.Slug = Slug;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     public Set<Users> getUsers() {
@@ -95,6 +96,5 @@ public class Role {
     public void setPrivilege(Set<Privilege> privilege) {
         this.privilege = privilege;
     }
-
     
 }

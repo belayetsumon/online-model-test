@@ -1,32 +1,17 @@
-<div class="card">
-    <div class="card-header bg-dark text-white">
-        Navigation
+<div class="card borderColor">
+    <div class="card-header bgMaroon text-white">
+        <i class="fas fa-list"></i> Navigation
     </div>
     <div class="card-body">
-        <!--            <span th:if="${ not #strings.isEmpty(userinfo.profileImage)}" class="badge bg-green pull-right"> 
-                        <img  class="img-responsive" th:src="@{/files/}+${userinfo.profileImage.imageName}" width="300px"  height="250px"/>
-                    </span>
-        
-                    <span th:if="${#strings.isEmpty(userinfo.profileImage)}" > Image Not Found  Please Add Profile Image</span></td>
-        
-                    <div class="bg-dark">
-                        <span th:if="${#strings.isEmpty(userinfo.profileImage)}"> 
-                            <a class="btn btn-success btn-sm " th:href="@{/profileimage/create}"> Add Profile Image</a>
-                        </span>
-                        <span th:if="${ not #strings.isEmpty(userinfo.profileImage)}"> 
-        
-                            <a class="btn btn-danger btn-sm " th:href="@{/profileimage/delete/{id}(id=${userinfo.profileImage.id})}"> Delete Profile Image</a>
-                        </span>
-                    </div>-->
-        <ul class="list-group list-group-flush">
-           <li class="list-group-item"><a class="nav-link" th:href="@{/admin}"> <i class="fas fa-wallet"></i> Your Wallet</a></li>
-            <li class="list-group-item"><a class=" " th:href="@{/admin}"> <i class="far fa-heart"></i> Wishlist</a></li>
-            <li class="list-group-item"><a class=" " th:href="@{/admin}"> Sales</a></li>
-            <li class="list-group-item"><a class=" " th:href="@{/instructor-exam/index}"> Exam List</a></li>
-            <li class="list-group-item"> <a class=" " th:href="@{/admin}"> <i class="fas fa-map-marked"></i> Addresses</a></li>
-            <li class="list-group-item"> <a class=" " th:href="@{/admin}"> <i class="fas fa-credit-card"></i> Payment Options</a></li>
-            <li class="list-group-item"> <a class=" " th:href="@{/admin}"> <i class="fas fa-lock"></i> Login & Security</a></li>
-            <li class="list-group-item"> <a class=" " th:href="@{/admin}"> <i class="far fa-bell"></i> Notifications</a></li>
+        <ul class="list-group fa-ul list-group-flush">
+            <li class="list-group-item"><a class="textMaroon" th:href="@{/instructor/}"> <span class="fa-li"><i class="fas fa-wallet"></i></span>Home </a></li>
+            <li class="list-group-item"><a class="textMaroon" th:href="@{/instructor-exam/categorylist}"><span class="fa-li"><i class="fas fa-book-open"></i></span>Add Exam</a></li>
+            <li class="list-group-item"><a class="textMaroon" th:href="@{/instructor-exam/index}"> <span class="fa-li"><i class="fas fa-list"></i></span>Exam List</a></li>
+            <li class="list-group-item"><a class="textMaroon" th:href="@{/vendor-order/index}"> <span class="fa-li"><i class="fas fa-cart-plus"></i></span>Sales</a></li>
+            <li class="list-group-item"> <a class="textMaroon" th:href="@{/admin}"> <span class="fa-li"><i class="fas fa-map-marked"></i></span> Addresses</a></li>
+            <li class="list-group-item"> <a class="textMaroon" th:href="@{/admin}"> <span class="fa-li"><i class="fas fa-credit-card"></i> </span>Payment Options</a></li>
+            <li class="list-group-item"> <a class="textMaroon " th:href="@{/admin}"> <span class="fa-li"><i class="fas fa-lock"></i> </span>Login & Security</a></li>
+            <li class="list-group-item"> <a class="textMaroon " th:href="@{/admin}"> <span class="fa-li"><i class="far fa-bell"></i></span> Notifications</a></li>
         </ul>
     </div>
 </div>

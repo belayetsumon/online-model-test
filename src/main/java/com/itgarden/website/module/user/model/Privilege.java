@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 package com.itgarden.website.module.user.model;
+
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
@@ -22,6 +25,11 @@ public class Privilege {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(nullable = false)
+    private Module module;
+
     @NotEmpty(message = "*Name cannot be blank.")
     public String name;
 
@@ -34,8 +42,9 @@ public class Privilege {
     public Privilege() {
     }
 
-    public Privilege(Long id, String name, String slug, Set<Role> role) {
+    public Privilege(Long id, Module module, String name, String slug, Set<Role> role) {
         this.id = id;
+        this.module = module;
         this.name = name;
         this.slug = slug;
         this.role = role;
@@ -47,6 +56,14 @@ public class Privilege {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     public String getName() {
@@ -73,5 +90,4 @@ public class Privilege {
         this.role = role;
     }
 
-    
 }

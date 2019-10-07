@@ -18,4 +18,6 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
     
     List<Exam> findByProductsubcategoryOrderByIdDesc(Productsubcategory productsubcategory);
     
+    
+    
 }

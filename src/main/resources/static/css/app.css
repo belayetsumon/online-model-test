@@ -28,10 +28,11 @@
 
 
 /*.textRed{ color:#ff6347;}*/
-.textRed{ color:#c82333;}
 
-.textGreen{ color:#179813;}
-
-.textOrange{ color:#fab702;}
-
-.textR{ color:#df0d00;}
+.textMaroon{ color:#992337; }
+.bgMaroon {
+  background-color: #992337;    
+}
+.borderColor{
+    border-color: #992337;    
+}

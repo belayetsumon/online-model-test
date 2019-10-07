@@ -22,19 +22,7 @@ and open the template in the editor.
 
 
                     <div class="form-group row">
-                        <input type="hidden" class="form-control "  th:field="*{id}" />
-
-                        <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label text-right">Batch</label>
-                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('batchNo')}" th:errors="*{batchNo}">Book Name</span>
-
-                        <select class="form-control col-sm-3 " id="exampleFormControlSelect1" th:field="*{batchNo}">
-
-                            <option th:each =" batchs : ${batch}"
-                                    th:value="${batchs.id} " 
-                                    th:text="${batchs.name}"> Select one</option>
-
-                        </select>
-
+                        <input type="hidden" class="form-control "  th:field="*{id}" />      
                     </div>
 
                     <div class="form-group row">

@@ -16,6 +16,7 @@ import com.itgarden.website.model.enumvalue.Status;
 import com.itgarden.website.module.user.model.Users;
 import com.itgarden.website.module.user.services.LoggedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/student-test")
+@PreAuthorize("hasAuthority('student-test')")
 public class TestStudentController {
 
     @Autowired

@@ -110,3 +110,10 @@ a.download {
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 
+.textMaroon{ color:#992337; }
+.bgMaroon {
+  background-color: #992337;    
+}
+.borderColor{
+    border-color: #992337;    
+}

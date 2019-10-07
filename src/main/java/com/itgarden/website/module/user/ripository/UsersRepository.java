@@ -5,6 +5,7 @@
  */
 package com.itgarden.website.module.user.ripository;
 
+import com.itgarden.website.module.user.model.Role;
 import com.itgarden.website.module.user.model.Status;
 import com.itgarden.website.module.user.model.Users;
 import java.util.List;
@@ -20,11 +21,17 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     Users findByEmail(String email);
 
+    Users findByMobile(String mobile);
+    
+     List<Users> findByRole(Role role);
+
     Users findByEmailAndStatus(String email, Status status);
 
     Users findByIdAndStatus(Long id, Status status);
+    
+   
 
     List<Users> findByStatus(Status status);
-    
-    List<Users> findByStatusAndProfileImageNotNullOrderByIdDesc(Status status,Pageable pageable);
+
+    List<Users> findByStatusAndProfileImageNotNullOrderByIdDesc(Status status, Pageable pageable);
 }

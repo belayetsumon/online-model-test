@@ -1,5 +1,5 @@
 <section style="background-color: #992337;color: #ffffff;">
-    <div class="container" >
+    <div class="container-fluid" >
         <div class="row">
             <div class="col-sm-6 text-left">
                 <ul class="list-inline">
@@ -7,43 +7,49 @@
                         class="list-inline-item"><a class="text-white"
                                                 th:href="@{/}"
                                                 aria-current="page">Home</a></li>                    
-                    <li class="list-inline-item"><a class="text-white"
-                                                    th:href="@{/front-view/member-login}">Login</a></li>
-                    <li class="list-inline-item"><a class="text-white"
-                                                    th:href="@{/front-view/member-registration}">Registration</a></li>
-                    <li class="list-inline-item">
-                        <a class="text-white" th:href="@{/profile/index}">My Account</a></li>
-                    <li class="list-inline-item"  >
-                        <div sec:authorize="isAuthenticated()">
-                            <a class="text-white" th:href="@{/users/logout}">Log out</a>
+                    <li class="list-inline-item"></li>
 
+                    <li sec:authorize="isAuthenticated()" class="list-inline-item">
+                        <a class="text-white" th:href="@{/customer/index}">My Account</a> </li>
+
+                
+                    <li sec:authorize="hasAuthority('admin')" class="list-inline-item">
+                        <a class="text-white" th:href="@{/admin/index}"> Admin Account</a> </li>
+
+                    <li class="list-inline-item"  >
+
+                        <div sec:authorize="isAuthenticated()">
+                            <a class="text-white" th:href="@{/users/logout}">Log Out</a>
                         </div>
+
+                        <div sec:authorize="!isAuthenticated()">
+                            <a class="text-white"
+                               th:href="@{/front-view/member-login}">Login</a>
+                        </div>
+
                     </li>
                 </ul>
             </div>
 
             <div class="col-sm-6 text-right">
                 <ul class="list-inline">
-
-
-                    <li class="list-inline-item"><a  class="text-white" href="https://www.facebook.com/ZunshaynApparels/"
-                                                     target=""><i class="fab fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item"><a class="text-white"
-                                                    href="https://www.youtube.com/channel/UCEOl5yhZKraRV64STmS7t-Q/featured?view_as=subscriber"
-                                                    target=""><i class="fab fa-youtube"></i></a></li>
-                    <li class="list-inline-item"> <a class="text-white"  href="" target=""><i class="fab fa-twitter-square "></i></a></li>
+                    <li class="list-inline-item">  
+                        <div sec:authorize="isAuthenticated()">
+                            Welcome Mr.XYZ
+                        </div></li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
+    <div class="container-fluid">
         <div class="d-flex flex-grow-1">
             <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
-            <a class="navbar-brand d-none d-lg-inline-block text-danger font-weight-bold"th:href="@{/}">
-                Oxford <span class="border-success bg-green ">Edu</span> Care
+            <a  style="color: #992337;"class="navbar-brand d-none d-lg-inline-block  font-weight-bold"th:href="@{/}">
+                Oxford Edu Care
             </a>
+
             <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
                 <img  class="img-fluid  " th:src="@{/img/logo.png}" width="80" height="80" />
             </a>
@@ -57,10 +63,10 @@
             <ul class="navbar-nav ml-auto flex-nowrap">
 
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link textMaroon" th:href="@{/}">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link  textMaroon dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         About Us
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -70,11 +76,11 @@
                                                     <a class="dropdown-item" th:href="@{/front-view/executive-committee}">Executive committee</a>
                                                     <a class="dropdown-item" th:href="@{/front-view/constitution}">Constitution</a>
                                                     <div class="dropdown-divider"></div>-->
-                        <a class="dropdown-item" th:href="@{/front-view/ceo-message}">CEO Message</a> 
-                        <a class="dropdown-item" th:href="@{/front-view/agent-division}">Agent Division</a> 
-                        <a class="dropdown-item" th:href="@{/front-view/trade-division}">Trading Division</a>
-                        <a class="dropdown-item" th:href="@{/front-view/corporate-value}">Corporate Values</a>
-                        <a class="dropdown-item" th:href="@{/front-view/code-conduct}">Code of Conduct</a>
+                        <!--                        <a class="dropdown-item" th:href="@{/front-view/ceo-message}">CEO Message</a> 
+                                                <a class="dropdown-item" th:href="@{/front-view/agent-division}">Agent Division</a> 
+                                                <a class="dropdown-item" th:href="@{/front-view/trade-division}">Trading Division</a>
+                                                <a class="dropdown-item" th:href="@{/front-view/corporate-value}">Corporate Values</a>
+                                                <a class="dropdown-item" th:href="@{/front-view/code-conduct}">Code of Conduct</a>-->
                         <a class="dropdown-item" th:href="@{/front-view/clients}">Our Clients</a>
 
                     </div>
@@ -96,31 +102,29 @@
                 <!--                <li class="nav-item"><a th:class="'nav-link '+${resourses}"  th:href="@{/front-view/resourses}">Resources</a></li>
                                 <li class="nav-item"><a th:class="'nav-link '+${wholesale}"  th:href="@{/front-view/wholesale}">Wholesale</a></li>-->
 
-                <li class="nav-item"><a th:class="'nav-link '+${wholesale}"  th:href="@{/front-view/product}">Our Product</a></li>
 
-                <li class="nav-item"><a th:class="'nav-link '+${wholesale}"  th:href="@{/front-view/product}">All Course</a></li>
 
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/front-view/news-events}">Instructor Registration</a>
-                </li>
+                <li class="nav-item"><a th:class="'nav-link '+${wholesale}"  th:href="@{/front-view/all-exam}">All Exam</a></li>
 
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/front-view/news-events}">Student Registration</a>
+            
+
+                <li sec:authorize="!isAuthenticated()" class="nav-item">
+                    <a class="nav-link" th:href="@{/front-view/front-registration}">Registration</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/front-view/contactUs}">Contact Us</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/cart/}"><div class="" th:if="${session.sessioncart==null}" >                                   
-                            <i class="fas fa-shopping-cart text-danger"></i>   Cart  0 
-                        </div> 
-
-                        <div class="" th:if="${session.sessioncart!=null}" >
-                            <i class="fas fa-shopping-cart text-warning"></i> Cart <span th:text="${session.sessioncart.size()}"></span>
-                        </div></a>
-                </li>
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/cart/}"><div class="" th:if="${session.sessioncart==null}" >                                   
+                                            <i class="fas fa-shopping-cart text-danger"></i>   Cart  0 
+                                        </div> 
+                
+                                        <div class="" th:if="${session.sessioncart!=null}" >
+                                            <i class="fas fa-shopping-cart text-warning"></i> Cart <span th:text="${session.sessioncart.size()}"></span>
+                                        </div></a>
+                                </li>-->
 
             </ul>
         </div>

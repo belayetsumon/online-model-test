@@ -81,8 +81,9 @@ and open the template in the editor.
 
                             <tr> 
                                 <td> 
-                                    <a  type="button" class="btn btn-sm" th:href="@{/test/save/{eid}(eid=${exam_details.id})}"> Test Start </a> 
-
+                                    <span >
+                                    <a  type="button" class="btn btn-sm" th:href="@{/instructor-test/save/{eid}(eid=${exam_details.id})}"> Test Start </a> 
+                                    </span>
                                 </td>
 
                                 <td> :</td>
@@ -103,12 +104,9 @@ and open the template in the editor.
                                             <tr th:each="testlists,status:${testlist}">
                                                 <td th:text="${status.count}">   </td>
                                                 <td>  
-                                                    <a th:href="@{/test/testdashboard/{tid}(tid=${testlists.id})}"> 
-
+                                                    <a th:href="@{/instructor-test/testdashboard/{tid}(tid=${testlists.id})}"> 
                                                         <span th:text="${testlists.exam.title}"></span>
-
                                                     </a> 
-
                                                 </td>
                                                 <td  th:text="${testlists.userId.name}">   </td>
                                                 <td>

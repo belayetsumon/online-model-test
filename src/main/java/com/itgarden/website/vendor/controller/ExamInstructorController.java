@@ -13,6 +13,8 @@ import com.itgarden.website.module.user.services.LoggedUserService;
 import com.itgarden.website.exam.ripository.ExamRepository;
 import com.itgarden.website.exam.ripository.QuestionRepository;
 import com.itgarden.website.exam.ripository.TestRepository;
+import com.itgarden.website.model.Productcategory;
+import com.itgarden.website.model.Productsubcategory;
 import com.itgarden.website.ripository.ProductcategoryRepository;
 import com.itgarden.website.ripository.ProductsubcategoryRepository;
 import com.itgarden.website.services.StorageProperties;
@@ -23,6 +25,7 @@ import javax.validation.Valid;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +41,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/instructor-exam")
+@PreAuthorize("hasAuthority('instructor-exam')")
 public class ExamInstructorController {
 
     @Autowired
@@ -67,15 +71,40 @@ public class ExamInstructorController {
         return "instructor/exam/index";
     }
 
-    @RequestMapping("/create")
-    public String create(Model model, Exam exam) {
+    @RequestMapping("/categorylist")
+    public String categorylist(Model model, Productcategory productcategory) {
+
+        model.addAttribute("productcategorylist", productcategoryRepository.findByStatus(Status.Active));
+
+        return "instructor/exam/categorylist";
+    }
+
+    @RequestMapping("/sub-categorylist/{cid}")
+    public String subcategorylist(Model model, @PathVariable Long cid, Productsubcategory productsubcategory) {
+
+        Productcategory productcategory = new Productcategory();
+
+        productcategory.setId(cid);
+
+        model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByProductcategory(productcategory));
+
+        return "instructor/exam/sub-categorylist";
+    }
+
+    @RequestMapping("/create/{scid}")
+    public String createexam(Model model, @PathVariable Long scid, Exam exam) {
         model.addAttribute("statuslist", Status.values());
-        model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByStatus(Status.Active));
 
         Users userss = new Users();
+
         userss.setId(loggedUserService.activeUserid());
+
         exam.setUserId(userss);
 
+        Productsubcategory productsubcategory = new Productsubcategory();
+
+        productsubcategory.setId(scid);
+        exam.setProductsubcategory(productsubcategory);
         model.addAttribute("lavel", Lavelstatus.values());
         return "instructor/exam/add";
     }
@@ -160,14 +189,13 @@ public class ExamInstructorController {
     }
 
     @RequestMapping("/details/{id}")
-    public String create(Model model, @PathVariable Long id, Exam exam) {
+    public String exam_details(Model model, @PathVariable Long id, Exam exam) {
 
         model.addAttribute("exam_details", examRepository.getOne(id));
-
         Exam examid = examRepository.getOne(id);
-
-        model.addAttribute("testlist", testRepository.findByExamOrderByIdDesc(examid));
-
+        Users userId = new Users();
+        userId.setId(loggedUserService.activeUserid());
+        model.addAttribute("testlist", testRepository.findByExamAndUserIdOrderByIdDesc(examid, userId));
         return "instructor/exam/exam_details";
 
     }

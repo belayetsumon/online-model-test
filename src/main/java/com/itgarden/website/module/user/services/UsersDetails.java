@@ -5,6 +5,7 @@
  */
 package com.itgarden.website.module.user.services;
 
+import com.itgarden.website.module.user.model.Privilege;
 import com.itgarden.website.module.user.model.Role;
 import com.itgarden.website.module.user.model.Status;
 import com.itgarden.website.module.user.model.Users;
@@ -40,8 +41,17 @@ public class UsersDetails implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
         Set<Role> userrole = user.getRole();
-        for (Role role : userrole) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+//        for (Role role : userrole) {
+//            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+        
+            for (Role role : user.getRole()) {
+            
+            for( Privilege privilegelist : role.getPrivilege())
+            {
+            grantedAuthorities.add(new SimpleGrantedAuthority( privilegelist.getSlug()));
+            }
+            
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
     }

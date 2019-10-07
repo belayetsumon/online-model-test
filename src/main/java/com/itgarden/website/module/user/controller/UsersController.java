@@ -5,15 +5,19 @@
  */
 package com.itgarden.website.module.user.controller;
 
+import com.itgarden.website.module.user.componant.UserValidator;
+import com.itgarden.website.module.user.model.Role;
 import com.itgarden.website.module.user.model.Status;
 import com.itgarden.website.module.user.model.Users;
 import com.itgarden.website.module.user.ripository.RoleRepository;
 import com.itgarden.website.module.user.ripository.UsersRepository;
 import com.itgarden.website.ripository.BatchRepository;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/users")
+//@PreAuthorize("hasAuthority('users')")
 public class UsersController {
 
     @Autowired
@@ -46,7 +51,10 @@ public class UsersController {
     @Autowired
     BatchRepository batchRepository;
 
-    @RequestMapping("/index")
+    @Autowired
+    UserValidator userValidator;
+
+    @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model) {
         model.addAttribute("alluser", usersRepository.findAll());
         return "user/allusers";
@@ -71,7 +79,6 @@ public class UsersController {
 
     @RequestMapping("/registrations")
     public String registrations(Model model, Users users) {
-        model.addAttribute("batch", batchRepository.findAll());
         model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("status", Status.values());
         return "user/registrations";
@@ -86,7 +93,6 @@ public class UsersController {
         return "user/registrations";
     }
 
-   
 //    @RequestMapping("/save")
 //    //@Transactional
 //    public String save(Model model, @RequestParam(value = "password2", required = false) String password2, @Valid Users users, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -121,13 +127,12 @@ public class UsersController {
 //            return "user/registrations";
 //        }
 //    }
-    
     @RequestMapping("/save")
     //@Transactional
     public String save(Model model, @RequestParam(value = "password2", required = false) String password2, @Valid Users users, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-              model.addAttribute("batch", batchRepository.findAll());
+            model.addAttribute("batch", batchRepository.findAll());
             model.addAttribute("roles", roleRepository.findAll());
             model.addAttribute("status", Status.values());
             return "pims/users/registrations";
@@ -148,7 +153,7 @@ public class UsersController {
             return "redirect:/users/index";
 
         } catch (Exception e) {
-            model.addAttribute("batch", batchRepository.findAll());
+
             model.addAttribute("roles", roleRepository.findAll());
             model.addAttribute("status", Status.values());
             redirectAttributes.addFlashAttribute("message", e);
@@ -156,8 +161,6 @@ public class UsersController {
             return "pims/users/registrations";
         }
     }
-    
-    
 
     @RequestMapping("/delete/{id}")
     public String delete(Model model, @PathVariable Long id, Users users) {
@@ -210,19 +213,29 @@ public class UsersController {
         return "redirect:users/uregistrations";
     }
 
-    @RequestMapping("/front-user-save")
+    @RequestMapping("/front-registration-save")
     public String frontUserSave(Model model, @Valid Users users, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        userValidator.validate(users, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("batch", batchRepository.findAll());
-            model.addAttribute("role", roleRepository.findAll());
-            return "frontview/member-registration";
+
+            Role instructor = roleRepository.findBySlug("instructor");
+
+            model.addAttribute("instructor", instructor);
+
+            Role customer = roleRepository.findBySlug("customer");
+
+            model.addAttribute("instructor", customer);
+
+            return "frontview/front-registration";
         }
-        users.setStatus(Status.Pending);
+        users.setStatus(Status.Active);
         users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
         usersRepository.save(users);
-        redirectAttributes.addFlashAttribute("success", " Congratulations you have successfully registered. please contact with system adminstrator for active your ID.");
-        return "redirect:/front-view/member-registration";
+        redirectAttributes.addFlashAttribute("success", " Congratulations you have successfully registered.");
+        return "redirect:/front-view/front-registration";
     }
+
+    
 
 }

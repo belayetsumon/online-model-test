@@ -16,6 +16,7 @@ import com.itgarden.website.model.enumvalue.Status;
 import com.itgarden.website.module.user.model.Users;
 import com.itgarden.website.module.user.services.LoggedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/instructor-test")
+@PreAuthorize("hasAuthority('instructor-test')")
 public class TestInstructorController {
 
     @Autowired
@@ -69,7 +71,7 @@ public class TestInstructorController {
 
         redirectAttributes.addFlashAttribute("message", "Your Test Have Created. Lets start.");
 
-        return "redirect:/exam/details/{eid}";
+        return "redirect:/instructor-exam/details/{eid}";
     }
 
     @RequestMapping("/testdashboard/{tid}")
@@ -83,7 +85,7 @@ public class TestInstructorController {
 
         model.addAttribute("examinfo", examinfo);
 
-        return "catalog/test/testdashboard";
+        return "instructor/test/testdashboard";
     }
 
     @RequestMapping("/openquestion/{tid}")
@@ -99,7 +101,7 @@ public class TestInstructorController {
 
             redirectAttributes.addFlashAttribute("message", "Successfully Completed Your Test.");
 
-            return "redirect:/test/testdashboard/{tid}";
+            return "redirect:/instructor-test/testdashboard/{tid}";
 
         } else {
 
@@ -124,7 +126,7 @@ public class TestInstructorController {
 
             mark.setQuestionTitle(question.getTitle());
 
-            return "catalog/test/openquestion";
+            return "instructor/test/openquestion";
         }
 
     }

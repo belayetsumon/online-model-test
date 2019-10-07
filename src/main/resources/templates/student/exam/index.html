@@ -53,27 +53,27 @@ and open the template in the editor.
                                         <th th:text="${status.count}">1</th>
 
 
-                                        <td> <a th:href="@{/student-exam/details/{id}(id=${examlists.id})}" th:text="${examlists.title}">    </a></td>
+                                        <td> <a th:href="@{/student-exam/details/{id}(id=${examlists.exam.id})}" th:text="${examlists.exam.title}">    </a></td>
 
-                                        <td> <span th:text="${examlists.question.size()}"></span> </td>
+                                        <td> <span th:text="${examlists.exam.question.size()}"></span> </td>
 
-                                        <td th:text="${examlists.productsubcategory.name}">Otto</td>
+                                        <td th:text="${examlists.exam.productsubcategory.name}">Otto</td>
 
-                                        <td th:text="${examlists.orderno}">Otto</td>
+                                        <td th:text="${examlists.exam.orderno}">Otto</td>
 
                                         <td>
-                                            <span th:if="${ not #strings.isEmpty(examlists.imageName)}" class="badge bg-green pull-right"> 
-                                                <img  class="img-responsive" th:src="@{/files/}+${examlists.imageName}" width="100px"  height="100px"/>
+                                            <span th:if="${ not #strings.isEmpty(examlists.exam.imageName)}" class="badge bg-green pull-right"> 
+                                                <img  class="img-responsive" th:src="@{/files/}+${examlists.exam.imageName}" width="100px"  height="100px"/>
                                             </span>
 
-                                            <span th:if="${#strings.isEmpty(examlists.imageName)}" > Image Not Found </span>
+                                            <span th:if="${#strings.isEmpty(examlists.exam.imageName)}" > Image Not Found </span>
                                         </td>
-                                        <td th:text="${examlists.price}">Otto</td>
-                                        <td th:text="${examlists.status}">Otto</td>
+                                        <td th:text="${examlists.exam.price}">Otto</td>
+                                        <td th:text="${examlists.exam.status}">Otto</td>
 
-                                        <td th:text="${examlists.created}">Otto</td>
+                                        <td th:text="${examlists.exam.created}">Otto</td>
 
-                                        <td th:text="${examlists.modified}">@mdo</td>
+                                        <td th:text="${examlists.exam.modified}">@mdo</td>
                                     </tr>
                                 </tbody>
                             </table>

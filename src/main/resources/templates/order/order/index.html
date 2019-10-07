@@ -30,7 +30,7 @@ and open the template in the editor.
                             </div>
                         </span>
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" th:if="${ not #lists.isEmpty(orderlist)}">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">#</th>
@@ -43,29 +43,25 @@ and open the template in the editor.
                             </thead>
                             <tbody>
 
-                                <tr th:each="testimoniallists,status:${testimoniallist}">
-
+                                <tr th:each="orderlists,status:${orderlist}">
                                     <th th:text="${status.count}">1</th>
-
-                                    <td> <a th:href="@{/testimonial/details/{id}(id=${testimoniallists.id})}" th:text="${testimoniallists.name}">    </a></td>
-
-                                    <td>
-                                        <span th:if="${ not #strings.isEmpty(testimoniallists.imageName)}" class="badge bg-green pull-right"> 
-                                            <img  class="img-responsive" th:src="@{/files/}+${testimoniallists.imageName}" width="100px"  height="100px"/>
-                                        </span>
-
-                                        <span th:if="${#strings.isEmpty(testimoniallists.imageName)}" > Image Not Found </span>
-
-                                    </td>
-
-                                    <td th:text="${testimoniallists.status}">Otto</td>
-
-                                    <td th:text="${testimoniallists.created}">Otto</td>
-
-                                    <td th:text="${testimoniallists.modified}">@mdo</td>
+                                    <td> <a  th:href="@{/order/details/{oid}(oid=${orderlists.id})}" th:text="${orderlists.customer.name}">    </a></td>
+                                    <td th:text="${orderlists.status}">Otto</td>
+                                    <td th:text="${orderlists.total}">Otto</td>
+                                    <td th:text="${orderlists.created}">Otto</td>
+                                    <td th:text="${orderlists.modified}">@mdo</td>
                                 </tr>
                             </tbody>
                         </table>
+                        <table class="table table-bordered" th:if="${ #lists.isEmpty(orderlist)}">
+                            <tr>
+                                <td> Sorry no order found ! </td>
+                            </tr>
+
+
+                        </table>
+
+
                     </div><!--  Card body end-->
 
 

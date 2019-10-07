@@ -81,7 +81,7 @@ and open the template in the editor.
 
                                     <li th:each="answerlists : ${qinfo.answer}">
 
-                                        <input type="radio" th:field="*{value}" th:value="${answerlists.id}" />
+                                        <input type="radio" th:field="*{value}" th:value="${answerlists.id}" required />
 
                                         <label th:for="${#ids.prev('value')}" th:text="${answerlists.title}">Wireframe</label>
 
