@@ -31,7 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 
 @RequestMapping("/mark")
-@PreAuthorize("hasAuthority('mark')")
+//@PreAuthorize("hasAuthority('mark')")
 public class MarkController {
 
     @Autowired

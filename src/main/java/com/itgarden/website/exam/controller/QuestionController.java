@@ -38,7 +38,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/question")
-@PreAuthorize("hasAuthority('question')")
+//@PreAuthorize("hasAuthority('question')")
 public class QuestionController {
 
     @Autowired

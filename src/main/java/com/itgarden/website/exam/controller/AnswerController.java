@@ -31,7 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/answer")
-@PreAuthorize("hasAuthority('answer')")
+//@PreAuthorize("hasAuthority('answer')")
 public class AnswerController {
     
     @Autowired

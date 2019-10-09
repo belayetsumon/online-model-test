@@ -42,7 +42,7 @@ and open the template in the editor.
                                         <th>Status</th>
                                         <th>Remark</th>
 
-                                        <th>Exam Details</th>
+                                        <th>Order List</th>
                                        
                                     </tr>
                                 </thead>
@@ -59,7 +59,7 @@ and open the template in the editor.
                                         <td th:text="${customerlists.status}">Chakma</td> 
                                         <td th:text="${customerlists.remarks}">Chakma</td>
                                         <td>
-                                            <a type="button" class="btn  btn-success btn-xs bg-maroon" th:href="@{/users/edit/{id} (id=${customerlists.id})}" > Order Details <span class="badge badge-warning" th:text="${customerlists.exam.size()}"></span> </a>
+                                            <a type="button" class="btn  btn-success btn-xs bg-maroon" th:href="@{/admin-customer/order-by-customer/{cid} (cid=${customerlists.id})}" > Order List <span class="badge badge-warning" th:text="${customerlists.exam.size()}"></span> </a>
                                         </td>
                                         
                                     </tr>

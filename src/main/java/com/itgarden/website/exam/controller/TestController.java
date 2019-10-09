@@ -30,7 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/test")
-@PreAuthorize("hasAuthority('test')")
+//@PreAuthorize("hasAuthority('test')")
 public class TestController {
 
     @Autowired

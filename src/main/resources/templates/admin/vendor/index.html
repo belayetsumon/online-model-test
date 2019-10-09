@@ -15,7 +15,7 @@ and open the template in the editor.
                 <div class="card">
                     <div class="card-header">
                         <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Instructor List. Total : <span class="badge badge-warning" th:text="${instructorlist.size()}"></span> </div>
-                                                                                                                                                        
+
                             <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/admin/}"> Close</a></div>
                         </div>
                     </div>
@@ -44,8 +44,7 @@ and open the template in the editor.
                                         <th>Status</th>
                                         <th>Created</th>
                                         <th>Remark</th>
-                                        <th>Exam Details</th>
-
+                                        <th>Exam List</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,10 +58,10 @@ and open the template in the editor.
                                             </span>
                                         </td>
                                         <td th:text="${instructorlists.status}">Chakma</td> 
-                                         <td th:text="${instructorlists.createdOn}">Chakma</td> 
+                                        <td th:text="${instructorlists.createdOn}">Chakma</td> 
                                         <td th:text="${instructorlists.remarks}">Chakma</td>
                                         <td>
-                                            <a type="button" class="btn  btn-success btn-xs bg-maroon" th:href="@{/users/edit/{id} (id=${instructorlists.id})}" > Exam Details <span class="badge badge-warning" th:text="${instructorlists.exam.size()}"></span> </a>
+                                            <a type="button" class="btn  btn-success btn-xs bg-maroon" th:href="@{/admin-vendor/exam-by-instructor/{iid} (iid=${instructorlists.id})}" > Exam List <span class="badge badge-warning" th:text="${instructorlists.exam.size()}"></span> </a>
                                         </td>
 
                                     </tr>
