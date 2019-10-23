@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/faq")
+ @PreAuthorize("hasAuthority('faq')")
 public class FaqController {
 
     @Autowired

@@ -45,14 +45,7 @@ public class TestInstructorController {
     @Autowired
     TestRepository testRepository;
 
-    @RequestMapping("/url")
 
-    public String index(Model model) {
-
-        model.addAttribute("attribute", "value");
-
-        return "view.name";
-    }
 
     @RequestMapping("/save/{eid}")
     public String create(Model model, @PathVariable Long eid, Test test, BindingResult bindingResult, RedirectAttributes redirectAttributes

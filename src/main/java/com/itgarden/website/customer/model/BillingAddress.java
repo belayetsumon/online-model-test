@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.itgarden.website.order.model;
+package com.itgarden.website.customer.model;
 
 import com.itgarden.website.module.user.model.Users;
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ShippingAddress {
+public class BillingAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +35,7 @@ public class ShippingAddress {
 
     @NotNull(message = "User cannot be blank.")
     @OneToOne(optional = true)
-    private SalesOrder order;
+    private Users userId;
 
     private String firstName;
 
@@ -78,12 +78,9 @@ public class ShippingAddress {
 
     /// End Audit //// 
 
-    public ShippingAddress() {
-    }
-
-    public ShippingAddress(Long id, SalesOrder order, String firstName, String lastName, String email, String mobile, String company, String addressOne, String addresstwo, String city, String postCode, String country, String district, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
+    public BillingAddress(Long id, Users userId, String firstName, String lastName, String email, String mobile, String company, String addressOne, String addresstwo, String city, String postCode, String country, String district, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
         this.id = id;
-        this.order = order;
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -101,6 +98,9 @@ public class ShippingAddress {
         this.modified = modified;
     }
 
+    public BillingAddress() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -109,12 +109,12 @@ public class ShippingAddress {
         this.id = id;
     }
 
-    public SalesOrder getOrder() {
-        return order;
+    public Users getUserId() {
+        return userId;
     }
 
-    public void setOrder(SalesOrder order) {
-        this.order = order;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {

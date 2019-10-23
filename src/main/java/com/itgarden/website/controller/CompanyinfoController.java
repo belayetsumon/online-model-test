@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/companyinfo")
-@PreAuthorize("hasAuthority('companyinfo')")
+ @PreAuthorize("hasAuthority('companyinfo')")
+
 public class CompanyinfoController {
 
     @RequestMapping("/index")

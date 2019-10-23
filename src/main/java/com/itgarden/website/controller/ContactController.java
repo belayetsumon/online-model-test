@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/contact")
+ @PreAuthorize("hasAuthority('contact')")
 public class ContactController {
 
     @Autowired

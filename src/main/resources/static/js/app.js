@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 
-
-
-
-
-
 $('.owl-carousel').owlCarousel({
     loop:true,
     margin:10,
@@ -25,3 +20,6 @@ $('.owl-carousel').owlCarousel({
         }
     }
 })
+
+
+

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.itgarden.website.order.model;
+package com.itgarden.website.customer.model;
 
 import com.itgarden.website.module.user.model.Users;
+import com.itgarden.website.order.model.SalesOrder;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class billingAddress {
+public class ShippingAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +36,7 @@ public class billingAddress {
 
     @NotNull(message = "User cannot be blank.")
     @OneToOne(optional = true)
-    private Users userId;
+    private SalesOrder order;
 
     private String firstName;
 
@@ -78,9 +79,12 @@ public class billingAddress {
 
     /// End Audit //// 
 
-    public billingAddress(Long id, Users userId, String firstName, String lastName, String email, String mobile, String company, String addressOne, String addresstwo, String city, String postCode, String country, String district, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
+    public ShippingAddress() {
+    }
+
+    public ShippingAddress(Long id, SalesOrder order, String firstName, String lastName, String email, String mobile, String company, String addressOne, String addresstwo, String city, String postCode, String country, String district, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
         this.id = id;
-        this.userId = userId;
+        this.order = order;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -98,9 +102,6 @@ public class billingAddress {
         this.modified = modified;
     }
 
-    public billingAddress() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -109,12 +110,12 @@ public class billingAddress {
         this.id = id;
     }
 
-    public Users getUserId() {
-        return userId;
+    public SalesOrder getOrder() {
+        return order;
     }
 
-    public void setUserId(Users userId) {
-        this.userId = userId;
+    public void setOrder(SalesOrder order) {
+        this.order = order;
     }
 
     public String getFirstName() {

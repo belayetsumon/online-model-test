@@ -11,8 +11,8 @@ and open the template in the editor.
         <section  class="border-bottom" style="padding: 50px 0px 50px 0px;background-color: #992337;">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-7">  <h1 class="font-weight-bold" style="color: #fff;">    Member Login </h1></div>
-                    <div class="col-sm-5 text-right" style="color: #ffffff">Home/Member/Member Login</div>
+                    <div class="col-sm-7">  <h1 class="font-weight-bold" style="color: #fff;">     Login </h1></div>
+                    <div class="col-sm-5 text-right" style="color: #ffffff">Home/User/User Login</div>
                 </div>
             </div>
         </section>
@@ -45,17 +45,17 @@ and open the template in the editor.
 
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email"  name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="sumon@yahoo.com" placeholder="Enter email">
+                                        <input type="email"  name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" placeholder="Enter email">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="1234567890" placeholder="Password">
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="" placeholder="Password">
                                     </div>
 
                                     <button type="submit" class="btn  btn-sm btn-warning">Submit</button>
                                 </form>
                                 <a th:href="@{/front-view/forgot-password}" class="btn btn-primary btn-sm m-1 btn-block btn-info">Forgot Password</a>
-                                <a  th:href="@{/front-view/member-registration}"class="btn btn-primary btn-sm m-1 btn-block  btn-success">New Member Registration</a>
+                                <a  th:href="@{/front-view/front-registration}"class="btn btn-primary btn-sm m-1 btn-block  btn-success">New Member Registration</a>
 
                             </div>
                         </div>
