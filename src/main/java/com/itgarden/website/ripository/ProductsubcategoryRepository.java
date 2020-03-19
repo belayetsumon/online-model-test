@@ -20,4 +20,5 @@ public interface ProductsubcategoryRepository extends JpaRepository<Productsubca
     List<Productsubcategory> findByStatus(Status status);
 
     List<Productsubcategory> findByProductcategory(Productcategory productcategory);
+    List<Productsubcategory> findByProductcategoryAndStatusOrderByName(String slug, Status status);
 }

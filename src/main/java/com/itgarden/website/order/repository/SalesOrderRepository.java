@@ -6,6 +6,7 @@
 package com.itgarden.website.order.repository;
 
 import com.itgarden.website.module.user.model.Users;
+import com.itgarden.website.order.model.OrderItem;
 import com.itgarden.website.order.model.OrderStatus;
 import com.itgarden.website.order.model.SalesOrder;
 import java.util.List;
@@ -22,7 +23,7 @@ public interface SalesOrderRepository extends JpaRepository<SalesOrder, Long> {
     
     List<SalesOrder> findByCustomerAndStatusOrderByIdDesc(Users users,OrderStatus status);
     
-    List<SalesOrder> findByExamUserIdAndStatusOrderByIdDesc(Users users,OrderStatus status);
+    SalesOrder findFirstByOrderByIdDesc();   
     
     
 }

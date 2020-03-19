@@ -38,7 +38,7 @@ and open the template in the editor.
                                         <th scope="col">Name</th>
                                         <th scope="col">Total Question </th>
 
-                                        <th scope="col"> Exam Category </th>
+                                        <th scope="col"> Exam Sub Category </th>
                                         <th scope="col"> Order no </th>
                                         <th scope="col"> Image </th>
                                         <th scope="col"> Price </th>
@@ -57,7 +57,14 @@ and open the template in the editor.
 
                                         <td> <span th:text="${examlists.question.size()}"></span><a th:href="@{/instructor-exam/question-by-exam/{examid}(examid=${examlists.id})}">  Question List  </a> </td>
 
-                                        <td th:text="${examlists.productsubcategory.name}">Otto</td>
+                                        <td >
+                                            <span th:each="subcategory,status:${examlists.productsubcategory}" >
+
+                                                <span th:text="${subcategory.name+','}">          </span>                            
+
+                                            </span>
+
+                                        </td>
 
                                         <td th:text="${examlists.orderno}">Otto</td>
 

@@ -6,6 +6,7 @@
 package com.itgarden.website.ripository;
 
 import com.itgarden.website.model.ProfileImage;
+import com.itgarden.website.module.user.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author User
  */
 public interface ProfileImageRepository extends JpaRepository<ProfileImage, Long> {
-    
+    ProfileImage findByUserId(Users users);
 }

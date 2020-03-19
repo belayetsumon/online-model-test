@@ -4,6 +4,8 @@ import com.itgarden.website.exam.model.Exam;
 import com.itgarden.website.model.Profile;
 import com.itgarden.website.model.ProfileImage;
 import com.itgarden.website.order.model.SalesOrder;
+import com.itgarden.website.vendor.model.Vendorprofile;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +35,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 //@EntityListeners(AuditingEntityListener.class)
 @Table(name = "employee")
 @DynamicUpdate
-public class Users {
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -104,14 +106,18 @@ public class Users {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<SalesOrder> salesOrder;
-    
+
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Exam> exam;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToOne(mappedBy = "userId")
+    public Vendorprofile vendorprofile;
 
     public Users() {
     }
 
-    public Users(Long id, String name, String email, String mobile, String password, Set<Role> role, Status status, String remarks, Date lastLogin, Date lastLogOut, String createdBy, Date updatedOn, String updatedBy, Profile profile, ProfileImage profileImage, List<SalesOrder> salesOrder, List<Exam> exam) {
+    public Users(Long id, String name, String email, String mobile, String password, Set<Role> role, Status status, String remarks, Date lastLogin, Date lastLogOut, String createdBy, Date updatedOn, String updatedBy, Profile profile, ProfileImage profileImage, List<SalesOrder> salesOrder, List<Exam> exam, Vendorprofile vendorprofile) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -129,7 +135,10 @@ public class Users {
         this.profileImage = profileImage;
         this.salesOrder = salesOrder;
         this.exam = exam;
+        this.vendorprofile = vendorprofile;
     }
+
+   
 
     public Long getId() {
         return id;
@@ -282,4 +291,14 @@ public class Users {
     public void setExam(List<Exam> exam) {
         this.exam = exam;
     }
+
+    public Vendorprofile getVendorprofile() {
+        return vendorprofile;
+    }
+
+    public void setVendorprofile(Vendorprofile vendorprofile) {
+        this.vendorprofile = vendorprofile;
+    }
+    
+    
 }

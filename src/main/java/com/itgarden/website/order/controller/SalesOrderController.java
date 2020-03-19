@@ -5,6 +5,7 @@
  */
 package com.itgarden.website.order.controller;
 
+import com.itgarden.website.order.model.OrderStatus;
 import com.itgarden.website.order.model.SalesOrder;
 import com.itgarden.website.order.repository.SalesOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,25 @@ public class SalesOrderController {
         return "order/order/order_details";
     }
 
+    @RequestMapping(value = {"statuschange/{oid}"})
+    public String statusChange(Model model, @PathVariable Long oid, SalesOrder salesOrder) {
+
+        salesOrder = salesOrderRepository.getOne(oid);
+        
+        salesOrder.setStatus(OrderStatus.Complete);
+        
+        salesOrderRepository.save(salesOrder);
+        
+         return "redirect:/order/details/{oid}";
+        
+        
+    }
+
     @RequestMapping(value = {"create"})
     public String create(Model model) {
         model.addAttribute("orderlist", "order");
+
         return "order/order/create";
     }
+
 }

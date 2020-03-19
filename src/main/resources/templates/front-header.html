@@ -12,9 +12,9 @@
                     <li sec:authorize="isAuthenticated()" class="list-inline-item">
                         <a class="text-white" th:href="@{/customer/index}">My Account</a> </li>
 
-                
-                    <li sec:authorize="hasAuthority('admin')" class="list-inline-item">
-                        <a class="text-white" th:href="@{/admin/index}"> Admin Account</a> </li>
+
+                    <!--                    <li sec:authorize="hasAuthority('admin')" class="list-inline-item">
+                                            <a class="text-white" th:href="@{/admin/index}"> Admin Account</a> </li>-->
 
                     <li class="list-inline-item"  >
 
@@ -28,15 +28,27 @@
                         </div>
 
                     </li>
+
+                    <li class="list-inline-item">
+                        <a class="text-white" th:href="@{/cart/index}">Cart <span class="badge badge-pill badge-warning" th:text="${totaltest}">4</span></a>
+                    </li>
                 </ul>
             </div>
 
             <div class="col-sm-6 text-right">
                 <ul class="list-inline">
-                    <li class="list-inline-item">  
-                        <div sec:authorize="isAuthenticated()">
-                            Welcome Mr.XYZ
-                        </div></li>
+                    <li class="list-inline-item"><a th:class="text-white"  th:href="@{/front-view/exam-category}">Exam Category</a></li>
+                    <li class="list-inline-item"><a th:class="text-white"  th:href="@{/front-view/all-exam}">All Exam</a></li>
+                    <li class="list-inline-item"><a th:class="text-white"  th:href="@{/front-view/all-instructor}">All Instructor</a></li>
+                    <li sec:authorize="!isAuthenticated()" class="list-inline-item">
+                        <a class="text-white" th:href="@{/front-view/front-registration}">Registration</a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a class="text-white" th:href="@{/front-view/contactUs}">Contact Us</a>
+                    </li>
+
+
                 </ul>
             </div>
         </div>
@@ -44,22 +56,24 @@
 </section>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <div class="d-flex flex-grow-1">
+        <div class="d-flex flex-grow-">
             <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
-            <a  style="color: #992337;"class="navbar-brand d-none d-lg-inline-block  font-weight-bold"th:href="@{/}">
-                Oxford Edu Care
+            <a  class="display-5 textMaroon d-none d-lg-inline-block  font-weight-bold" th:href="@{/}">
+                Oxford Model Test
             </a>
 
-            <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
-<!--                <img  class="img-fluid  " th:src="@{/img/logo.png}" width="80" height="80" />-->
-Oxford Edu Care
+            <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" th:href="@{/}">
+
+                <i class="fas fa-home textMaroon"></i>
             </a>
-            <div class="w-100 text-right">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
+            <!--            <div class="w-100 text-right">
+                            <button class="navbar-toggler float-xs-right" type="button" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>-->
+
         </div>
+
         <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
             <ul class="navbar-nav ml-auto flex-nowrap">
 
@@ -104,10 +118,10 @@ Oxford Edu Care
                                 <li class="nav-item"><a th:class="'nav-link '+${wholesale}"  th:href="@{/front-view/wholesale}">Wholesale</a></li>-->
 
 
-
+ <li class="nav-item"><a th:class="'nav-link '+${wholesale}"  th:href="@{/front-view/exam-category}">Exam Category</a></li>
                 <li class="nav-item"><a th:class="'nav-link '+${wholesale}"  th:href="@{/front-view/all-exam}">All Exam</a></li>
+                <li class="nav-item"><a th:class="nav-link"  th:href="@{/front-view/all-instructor}">All Instructor</a></li>
 
-            
 
                 <li sec:authorize="!isAuthenticated()" class="nav-item">
                     <a class="nav-link" th:href="@{/front-view/front-registration}">Registration</a>
@@ -115,6 +129,10 @@ Oxford Edu Care
 
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/front-view/contactUs}">Contact Us</a>
+                </li>
+
+                <li class="list-inline-item">
+                    <a class="nav-link" th:href="@{/cart/index}">Cart <span class="badge badge-pill badge-warning" th:text="${totaltest}">4</span></a>
                 </li>
 
                 <!--                <li class="nav-item">

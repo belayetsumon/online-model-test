@@ -50,7 +50,9 @@ public class CustomerController {
         Users userId = new Users();
         userId.setId(loggedUserService.activeUserid());
         model.addAttribute("orderlist", salesOrderRepository.findByCustomer(userId));
-        
+
+        model.addAttribute("orderlist_panding", salesOrderRepository.findByCustomerAndStatusOrderByIdDesc(userId, OrderStatus.Pending));
+
         model.addAttribute("examlist", salesOrderRepository.findByCustomerAndStatusOrderByIdDesc(userId, OrderStatus.Complete));
 
         return "customer/index";

@@ -11,66 +11,74 @@ and open the template in the editor.
         <hr/>
         <div class="row">
             <div class="col-sm-12">
-        
-        <div class="card">
-            <div class="card-header bgMaroon ">
-                <div class="row">  <div class="col-sm-5">  <h4 class="font-weight-bold text-white"> Profile</h4></div>
-                    <div class="col-sm-7 "> 
 
-                        <span th:if="${ #strings.isEmpty(vendorprofile)}">
-                            <a class="btn btn-success btn-sm float-right" th:href="@{/vendorprofile/create}"> Add Profile Info</a>
-                        </span>
+                <div class="card">
+                    <div class="card-header bgMaroon ">
+                        <div class="row">  <div class="col-sm-5">  <h4 class="font-weight-bold text-white"> Profile</h4></div>
+                            <div class="col-sm-7 "> 
+
+                                <span th:if="${ #strings.isEmpty(vendorprofile)}">
+                                    <a class="btn btn-success btn-sm float-right" th:href="@{/vendorprofile/create}"> Add Profile Info</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered" th:if="${ not #strings.isEmpty(vendorprofile)}">
+                            <tr>
+                                <td> First Name:</td>
+                                <td th:text="${vendorprofile.firstName}">Otto</td>
+
+                            </tr>
+
+                            <tr>
+                                <td>Last Name:</td>
+                                <td th:text="${vendorprofile.lastName}">Otto</td>
+
+                            </tr>
+                            <tr>
+                                <td> Designation:</td>
+                                <td th:text="${vendorprofile.designation}">Otto</td>
+
+                            </tr>
+
+                            <tr>
+                                <td> Profile Description:</td>
+                                <td th:text="${vendorprofile.description}">Otto</td>
+
+                            </tr> 
+
+                            <tr>
+                                <td> Created: <span th:text="${vendorprofile.created}"> </span> </td>
+                                <td> Created By: <span th:text="${vendorprofile.createdBy}"> </span> </td>
+                            </tr>
+
+                            <tr>
+                                <td> Updated: <span th:text="${vendorprofile.modified}"> </span></td>
+
+                                <td>Updated By: <span th:text="${vendorprofile.modifiedBy}"> </span></td>
+                            </tr>
+
+                            <tr>
+                                <td> <a  type="button"  class="btn btn-sm btn-success" th:href="@{/vendorprofile/edit/{id}(id=${vendorprofile.id})}"> Edit  </a></td>
+
+                                <td></td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-bordered" th:if="${ #strings.isEmpty(vendorprofile)}">
+                            <tr>
+                                <td> Sorry no data found . Please add your profile info </td>
+                            </tr>
+
+
+                        </table>
+
+
+
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-
-<!--                <table class="table table-bordered" th:if="${ not #strings.isEmpty(vendorprofile)}">
-                    <tr>
-                        <td> Name:</td>
-                        <td th:text="${vendorprofile.name}">Otto</td>
-
-                    </tr>
-
-         
-                    <tr>
-                        <td> Designation:</td>
-                        <td th:text="${vendorprofile.designation}">Otto</td>
-
-                    </tr>
-
-                          
-
-                    <tr>
-                        <td> Created: <span th:text="${vendorprofile.created}"> </span> </td>
-                        <td> Created By: <span th:text="${vendorprofile.createdBy}"> </span> </td>
-                    </tr>
-
-                    <tr>
-                        <td> Updated: <span th:text="${vendorprofile.modified}"> </span></td>
-
-                        <td>Updated By: <span th:text="${vendorprofile.modifiedBy}"> </span></td>
-                    </tr>
-
-                    <tr>
-                        <td> <a  type="button"  class="btn btn-sm btn-success" th:href="@{/profile/edit/{id}(id=${vendorprofile.id})}"> Edit  </a></td>
-
-                        <td><a  class="btn btn-sm btn-danger" type="button" th:href="@{/profile/delete/{id}(id=${vendorprofile.id})}"> Delete </a></td>
-                    </tr>
-                </table>-->
-
-                <table class="table table-bordered" th:if="${ #strings.isEmpty(vendorprofile)}">
-                    <tr>
-                        <td> Sorry no data found . Please add your profile info </td>
-                    </tr>
-
-
-                </table>
-
-
-
-            </div>
-        </div>
 
 
 

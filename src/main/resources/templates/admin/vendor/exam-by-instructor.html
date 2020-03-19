@@ -57,7 +57,13 @@ and open the template in the editor.
 
                                         <td> <span th:text="${examlists.question.size()}"></span><a th:href="@{/exam/question-by-exam/{examid}(examid=${examlists.id})}">  Question List  </a> </td>
 
-                                        <td th:text="${examlists.productsubcategory.name}">Otto</td>
+                                      <td >
+                                          <span th:each="subcategory,status:${examlists.productsubcategory}" >
+
+                                                <span th:text="${subcategory.name+','}">  
+                                      
+                                      
+                                      </td>
 
                                         <td th:text="${examlists.orderno}">Otto</td>
 

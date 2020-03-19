@@ -22,14 +22,14 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     Users findByEmail(String email);
 
     Users findByMobile(String mobile);
-    
-     List<Users> findByRole(Role role);
+
+    List<Users> findByRole(Role role);
+
+    List<Users> findByRoleAndStatusOrderByIdDesc(Role role, Status status);
 
     Users findByEmailAndStatus(String email, Status status);
 
     Users findByIdAndStatus(Long id, Status status);
-    
-   
 
     List<Users> findByStatus(Status status);
 

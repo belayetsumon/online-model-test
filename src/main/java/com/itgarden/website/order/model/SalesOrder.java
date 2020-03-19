@@ -5,18 +5,20 @@
  */
 package com.itgarden.website.order.model;
 
-import com.itgarden.website.exam.model.Exam;
 import com.itgarden.website.module.user.model.Users;
 import java.time.LocalDateTime;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -37,12 +39,8 @@ public class SalesOrder {
     private Long id;
 
     @NotNull(message = "User cannot be blank.")
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Users customer;
-
-    @NotNull(message = "Exam cannot be blank.")
-    @ManyToOne(optional = true)
-    private Exam exam;
 
     private double total;
 
@@ -67,21 +65,24 @@ public class SalesOrder {
     @Column(insertable = false)
     private LocalDateTime modified;
 
-    /// End Audit //// 
+    
+    @OneToMany(mappedBy = "salesOrder", fetch = FetchType.LAZY)
+    private Set<OrderItem> orderItem;
 
+    /// End Audit //// 
     public SalesOrder() {
     }
 
-    public SalesOrder(Long id, Users customer, Exam exam, double total, OrderStatus status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
+    public SalesOrder(Long id, Users customer, double total, OrderStatus status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified, Set<OrderItem> orderItem) {
         this.id = id;
         this.customer = customer;
-        this.exam = exam;
         this.total = total;
         this.status = status;
         this.createdBy = createdBy;
         this.created = created;
         this.modifiedBy = modifiedBy;
         this.modified = modified;
+        this.orderItem = orderItem;
     }
 
     public Long getId() {
@@ -98,14 +99,6 @@ public class SalesOrder {
 
     public void setCustomer(Users customer) {
         this.customer = customer;
-    }
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
     }
 
     public double getTotal() {
@@ -155,5 +148,14 @@ public class SalesOrder {
     public void setModified(LocalDateTime modified) {
         this.modified = modified;
     }
-    
+
+    public Set<OrderItem> getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(Set<OrderItem> orderItem) {
+        this.orderItem = orderItem;
+    }
+
+  
 }

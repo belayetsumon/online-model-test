@@ -5,7 +5,10 @@
  */
 package com.itgarden.website.globalcontroller;
 
+import com.itgarden.website.model.cart.CartItem;
 import com.itgarden.website.module.user.ripository.UsersRepository;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,6 +32,22 @@ public class GlobalController {
 //        Users users = usersRepository.findByEmail(auth.getName());
 //        
 //        model.addAttribute("username", users.getName());
+    }
+
+    @ModelAttribute
+    public void shopingcart(Model model, HttpSession session) {
+
+        if (session.getAttribute("sessioncart") != null) {
+
+            List<CartItem> cartitem = (List<CartItem>) session.getAttribute("sessioncart");
+
+            model.addAttribute("totaltest", cartitem.size());
+
+        } else {
+
+            model.addAttribute("totaltest", "0");
+        }
+
     }
 
 }

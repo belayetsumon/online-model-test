@@ -100,6 +100,8 @@ public class AnswerInstructorController {
     
     @RequestMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id, Answer answer) {
+        
+    
         model.addAttribute("answer", answerRepository.getOne(id));
         return "instructor/answer/add";
     }

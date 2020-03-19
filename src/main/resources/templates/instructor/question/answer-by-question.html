@@ -16,9 +16,9 @@ and open the template in the editor.
                         <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Answer List </div>
                             <div class="col-sm-7 "> 
 
-                                <span th:if="${qinfo.answer.size()<4}">
+<!--                                <span th:if="${qinfo.answer.size()<4}">
                                     <a class="btn btn-success btn-sm float-right" th:href="@{/instructor-answer/create/{qid}(qid=${qinfo.id})}"> Add Answer</a>
-                                </span>
+                                </span>-->
                                 <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/question-by-exam/{examid}(examid=${qinfo.exam.id})}">Close</a>
 
                             </div>
@@ -39,26 +39,75 @@ and open the template in the editor.
                         <h5>    Question No :<span th:text="${qinfo.questionno}"></span></h5>
                         <h5>    Question Title :<span th:text="${qinfo.title}"></span></h5>
 
+                        <div class="row">
+                            <div class="col-sm-12 mb-5">
+                                <form th:action="@{/instructor-answer/save/{qid}(qid=${qinfo.id})}" th:object="${answer}" enctype="multipart/form-data" method="post" >
+
+                                    <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('*')}">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error </h4>
+                                        <ul th:if="${#fields.hasErrors('*')}">
+                                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                                        </ul>
+                                    </div>
+                                    <div class="row" th:if="${!#strings.isEmpty(success)}"> 
+                                        <span  class="text-success"th:text="success"> </span>
+                                    </div> 
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control"  th:field="*{id}" />
+
+                                        <input type="hidden" class="form-control"  th:field="*{question}" />
+
+                                        <input type="hidden" class="form-control"  th:field="*{answerno}" />
+
+                                        <input type="hidden" class="form-control"  th:field="*{questionno}" />
+
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Answer No :<span class="text-danger"> </span></label>
+                                        <span  th:text="${answer.answerno}"</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Answer :<span class="text-danger"> *</span></label>
+                                        <input type="text"  minlength=" 2" required="true" class="form-control col-sm-5" th:field="*{title}" aria-describedby="emailHelp" placeholder="Enter Answer">
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Book Name</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Mark:<span class="text-danger"> </span></label>
+                                        <input type="number"  minlength=" 2" min="0" max="1" required="true" class="form-control col-sm-5" th:field="*{value}" aria-describedby="emailHelp" placeholder="Enter sub title">
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Book Name</span>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Value</th>
-                                        <th scope="col">Title</th>                              
-
-                                        <th scope="col"> Created </th>
-                                        <th scope="col"> Updated </th>
+                                        <th scope="col">Mark</th>
+                                        <th scope="col">Title</th>   
+                                        <th scope="col"> Delete </th>
+                                        <th scope="col"> Created </th>                         
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr th:each="answerlists,status:${answerlist}">
-                                        <th th:text="${answerlists.answerno}">1</th>
+                                        <th th:text="${status.count}">1</th>
                                         <td th:text="${answerlists.value}">Otto</td>
-                                        <td> <a th:href="@{/instructor-answer/details/{id}(id=${answerlists.id})}" th:text="${answerlists.title}">    </a></td>
-                                        <td th:text="${answerlists.created}">Otto</td>
-                                        <td th:text="${answerlists.modified}">@mdo</td>
+                                        <td> <a th:href="@{/instructor-answer/edit/{id}(id=${answerlists.id})}"> <span th:text="${answerlists.title}">    </span></a></td>
+                                        <td>
+                                            <a th:href="@{/instructor-answer/delete/{id}(id=${answerlists.id})}"> Delete </a>
+                                        </td>
+                                        <td th:text="${answerlists.created}">@mdo</td>
                                     </tr>
                                 </tbody>
                             </table>

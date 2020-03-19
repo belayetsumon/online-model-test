@@ -6,6 +6,7 @@
 package com.itgarden.website.model;
 
 import com.itgarden.website.model.enumvalue.Status;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 
-public class Productcategory {
+public class Productcategory  implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

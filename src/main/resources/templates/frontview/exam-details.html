@@ -9,69 +9,164 @@
                 <div class="row">
                     <div class="col-sm-8">  
                         <h3 class="font-weight-bold" style="color: #fff;">   <span th:text="${exam.title}"></span>  </h3>
-                        <h5 class="font-weight-bold" style="color: #fff;">   <span th:text="${exam.subtitle}"></span>  </h5>
-                        <h6 class="text-white"> <b>Instructor :</b> <span th:text="${exam.userId.name}"></span><b> Test:</b> <span th:text="${exam.test.size()}"></span><b> Price:</b><span th:text="${exam.price}"></span></h6>
+                        <h5 class="font-weight-bold" style="color: #fff;">   <span th:utext="${exam.subtitle}"></span>  </h5>
+                        <h6 class="text-white"> <b>Instructor :</b> <span th:text="${exam.userId.name}"></span><b> Test:</b> <span th:text="${exam.test.size()}"></span><b> Price:</b> <span th:text="${exam.price}"></span>  <b> Total Q.</b> <span  th:text="${exam.question.size()}">    </span></h6>
                         <div>
+                            <h5 class="font-weight-bold" style="color: #fff;">   Payment By :</h5>
+                            <img  class="img-fluid  " th:src="@{/img/pay.png}"  />
+                        </div>
+
+                        <div class="text-white">
+
+                            এই মডেল টেস্টটি দেওয়ার জন্য   Registration করুন ।
+                            পূর্বে registration করা থাকলে নতুন করে Registration করার দরকার নেই।
+                            Buy Now বাটন এ ক্লিক করে শপিং কার্ট এ অ্যাড করুন।
+                            উপরের কার্ট মেন্যুতে ক্লিক করে চেক আউট করুন।
+
 
                         </div>
                     </div>
 
                     <div class="col-sm-2">
-                        <a type="button" class="btn btn-light btn-block text-danger" th:href="@{/}"><i class="far fa-heart"></i> Add Wishlist </a>
-                        <a type="button" class="btn btn-danger btn-block" th:href="@{/customer-order/save/{examid}(examid=${exam.id})}"> <i class="fas fa-cart-plus"></i> Buy Now </a>
 
+                        <a type="button" class="btn btn-light btn-block text-danger" th:href="@{/}"><i class="far fa-heart"></i> Add Wishlist </a>
+
+                        <form class=" mt-3"  th:action="@{/cart/add}" method="post">
+
+                            <input type="hidden"  name="product_id" th:value="${exam.id}">
+                            <input type="hidden"  name="quantity" value="1">
+
+                            <button type="submit" class="btn btn-danger btn-block" > 
+
+                                <i class="fas fa-cart-plus"></i> Buy Now </button>
+                        </form>
                     </div>
                     </section>
 
                     <section>
-                        <div class="container-fluid">
-                            <div class="row mt-4">
+                        <div class="container-fluid mt-5">
+                            <div class="row">
 
-                                <div class="col-sm-9">
-                                    <div class="card mb-4 border-danger">
+                                <div class="col-sm-8">
+                                    <div class="row">        
 
-                                        <div class="card-header border-danger ">
-                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Description</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
+                                        <div class="col-sm-12" th:if="${not #sets.isEmpty(exam.productsubcategory)}">
+                                            <div class="card mb-4 " >
+                                                <div class="card-header bgMaroon">
+                                                    <h6 class=" text-white">
+                                                        <i class="fas fa-list"></i> Exam Category</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item" th:each="productsubcategorylist : ${exam.productsubcategory}">
+                                                            <a    class="text-muted" th:href="@{/front-view/exam-by-sub-category/{subcatid}(subcatid=${productsubcategorylist.id})}" th:text="${productsubcategorylist.name}"> </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>               </div> 
+                                        <div class="col-sm-12" th:if="${not #strings.isEmpty(exam.description)}">
+                                            <div class="card mb-4 ">
 
-                                                <span th:text="${exam.description}"></span>
+                                                <div class="card-header bgMaroon">
+                                                    <h6 class=" text-white"> <i class="fas fa-list"></i> Exam Description</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+
+                                                        <span th:utext="${exam.description}"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>       
+                                        <div class="col-sm-12" >
+                                            <div class="card mb-4 border-danger" th:if="${not #strings.isEmpty(exam.syllabus)}">
+
+                                                <div class="card-header bgMaroon">
+                                                    <h6 class="font-weight-bold text-white"> <i class="fas fa-list"></i> Exam Syllabus</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <span th:utext="${exam.syllabus}"></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="card mb-4 border-danger">
 
-                                        <div class="card-header border-danger ">
-                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Syllabus</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <span th:text="${exam.syllabus}"></span>
+                                        <div class="col-sm-12">
+                                            <div class="card mb-4 border-danger">
+
+                                                <div class="card-header bgMaroon">
+                                                    <h6 class=" text-white"> <i class="fas fa-list"></i> Instructor Profile </h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+
+                                                        <div class="media">
+
+                                                            <span th:if="${#strings.isEmpty(exam.userId.profileImage)}" > 
+
+                                                                <img  class="mr-3 rounded-circle border border-secondary m-auto" th:src="@{/img/image-not-available.png}"  width="150" height="150"/> 
+
+                                                            </span>  
+                                                            <span th:if="${ not #strings.isEmpty(exam.userId.profileImage)}" class="badge bg-green pull-right"> 
+                                                                <img  class="mr-3 rounded-circle border border-secondary" th:src="@{/files/}+${exam.userId.profileImage.imageName}" width="150px"  height="150px"/>
+                                                            </span>
+
+                                                            <div class="media-body">
+
+                                                                <p class="mt-0">
+                                                                    Name :  <a   class=" text-muted"  th:href="@{/front-view/instructor-details/{iid}(iid=${exam.userId.id})}"  > 
+                                                                        <span th:text="${exam.userId.name}"></span>
+                                                                    </a> 
+                                                                </p>
+
+                                                                <p>
+                                                                    <span th:if="${#strings.isEmpty(exam.userId.vendorprofile)}" > 
+                                                                        Designation : 
+                                                                    </span>
+
+                                                                    <span th:if="${not #strings.isEmpty(exam.userId.vendorprofile)}" > 
+                                                                        Designation : <span th:text="${exam.userId.vendorprofile.designation}"></span>
+                                                                    </span>
+
+                                                                </p>
+
+                                                                <p>
+                                                                    <span th:if="${#strings.isEmpty(exam.userId.vendorprofile)}" > 
+                                                                        Profile : 
+                                                                    </span>
+
+                                                                    <span th:if="${not #strings.isEmpty(exam.userId.vendorprofile)}" > 
+                                                                        Profile : <span th:utext="${exam.userId.vendorprofile.description}"></span>
+                                                                    </span>
+                                                                </p>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-sm-9">
+
+                                    </div></div>
+                                <div class="col-sm-4">
                                     <div class="card mb-4 border-danger">
 
-                                        <div class="card-header border-danger ">
-                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Instructor Profile </h5>
+                                        <div class="card-header bgMaroon">
+                                            <h6 class=" text-white"> <i class="fas fa-list"></i> Recent Model Test</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
 
                                                 <div class="media">
-                                                    <img  class="mr-3 rounded-circle border border-secondary" th:src="@{/img/image-not-available.png}"  width="150" height="150"/> 
+
 
                                                     <div class="media-body">
 
-                                                        <h5 class="mt-0"><span th:text="${exam.userId.name}"></span></h5>
 
-                                                        <span th:text="${exam.userId.name}"></span>
 
                                                     </div>
                                                 </div>
@@ -79,19 +174,10 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
 
-
-                                <div class="col-sm-3">
-
-                                    <div class="card border-danger" >
-                                        <div class="card-header border-danger">
-                                            <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Category</h5>
-                                        </div>
-
-                                    </div> 
-                                </div>
                             </div>
                         </div>
                     </section>

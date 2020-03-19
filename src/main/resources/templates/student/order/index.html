@@ -35,7 +35,7 @@ and open the template in the editor.
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Customer</th>
-                                    <th scope="col">Exam Name</th>
+<!--                                    <th scope="col">Exam Name</th>-->
                                     <th scope="col"> Status </th>
                                     <th scope="col"> Price/Taka </th>
                                     <th scope="col"> Date Added </th>
@@ -47,7 +47,7 @@ and open the template in the editor.
                                 <tr th:each="orderlists,status:${orderlist}">
                                     <th th:text="${status.count}">1</th>
                                     <td> <a   th:text="${orderlists.customer.name}">    </a></td>
-                                    <td> <a  th:href="@{/customer-order/details/{oid}(oid=${orderlists.id})}" th:text="${orderlists.exam.title}">    </a></td>
+<!--                                    <td> <a  th:href="@{/customer-order/details/{oid}(oid=${orderlists.id})}" th:text="${orderlists.exam.title}">    </a></td>-->
                                     <td th:text="${orderlists.status}">Otto</td>
                                     <td th:text="${orderlists.total}">Otto</td>
                                     <td th:text="${orderlists.created}">Otto</td>

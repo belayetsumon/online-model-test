@@ -36,7 +36,8 @@ and open the template in the editor.
                                 <h6> Candidate  Name: <span th:text="${testinfo.userId.name}"> </span> </h6></div>
                             <div class="col-sm-6">
 
-                                <a th:href="@{/student-test/openquestion/{tid}(tid=${testinfo.id})}"> Open The Question </a>
+                                <a type="button"  class="btn btn-danger" th:href="@{/student-test/openquestion/{tid}(tid=${testinfo.id})}"> Open The Question </a>
+                                
                                 <h6> Your Total Marks : <b th:text="${#aggregates.sum(testinfo.mark.![value])}" /></h6>
 
                             </div>

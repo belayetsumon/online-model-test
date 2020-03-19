@@ -312,6 +312,14 @@ public class FrontController {
     }
 
     //  Model test Start Here 
+    @RequestMapping("/exam-category")
+    public String examcategory(Model model) {
+
+        model.addAttribute("categorylist", productcategoryRepository.findAll());
+
+        return "frontview/exam-category";
+    }
+
     @RequestMapping("/sub-category-by-category/{catid}")
     public String by_category(Model model, @PathVariable Long catid, Productsubcategory productsubcategory) {
         Productcategory productcategory = new Productcategory();
@@ -353,9 +361,32 @@ public class FrontController {
 
         model.addAttribute("categorylist", productcategoryRepository.findAll());
 
-        model.addAttribute("examlist", examRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
+        Pageable pageable = new PageRequest(0, 100, Sort.Direction.ASC, "id");
+
+        model.addAttribute("examlist", examRepository.findByStatusOrderByIdDesc(pageable, com.itgarden.website.model.enumvalue.Status.Active));
 
         return "frontview/all-exam";
+    }
+
+    @RequestMapping("/all-instructor")
+    public String allinstructor(Model model) {
+
+        Role instructor = roleRepository.findBySlug("instructor");
+        model.addAttribute("instructorlist", usersRepository.findByRoleAndStatusOrderByIdDesc(instructor, Status.Active));
+
+        return "frontview/all-instructor";
+    }
+
+    @RequestMapping("/instructor-details/{iid}")
+    public String instructor_details(Model model, @PathVariable Long iid) {
+
+        Users users = usersRepository.getOne(iid);
+
+        model.addAttribute("instructor_details", users);
+
+        model.addAttribute("examlist", examRepository.findByUserIdAndStatusOrderByIdDesc(users, com.itgarden.website.model.enumvalue.Status.Active));
+
+        return "frontview//instructor-details";
     }
 
     @RequestMapping("/front-registration")
@@ -372,5 +403,4 @@ public class FrontController {
         return "frontview/front-registration";
     }
 
-  
 }

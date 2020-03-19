@@ -11,6 +11,8 @@ import com.itgarden.website.module.user.model.Users;
 import com.itgarden.website.module.user.ripository.RoleRepository;
 import com.itgarden.website.module.user.ripository.UsersRepository;
 import com.itgarden.website.order.model.OrderStatus;
+import com.itgarden.website.vendor.model.Vendorprofile;
+import com.itgarden.website.vendor.repository.VendorprofileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,9 @@ public class AdminVendorController {
     @Autowired
     ExamRepository examRepository;
 
+    @Autowired
+    VendorprofileRepository vendorprofileRepository;
+
     @RequestMapping(value = {"", "/", "/index"})
     public String customerlist(Model model) {
 
@@ -51,6 +56,38 @@ public class AdminVendorController {
         model.addAttribute("examlist", examRepository.findByUserIdOrderByIdDesc(userId));
 
         return "admin/vendor/exam-by-instructor";
+    }
+
+    @RequestMapping("/instructor_profile/{iid}")
+    public String instructorprofile(Model model, @PathVariable Long iid, Vendorprofile vendorprofile) {
+
+        Users userId = new Users();
+
+        userId.setId(iid);
+
+        Vendorprofile vendorprofile2 = vendorprofileRepository.findByUserId(userId);
+
+        if (vendorprofile2 == null) {
+
+            vendorprofile.setUserId(userId);
+
+        } else {
+
+            model.addAttribute("vendorprofile", vendorprofile2);
+
+        }
+
+        return "admin/vendor/profile_add";
+    }
+    
+    
+      @RequestMapping("/save")
+      
+    public String save(Model model, Vendorprofile vendorprofile) {
+
+ 
+
+          return "redirect:/admin-vendor/instructor_profile/{iid}";
     }
 
 }

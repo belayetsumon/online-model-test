@@ -17,6 +17,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProductcategoryRepository extends JpaRepository<Productcategory, Long> {
 
     List<Productcategory> findByStatus(Status status);
+    
+    Productcategory  findBySlug(String slug);
 
     List<Productcategory> findByStatusAndOurproductStatus(Status cattatus,Status productstatus);
 }

@@ -19,14 +19,15 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="card-body">
-           
+
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                 
+                                        <th scope="col">Add Exam</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,8 +36,8 @@ and open the template in the editor.
                                         <th th:text="${status.count}">1</th>
 
                                         <td> <a th:href="@{/instructor-exam/sub-categorylist/{cid}(cid=${productcategorylists.id})}" th:text="${productcategorylists.name}">    </a></td>
-
-                                   </tr>
+                                        <td> <a  type="button" class="btn btn-sm badge-success" th:href="@{/instructor-exam/create/{cid}(cid=${productcategorylists.id})}" >  Add Exam  </a></td>
+                                    </tr>
                                 </tbody>
                             </table>
 

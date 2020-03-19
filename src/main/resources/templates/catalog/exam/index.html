@@ -14,7 +14,7 @@ and open the template in the editor.
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam  List </div>
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam  List <span th:text="${examlist.size()}"></span></div>
                             <div class="col-sm-7 "> <a class="btn btn-success btn-sm float-right" th:href="@{/exam/create}"> Add Exam </a></div>
                         </div>
                     </div>
@@ -57,7 +57,15 @@ and open the template in the editor.
 
                                         <td> <span th:text="${examlists.question.size()}"></span><a th:href="@{/exam/question-by-exam/{examid}(examid=${examlists.id})}">  Question List  </a> </td>
 
-                                        <td th:text="${examlists.productsubcategory.name}">Otto</td>
+                                        <td>Otto
+                                        
+                                                 <span th:each="subcategory,status:${examlists.productsubcategory}" >
+
+                                                <span th:text="${subcategory.name+','}">          </span>                            
+
+                                            </span>
+
+                                        </td>
 
                                         <td th:text="${examlists.orderno}">Otto</td>
 

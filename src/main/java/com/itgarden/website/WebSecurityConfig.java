@@ -39,13 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/front-view/**","/cart/**","/order/create", "/users/uregistrations", "/users/usave",  "/users/front-registration-save", "/users/userforgotpassword", "/forgotpassword/**").permitAll()
+                .antMatchers("/","/front-view/**","/order/create", "/users/uregistrations", "/users/usave",  "/users/front-registration-save", "/users/userforgotpassword", "/forgotpassword/**").permitAll()
                 //                .antMatchers("/dashboards/index").hasRole("admin")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/front-view/member-login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/",true)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 //                .failureUrl("/login?error=true")

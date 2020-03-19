@@ -5,7 +5,7 @@
  */
 package com.itgarden.website.model.cart;
 
-import com.itgarden.website.model.Ourproduct;
+import com.itgarden.website.exam.model.Exam;
 import java.io.Serializable;
 import org.springframework.context.annotation.Scope;
 
@@ -17,24 +17,24 @@ import org.springframework.context.annotation.Scope;
 @Scope("session")
 public class CartItem implements Serializable {
 
-    private Ourproduct ourproduct;
+    private Exam exam;
 
     private int quantity;
-
-    public CartItem(Ourproduct ourproduct, int quantity) {
-        this.ourproduct = ourproduct;
-        this.quantity = quantity;
-    }
 
     public CartItem() {
     }
 
-    public Ourproduct getOurproduct() {
-        return ourproduct;
+    public CartItem(Exam exam, int quantity) {
+        this.exam = exam;
+        this.quantity = quantity;
     }
 
-    public void setOurproduct(Ourproduct ourproduct) {
-        this.ourproduct = ourproduct;
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 
     public int getQuantity() {
@@ -43,5 +43,6 @@ public class CartItem implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }  
+    }
+
 }

@@ -8,10 +8,12 @@ package com.itgarden.website.exam.model;
 import com.itgarden.website.model.Productsubcategory;
 import com.itgarden.website.model.enumvalue.Status;
 import com.itgarden.website.module.user.model.Users;
-import com.itgarden.website.order.model.SalesOrder;
+import com.itgarden.website.order.model.OrderItem;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +25,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
@@ -40,20 +44,24 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Exam {
+public class Exam implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull(message = " User cannot be blank.")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Users userId;
 
-    @NotNull(message = "Product category cannot be blank.")
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    private Productsubcategory productsubcategory;
+    @NotNull(message = "Please select minimum one sub category")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "exam_productsubcategory",
+            joinColumns = @JoinColumn(name = "exam_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "productsubcategory_id", referencedColumnName = "id"))
+
+    private Set<Productsubcategory> productsubcategory;
 
     @NotBlank(message = "Title  is required.")
     private String title;
@@ -65,16 +73,15 @@ public class Exam {
     private String subtitle;
 
     @Lob
-    @NotBlank(message = "Syllabus  is required.")
+
     private String syllabus;
 
     private int orderno;
 
     @Lob
-    @NotBlank(message = "Description  is required.")
+
     private String description;
 
-    @NotNull(message = "Price is required.")
     private double price;
 
     private double discount;
@@ -113,9 +120,12 @@ public class Exam {
     public List<Test> test = new ArrayList<>();
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public List<SalesOrder> salesOrder = new ArrayList<>();
+    public List<OrderItem> orderItem = new ArrayList<>();
 
-    public Exam(Long id, Users userId, Productsubcategory productsubcategory, String title, String slug, String subtitle, String syllabus, int orderno, String description, double price, double discount, String imageName, Lavelstatus level, Status status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
+    public Exam() {
+    }
+
+    public Exam(Long id, Users userId, Set<Productsubcategory> productsubcategory, String title, String slug, String subtitle, String syllabus, int orderno, String description, double price, double discount, String imageName, Lavelstatus level, Status status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
         this.id = id;
         this.userId = userId;
         this.productsubcategory = productsubcategory;
@@ -136,9 +146,6 @@ public class Exam {
         this.modified = modified;
     }
 
-    public Exam() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -155,11 +162,11 @@ public class Exam {
         this.userId = userId;
     }
 
-    public Productsubcategory getProductsubcategory() {
+    public Set<Productsubcategory> getProductsubcategory() {
         return productsubcategory;
     }
 
-    public void setProductsubcategory(Productsubcategory productsubcategory) {
+    public void setProductsubcategory(Set<Productsubcategory> productsubcategory) {
         this.productsubcategory = productsubcategory;
     }
 
@@ -299,4 +306,15 @@ public class Exam {
         this.test = test;
     }
 
+    public List<OrderItem> getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(List<OrderItem> orderItem) {
+        this.orderItem = orderItem;
+    }
+
+
+
+    
 }

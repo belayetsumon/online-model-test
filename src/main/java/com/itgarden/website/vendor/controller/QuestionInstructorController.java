@@ -5,6 +5,7 @@
  */
 package com.itgarden.website.vendor.controller;
 
+import com.itgarden.website.exam.model.Answer;
 import com.itgarden.website.exam.model.Exam;
 import com.itgarden.website.exam.model.Question;
 import com.itgarden.website.exam.ripository.AnswerRepository;
@@ -214,12 +215,19 @@ public class QuestionInstructorController {
     }
 
     @RequestMapping("/answer-by-question/{qid}")
-    public String answer_by_question(Model model, @PathVariable Long qid, Question question) {
+    public String answer_by_question(Model model, @PathVariable Long qid, Question question, Answer answer) {
         question.setId(qid);
         model.addAttribute("answerlist", answerRepository.findByQuestion(question));
+        question = questionRepository.getOne(qid);
+        model.addAttribute("qinfo", question);
 
-        model.addAttribute("qinfo", questionRepository.getOne(qid));
-
+        question.setId(qid);
+        
+        answer.setQuestion(question);
+        int ansNo = answerRepository.findByQuestion(question).size() + 1;
+        answer.setAnswerno(ansNo);
+        answer.setQuestionno(question.getQuestionno());
+        
         return "instructor/question/answer-by-question";
     }
 

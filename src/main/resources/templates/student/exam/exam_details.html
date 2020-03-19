@@ -60,56 +60,64 @@ and open the template in the editor.
 
                                 <td> 
 
-                                    <a  type="button" class="btn btn-sm" th:href="@{/student-test/save/{eid}(eid=${exam_details.id})}"> Test Start </a> 
+                                    <a  type="button" class="btn btn-sm btn-warning" th:href="@{/student-test/save/{eid}(eid=${exam_details.id})}"> Create Test </a> 
 
                                 </td>
 
                                 <td> :</td>
                                 <td> 
 
-                                    <table class="table table-bordered">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">#</th>
 
-                                                <th scope="col">Test Title</th>
-                                                <th scope="col">User</th>
-
-                                                <th scope="col"> Answer </th>
-
-                                                <th scope="col"> Marks</th>
-
-                                                <th scope="col"> Status </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="testlists,status:${testlist}">
-                                                <td th:text="${status.count}">   </td>
-                                                <td>  
-                                                    <a th:href="@{/student-test/testdashboard/{tid}(tid=${testlists.id})}"> 
-
-                                                        <span th:text="${testlists.exam.title}"></span>
-
-                                                    </a> 
-
-                                                </td>
-                                                <td  th:text="${testlists.userId.name}">   </td>
-                                                <td>
-                                                    <span th:text="${testlists.mark.size()}"></span>
-                                                </td>
-                                                <td>
-                                                    <span th:text="${#aggregates.sum(testlists.mark.![value])}" ></span>
-                                                </td>
-                                                <td th:text="${testlists.status}"> </td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>  
 
                                 </td>
                             </tr>
                         </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Test Start</th>
 
+                                        <th scope="col">Test Title</th>
+                                        <th scope="col">User</th>
+
+                                        <th scope="col"> Answer </th>
+
+                                        <th scope="col"> Marks</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="testlists,status:${testlist}">
+                                        <td th:text="${status.count}">   </td>
+                                        <td>  
+                                            <a  type="button" class="btn btn-sm btn-warning" th:href="@{/student-test/testdashboard/{tid}(tid=${testlists.id})}"> 
+                                                Start Test
+                                            </a> 
+
+                                        </td>
+                                        <td>  
+                                            <a th:href="@{/student-test/testdashboard/{tid}(tid=${testlists.id})}"> 
+
+                                                <span th:text="${testlists.exam.title}"></span>
+
+                                            </a> 
+
+                                        </td>
+                                        <td  th:text="${testlists.userId.name}">   </td>
+                                        <td>
+                                            <span th:text="${testlists.mark.size()}"></span>
+                                        </td>
+                                        <td>
+                                            <span th:text="${#aggregates.sum(testlists.mark.![value])}" ></span>
+                                        </td>
+
+
+                                    </tr>
+                                </tbody>
+                            </table>  
+                        </div>
                     </div><!--  Card body end-->
 
                     <div class="card-footer">

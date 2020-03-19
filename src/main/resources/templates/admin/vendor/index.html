@@ -53,15 +53,22 @@ and open the template in the editor.
                                         <td th:text="${instructorlists.name}">Chakma</td>
                                         <td th:text="${instructorlists.mobile}">Chakma</td>
                                         <td th:text="${instructorlists.email}">Chakma</td>
-                                        <td> <span th:each="role :${instructorlists.role}">
+                                        <td> 
+                                            
+                                            <span th:each="role :${instructorlists.role}">
                                                 <span th:text="${role.name}+' ,'">  </span>
                                             </span>
+                                            
                                         </td>
                                         <td th:text="${instructorlists.status}">Chakma</td> 
                                         <td th:text="${instructorlists.createdOn}">Chakma</td> 
                                         <td th:text="${instructorlists.remarks}">Chakma</td>
                                         <td>
                                             <a type="button" class="btn  btn-success btn-xs bg-maroon" th:href="@{/admin-vendor/exam-by-instructor/{iid} (iid=${instructorlists.id})}" > Exam List <span class="badge badge-warning" th:text="${instructorlists.exam.size()}"></span> </a>
+                                      
+                                        <a type="button" class="btn  btn-success btn-xs bg-maroon mt-2" th:href="@{/admin-vendor/instructor_profile/{iid} (iid=${instructorlists.id})}" > Profile  </a>
+                                        
+                                        
                                         </td>
 
                                     </tr>

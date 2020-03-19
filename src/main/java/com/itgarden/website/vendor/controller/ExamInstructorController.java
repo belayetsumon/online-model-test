@@ -24,6 +24,8 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -67,7 +69,15 @@ public class ExamInstructorController {
 
     @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model) {
-        model.addAttribute("examlist", examRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
+
+        Users userss = new Users();
+
+        userss.setId(loggedUserService.activeUserid());
+
+        Pageable pageable = PageRequest.of(0, 20, Sort.by("id").descending());
+
+        model.addAttribute("examlist", examRepository.findByUserIdOrderByIdDesc(userss, pageable));
+
         return "instructor/exam/index";
     }
 
@@ -91,20 +101,17 @@ public class ExamInstructorController {
         return "instructor/exam/sub-categorylist";
     }
 
-    @RequestMapping("/create/{scid}")
-    public String createexam(Model model, @PathVariable Long scid, Exam exam) {
+    @RequestMapping("/create/{cid}")
+    public String createexam(Model model, @PathVariable Long cid, Exam exam) {
         model.addAttribute("statuslist", Status.values());
 
+        Productcategory productcategory = new Productcategory();
+        productcategory.setId(cid);
+        model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByProductcategory(productcategory));
+
         Users userss = new Users();
-
         userss.setId(loggedUserService.activeUserid());
-
         exam.setUserId(userss);
-
-        Productsubcategory productsubcategory = new Productsubcategory();
-
-        productsubcategory.setId(scid);
-        exam.setProductsubcategory(productsubcategory);
         model.addAttribute("lavel", Lavelstatus.values());
         return "instructor/exam/add";
     }
@@ -121,7 +128,17 @@ public class ExamInstructorController {
             exam.setUserId(userss);
             model.addAttribute("statuslist", Status.values());
             model.addAttribute("lavel", Lavelstatus.values());
-            model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByStatus(Status.Active));
+
+            exam.getProductsubcategory().stream().findFirst();
+
+            Long cid = exam.getProductsubcategory().stream().findFirst().get().getProductcategory().getId();
+
+            Productcategory productcategory = new Productcategory();
+            productcategory.setId(cid);
+
+            model.addAttribute("productsubcategory", productcategoryRepository.getOne(productcategory.getId()));
+
+            model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByProductcategory(productcategory));
             return "instructor/exam/add";
         }
 
@@ -162,7 +179,16 @@ public class ExamInstructorController {
 
                 model.addAttribute("statuslist", Status.values());
                 model.addAttribute("lavel", Lavelstatus.values());
-                model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByStatus(Status.Active));
+                exam.getProductsubcategory().stream().findFirst();
+
+                Long cid = exam.getProductsubcategory().stream().findFirst().get().getProductcategory().getId();
+
+                Productcategory productcategory = new Productcategory();
+                productcategory.setId(cid);
+
+                model.addAttribute("productsubcategory", productcategoryRepository.getOne(productcategory.getId()));
+
+                model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByProductcategory(productcategory));
 
                 redirectAttributes.addFlashAttribute("message", pic.getOriginalFilename() + " => " + e.getMessage());
                 return "redirect:/instructor-exam/index";
@@ -202,10 +228,24 @@ public class ExamInstructorController {
 
     @RequestMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id, Exam exam) {
-        model.addAttribute("exam", examRepository.getOne(id));
+
+        exam = examRepository.getOne(id);
+        model.addAttribute("exam", exam);
+
+        exam.getProductsubcategory().stream().findFirst();
+
+        Long cid = exam.getProductsubcategory().stream().findFirst().get().getProductcategory().getId();
+
+        Productcategory productcategory = new Productcategory();
+        productcategory.setId(cid);
+
+        model.addAttribute("productsubcategory", productcategoryRepository.getOne(productcategory.getId()));
+
+        model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByProductcategory(productcategory));
+
         model.addAttribute("lavel", Lavelstatus.values());
         model.addAttribute("statuslist", Status.values());
-        model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByStatus(Status.Active));
+
         return "instructor/exam/add";
     }
 

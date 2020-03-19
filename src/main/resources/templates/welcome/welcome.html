@@ -6,81 +6,249 @@ and open the template in the editor.
 -->
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-home">
     <div layout:fragment = "main_content">
+        <section >
+            <div class="container-fluid  d-none d-sm-block banner" style="box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);">
+                <div  class="row"style="background: rgba(0, 0, 0, .5);  filter: alpha(opacity=50); /* For IE8 and earlier */ min-height: 500px">
+                    <div class="col-sm-12">
+                        <h1 class="display-3 font-weight-bold text-white text-center mt-5"> Attend Model Test on Your Schedule</h1> 
 
-        <section class="my-auto" style="background-color: #992337; min-height: 400px">
-            <div class="container-fluid p-5 ">
-                <div class="col-md-12 ">
-                    <h1  class="  text-white font-weight-bold text-center">Attend Model Test On Your Schedule </h1>
-                    <h3 class="  text-white font-weight-bold text-center">Anywhere, Anytime </h3> 
+                        <h5 class="display-4 text-white text-center">Anytime, Anywhere</h5>
+
+                        <h5 class="text-white text-center font-weight-bold" style="line-height: 35px">    
+                            BCS, Bank, Non BCS , S.S.C, H.S.C, University Admission, Medical Admission, IBA, NTRCA, 
+                            Primary School Teacher Recruitments  
+                            সহ যেকোনো  প্রতিযোগিতামূলক পরীক্ষার  প্রস্তুতিমূলক MCQ  Model Test দেওয়া যাবে। 
+                        </h5>
+                        <h4 class="text-white text-center font-weight-bold">
+                            প্রতি Model Test  Fee ৫০ টাকা </h4>
+                        <p class="lead">&nbsp;</p>
+
+                        <p class="lead">&nbsp;</p>
+                    </div>
                 </div>
             </div>
         </section>
-
-
-        <section class=" pt-5 pb-5 bg-light" >
+        <section class=" pt-5 pb-5 d-none d-sm-block" >
             <div class="container-fluid ">
 
                 <div class="col-sm-12 col-md-12 ">
-                    <h1 class="text-center textMaroon font-weight-bold">Exam Category </h1>
+                    <h4 class="textMaroon font-weight-bold text-uppercase">Trending Model Test </h4>
+
 
                     <div class=" row justify-content-center" style="padding: 0px 0px 50px 0px">
                         <div class="col-md-7 text-center"> 
                         </div></div></div>
 
-                <ul class="row list-unstyled" th:if="${ not #strings.isEmpty(productcategorylist)}" >
-                    <li class="col-sm-3 mb-1 "  th:each="productcategorylists,status:${productcategorylist}">
+                <div class="row " th:if="${ not #lists.isEmpty(examlist)}" >
 
-                        <div class="card bgMaroon text-white" >
+                    <div class="col-sm-3 mb-3 shadow "  th:each="examlists,status:${examlist}">
+
+                        <div class="card home_test" style="border: none;">
                             <div class="card-body">
+                                <div class="row">
 
+                                    <h6>
+                                        <span  th:text="${examlists.title}">    </span> 
+                                    </h6>
 
-                                <a    class="text-white text-center" th:href="@{/front-view/sub-category-by-category/{catid}(catid=${productcategorylists.id})}" > <h5>  <span  th:text="${productcategorylists.name}">    </span> </h5> </a> 
+                                    <span th:if="${ not #strings.isEmpty(examlists.imageName)}" class="badge bg-green pull-right"> 
+                                        <img  class=" align-self-center img-fluid" th:src="@{/files/}+${examlists.imageName}" />
+                                    </span>
 
+                                    <span th:if="${#strings.isEmpty(examlists.imageName)}" > 
+
+                                        <img  class="align-self-center img-fluid" th:src="@{/img/no_image.png}" />
+                                    </span>
+                                    <h6>
+                                        Price:  <span  th:text="${examlists.price}">    </span> /- Total Q. <span  th:text="${examlists.question.size()}">    </span>
+                                    </h6>
+                                    <a    type="button" class=" btn btn-danger btn-outline-danger btn-block"th:href="@{/front-view/exam-details/{examid}(examid=${examlists.id})}" >
+                                        <h6>
+                                            Details 
+                                        </h6>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </li>
-                </ul>
-                <div  class="row" th:if="${#strings.isEmpty(productcategorylist)}"> 
+                    </div>
+                </div>
+
+                <div  class="row" th:if="${#lists.isEmpty(examlist)}"> 
+                    <div class="col-sm-12 col-md-12 ">
+                        <h2 class="text-center text-muted"> Sorry! No  Informations  Are Found. </h2>
+                    </div>
+                </div>
+
+                <h4 class="text-center">   <a th:href="@{/front-view/all-exam}" class="btn btn-outline-danger">Browse All </a></h4>
+            </div>
+        </section>
+
+        <section class=" pt-5 pb-5 " >
+            <div class="container-fluid ">
+
+                <div class="col-sm-12 col-md-12 ">
+                    <h1 class="text-center textMaroon font-weight-bold text-uppercase">Model Test Category </h1>
+                    <h4 class="text-center  font-weight-bold ">Choose Your Own </h4>
+
+                    <div class=" row justify-content-center" style="padding: 0px 0px 50px 0px">
+                        <div class="col-md-7 text-center"> 
+                        </div></div></div>
+
+                <div class="row " th:if="${ not #lists.isEmpty(productcategorylist)}" >
+
+                    <div class="col-sm-3 mb-3  "  th:each="productcategorylists,status:${productcategorylist}">
+                        <div class="card bg-light  home_box_effect"  >
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-left media-">
+                                        <span th:if="${ not #strings.isEmpty(productcategorylists.imageName)}" class="badge bg-green pull-right"> 
+                                            <img  class=" align-self-center img-thumbnail" th:src="@{/files/}+${productcategorylists.imageName}" width="100px"  height="100px"/>
+                                        </span>
+
+                                        <span th:if="${#strings.isEmpty(productcategorylists.imageName)}" > 
+
+                                            <img  class="align-self-center img-thumbnail" th:src="@{/img/no_image.png}" width="100px"  height="100px"/>
+                                        </span>
+                                    </div>
+                                    <div class="media-body ml-3">
+                                        <a    class=" textMaroon font-weight-bold" th:href="@{/front-view/sub-category-by-category/{catid}(catid=${productcategorylists.id})}" > <h5>  <span  th:text="${productcategorylists.name}">    </span> </h5> </a> 
+
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div  class="row" th:if="${#lists.isEmpty(productcategorylist)}"> 
                     <div class="col-sm-12 col-md-12 ">
                         <h2 class="text-center text-muted"> Sorry! No  Categories Are Found. </h2>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section   class="">
+            <div class="container-fluid bg-light">
+                <div class="row ">
+                    <div class="col-sm-6 col-md-6  d-none d-sm-block home_job_left">
+                        <div   class="row" style="background-color: rgba(0, 0, 0, .4);  filter: alpha(opacity=50); height: 500px">
+                            <h1 class=" display-3 m-3 text-white font-weight-bold text-center">  যেকোনো  প্রতিযোগিতামূলক পরীক্ষার MCQ  Model Test দিন ।</h1>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="card bg-light" style="border:none;">
+                            <h3 class=" m-2 p-2 textMaroon display-5 font-weight-bold bgMaroon text-white">  Job Category List </h3> 
+                            <hr>
+                            <div class="card-body">
+
+                                <ul class="list-unstyled row  fa-ul " th:if="${ not #lists.isEmpty(joblist)}" >
+
+                                    <li class="col-sm-6"  th:each="joblists,status:${joblist}"> 
+                                        <span class="fa-li"><i class="fas fa-angle-double-right textMaroon"></i></span>
+                                        <a    class=" textMaroon font-weight-bold" th:href="@{/front-view/exam-by-sub-category/{subcatid}(subcatid=${joblists.id})}" > <h5>  <span  th:text="${joblists.name}">    </span> </h5> </a> 
+                                    </li>
+                                </ul>
+
+                                <div  class="row" th:if="${#lists.isEmpty(joblist)}"> 
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <h2 class="text-center text-muted"> Sorry! No  Categories Are Found. </h2>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
 
-        <!--Contact Start -->
-        <section style="background-color: #992337;color: #ffffff;">
-            <div class="container-fluid p-4" >
+        <section   class="pt-5 pb-5 ">
+            <div class="container-fluid">
                 <div class="row">
+                    <div class="col-sm-12 col-md-12 ">
+                        <h1 class=" display-5 mt-5 mb-5 text-center font-weight-bold textMaroon">    ঘরে বসে অনলাইনে আয় করুন  24/7</h1>     
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="card  effect7" style="border: none;">
+                                    <h3 class="mb-4 mt-4 text-center font-weight-bold">   যোগ্যতা ?</h3>
 
-                    <div class="col-sm-3 col-md-3 border-right">
+                                    <div class="card-body">
+                                        1.	Minimum Public/privet University Student.</br>
+                                        2.	Coaching Center teacher.</br>
+                                        3.	School or college Teacher.</br>
+                                        4.	Job Holder</br>
+                                        5.	BCS, Bank, Non BCS , S.S.C, H.S.C, University Admission, Medical Admission, IBA, NTRCA, Primary School Teacher Requirements    সহ যেকোনো  প্রতিযোগিতামূলক পরীক্ষার MCQ  Model Test তৈরি করতে পারা।
+                                        </br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card effect7" style="border: none;">
+                                    <h3 class="mb-4 mt-4 font-weight-bold text-center">      কিভাবে করবেন ?</h3>
+
+                                    <div class="card-body">
+                                        1.	www.oxfordmodeltest.com এ Model test instructor হিসাবে রেজিস্ট্রেশান করুন ।</br>
+                                        2.	আপনার পছন্দমত  category select করুন।</br>
+                                        3.	MCQ Model Test তৈরি করুন </br>
+                                        4.	Submit করুন ।</br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="card effect7" style="border: none;">
+                                    <h3 class="mb-4 mt-4 text-center font-weight-bold">   আপনার কিভাবে আয় হবে ?</h3>
+
+                                    <div class="card-body">
+                                        1.	যে সকল  ছাত্র www.oxfordmodeltest.com এ মডেল টেস্ট দিবেন। তাদেরকে প্রত্যেক মডেল টেস্ট এর জন্য ৫০ টাকা প্রদান করতে হবে।</br>
+                                        2.	যদি কোন ছাত্র আপনার মডেল টেস্ট এ পরীক্ষা  দেয় । তাহলে instructor হিসাবে পাবেন ৩০% (১৫ টাকা)।</br>
+                                        3.	আপনার অ্যাকাউন্ট এ যখন ১০০০ টাকা জমা হবে তখন আপনার ব্যাংক অ্যাকাউন্ট অথবা বিকাস অ্যাকাউন্ট এ পাঠিয়ে দেওয়া হবে।</br>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </section>
+
+        <!--Contact Start -->
+        <section  class="home_box_effect" style="background-color: #992337;color: #ffffff;">
+            <div class="container-fluid p-5" >
+                <div class="row m-3">
+
+                    <div class="col-sm-3 col-md-3 border-right border-danger">
                         <div class="media ">
                             <i class="fas fa-graduation-cap fa-2x align-self-center m-1 "></i>
                             <div class="media-body ml-3">
                                 <h5 class="mt-0  text-white font-weight-bold">Total Student</h5>
-                                  <h6 class=" text-center" th:text="${totalStudent}"></h6>
+                                <h3 class=" text-center font-weight-bold" th:text="${totalStudent}"></h3>
                             </div>
                         </div>
                     </div>
 
 
-                    <div class="col-sm-3 col-md-3 border-right">
+                    <div class="col-sm-3 col-md-3 border-right border-danger">
 
                         <div class="media">
                             <i class="fas fa-user-graduate fa-2x align-self-center m-1"></i>
                             <div class="media-body ml-3">
                                 <h5 class="mt-0  text-white font-weight-bold">Total Instructor</h5>
-                                 <h6 class=" text-center" th:text="${totalInstructor}"></h6>
+                                <h3 class=" text-center font-weight-bold" th:text="${totalInstructor}"></h3>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-md-3 border-right">
+                    <div class="col-sm-3 col-md-3 border-right border-danger">
 
                         <div class="media">
                             <i class="fas fa-chalkboard-teacher fa-2x align-self-center m-1"></i>
                             <div class="media-body ml-3">
                                 <h5 class=" text-white font-weight-bold"> Total Exam</h5>
-                                <h6 class=" text-center" th:text="${totalExam}"></h6>
+                                <h3 class=" text-center font-weight-bold" th:text="${totalExam}"></h3>
                             </div>
                         </div>
                     </div>
@@ -90,124 +258,173 @@ and open the template in the editor.
                             <i class="fas fa-question fa-2x align-self-center m-1"></i>
                             <div class="media-body ml-3">
                                 <h5 class="mt-0 text-white font-weight-bold">Total Question</h5>
-                                <h6 class=" text-center" th:text="${totalQuestion}"></h6>
+                                <h3 class=" text-center font-weight-bold" th:text="${totalQuestion}"></h3>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
+        <section   class="">
+            <div class="container-fluid">
+
+                <h1 class=" display-5 m-5 textMaroon  font-weight-bold  text-center">  Public University Admission M C Q <br>Model Test </h1>
+
+                <div class="row pt-5 pb-5">
+
+                    <div class="col-sm-6 col-md-6 d-none d-sm-block text-center  ">
+
+
+                        <div class="row">
+
+                            <div class="col-sm-6 ">
+                                <img class="  p-2 "  style="border: 2px #992337 solid " th:src="@{../img/unilogo/dhaka_university_logo.png}"  height="200px"/>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <img class="  p-2 "  style="border: 2px #992337 solid " th:src="@{../img/unilogo/cu_logo.jpg}"  height="200px"/>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="card " style="border:none;">
+                            <h3 class=" m-2 p-2 textMaroon display-5 font-weight-bold bgMaroon text-white">  Public University List </h3> 
+                            <div class="card-body">
+                                <ul class="list-unstyled fa-ul row" th:if="${ not #lists.isEmpty(publicuniversityadmission)}" >
+                                    <li class=" col-sm-6"  th:each="publicuniversityadmissions,status:${publicuniversityadmission}">
+
+                                        <span class="fa-li"><i class="fas fa-angle-double-right textMaroon"></i></span>
+
+                                        <a    class=" text-muted font-weight-bold" th:href="@{/front-view/exam-by-sub-category/{subcatid}(subcatid=${publicuniversityadmissions.id})}" > 
+                                            <h5>   <span  th:text="${publicuniversityadmissions.name}">    </span> </h5> </a> 
+                                    </li>
+                                </ul>
+
+                                <div  class="row" th:if="${#lists.isEmpty(publicuniversityadmission)}"> 
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <h2 class="text-center text-muted"> Sorry! No  Categories Are Found. </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
-
-
         </section>
 
-
-
-        <section   class="pt-5 pb-5 bg-light">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 ">
-                        <div class="card">
-                            <div class="card-header bgMaroon text-white font-weight-bold">
-                                Student
-                            </div>
-                            <div class="card-body">
-
-                                <p class="card-text">আপনি কি একজন চাকরি পদপ্রার্থী  ?</br>
-                                    আপনার সর্বশেষ প্রস্তুতি যাচাই করতে www.oxfordeducare.com এ মডেল টেস্ট অংশগ্রহণ করুন ।</br>
-
-                                    www.oxfordeducare.com এ খুব সহজে আপনি বিভিন্ন পরীক্ষার জন্য মডেল টেস্ট দিতে পারবেন ।</p>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-sm-6 col-md-6 "><div class="card">
-                            <div class="card-header bgMaroon text-white font-weight-bold">
-                                Teacher                   </div>
-                            <div class="card-body">
-
-                                <p class="card-text">আপনি কি স্কুল কলেজ অথবা যে কোন কোচিং এ ক্লাস নেন কিংবা চাকরি করেন ? </br>
-                                    চাকরির পাশাপাশি অনলাইন এ আয় করতে চান ?<br>
-                                    www.oxfordeducare.com এ মডেল টেস্ট Instructor হিসাবে নিবন্ধন করুন।</br>
-                                    বাড়তি কিছু আয় করুন ।
-
-                                    Details: 01714117032</p>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>  
+        <!--Contact Start -->
+        <section class="bgMaroon home_box_effect">
+            <div class="container-fluid p-5" >
+                <div class="row mt-4 mb-3  text-center">
+                    <div class="col-md-12">
+                        <h2 class="display-4  font-weight-bold text-white">  Contact Us :  <span class="bg-light textMaroon rounded">01714117032 </span></h2>
+                    </div></div>
             </div>
         </section>
 
+        <section   class="">
+            <div class="container-fluid bg-light pt-5">
 
+                <h1 class=" display-5 m-5 textMaroon  font-weight-bold  text-center">  Public Engineering University Admission M C Q <br>Model Test </h1>
 
+                <div class="row pt-5 pb-5">
 
-
-
-        <section   class="pt-5 pb-5 bg-light">
-            <div class="container-fluid">
-                <div class="row">
                     <div class="col-sm-6 col-md-6 ">
-                        <div class="card">
-                            <div class="card-header bgMaroon text-white font-weight-bold">
-                                Top Exam
-                            </div>
+                        <div class="card bg-light" style="border:none;">
+
+                            <h3 class=" m-2 p-2 textMaroon display-5 font-weight-bold bgMaroon text-white">   University List </h3> 
+
                             <div class="card-body">
-                                
-                                <p class="card-text">Sorry No information found.</p>
-                               
+
+                                <ul class="list-inline  fa-ul row" th:if="${ not #lists.isEmpty(engineering_universities)}" >
+
+                                    <li class=" col-sm-6"  th:each="hscs,status:${engineering_universities}">
+
+                                        <span class="fa-li"><i class="fas fa-angle-double-right textMaroon"></i></span>
+                                        <a    class=" textMaroon font-weight-bold" th:href="@{/front-view/exam-by-sub-category/{subcatid}(subcatid=${hscs.id})}" >
+                                            <h5>   <span  th:text="${hscs.name}">    </span> </h5> </a> 
+                                    </li>
+                                </ul>
+                                <div  class="row" th:if="${#lists.isEmpty(engineering_universities)}"> 
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <h2 class="text-center text-muted"> Sorry! No  Subjects Are Found. </h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="col-sm-6 col-md-6 "><div class="card">
-                            <div class="card-header bgMaroon text-white font-weight-bold">
-                                New Exam                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Sorry No information found.</p>
+                    <div class="col-sm-6 col-md-6 d-none d-sm-block text-center  ">
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <img class="  p-2 "  style="border: 2px #992337 solid " th:src="@{../img/unilogo/buet.png}" height="200px"/>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <img class="  p-2 "  style="border: 2px #992337 solid " th:src="@{../img/unilogo/cuet.png}" height="200px"/>
                             </div>
                         </div>
                     </div>
-
-
-                </div>  
-            </div>
-        </section>
-
-
-        <section   class="pt-5 pb-5">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 ">
-                        <div class="card">
-                            <div class="card-header bgMaroon text-white font-weight-bold">
-                                New Student
-                            </div>
-                            <div class="card-body">
-                               <p class="card-text">Sorry No information found.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-6 "><div class="card">
-                            <div class="card-header bgMaroon text-white font-weight-bold">
-                               New Instructor
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Sorry No information found.</p>
-                            </div>
-                        </div>
-
-
-                    </div>  
                 </div>
+            </div>
         </section>
+
+
+        <!--Contact Start -->
+        <section  class="home_box_effect"style="background-color: #992337;color: #ffffff;">
+            <div class="container-fluid p-5" >
+                <div class="row m-3">
+                    <h2 class="display-4 text-center font-weight-bold">  Registration Here <button  type="button" class="btn  btn-md">Registration Now</button> </h2>
+                </div>
+            </div>
+        </section>
+
+        <section   class="">
+            <div class="container-fluid">
+
+                <h1 class=" display-5 m-5 textMaroon  font-weight-bold  text-center">  Science and Technology University Admission M C Q <br>Model Test </h1>
+                <div class="row pt-5 pb-5 ">
+                    <div class="col-sm-6 col-md-6 d-none d-sm-block text-center  ">
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <img class="  p-2 "  style="border: 2px #992337 solid " th:src="@{../img/unilogo/nstu_logo.png}" height="200px"/>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <img class="  p-2 "  style="border: 2px #992337 solid " th:src="@{../img/unilogo/sust.png}" height="200px"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="card" style="border:none;">
+
+                            <h3 class=" m-2 p-2 textMaroon display-5 font-weight-bold bgMaroon text-white"> University List </h3> 
+                            <div class="card-body">
+                                <div class="row">
+                                    <ul class=" fa-ul row " th:if="${ not #lists.isEmpty(science_technology)}" >
+
+                                        <li class="col-sm-6 pl-3 pr-4"  th:each="ssclists,status:${science_technology}">
+
+                                            <a    class=" textMaroon font-weight-bold" th:href="@{/front-view/exam-by-sub-category/{subcatid}(subcatid=${ssclists.id})}" > 
+                                                <h5>   <span class="fa-li"><i class="fas fa-angle-double-right textMaroon"></i></span> <span  th:text="${ssclists.name}">    </span> </h5> </a> 
+                                        </li>
+                                    </ul>
+
+                                    <div  class="row" th:if="${#lists.isEmpty(science_technology)}"> 
+
+                                        <div class="col-sm-12 col-md-12 ">
+                                            <h2 class="text-center text-muted"> Sorry! No  Subjects Are Found. </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 </div>

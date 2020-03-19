@@ -14,7 +14,7 @@ and open the template in the editor.
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Order List </div>
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Order List <span th:text="${orderlist.size()}"></span></div>
                             <!--                            <div class="col-sm-7 "> <a class="btn btn-success btn-sm float-right" th:href="@{/testimonial/create}"> Add Testimonial</a></div>-->
                         </div>
 
@@ -34,24 +34,41 @@ and open the template in the editor.
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Customer</th>
-                                     <th scope="col">Exam</th>
-                                    <th scope="col"> Status </th>
-                                    <th scope="col"> Total </th>
-                                    <th scope="col"> Date Added </th>
-                                    <th scope="col"> Date Modified </th>
+                                    <th scope="col"> Exam</th>
+                                    <th scope="col"> Total Sale</th>
+                                    <th scope="col"> Sales Details </th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <tr th:each="orderlists,status:${orderlist}">
                                     <th th:text="${status.count}">1</th>
-                                    <td> <a  th:href="@{/vendor-order/details/{oid}(oid=${orderlists.id})}" th:text="${orderlists.customer.name}">    </a></td>
-                                     <td> <a  th:href="@{/vendor-order/details/{oid}(oid=${orderlists.id})}" th:text="${orderlists.exam.title}">    </a></td>
-                                    <td th:text="${orderlists.status}">Otto</td>
-                                    <td th:text="${orderlists.total}">Otto</td>
-                                    <td th:text="${orderlists.created}">Otto</td>
-                                    <td th:text="${orderlists.modified}">@mdo</td>
+                                    <!--                                    <td> <a  th:href="@{/vendor-order/details/{oid}(oid=${orderlists.orderItem.salesOrder.id})}" th:text="${orderlists.orderItem.salesOrder.customer.name}">    </a></td>-->
+                                    <td> <a   th:text="${orderlists.title}">    </a>     </a></td>
+
+                                    <td><span   th:text="${orderlists.orderItem.size()}"></span></td>
+
+
+
+                                    <td>
+                                        <table class="table table-bordered" th:if="${ not #lists.isEmpty(orderlists.orderItem)}">
+
+                                            <tr>
+                                                <th scope="col">invoice Id</th>
+                                                <th scope="col"> Date</th>
+                                                <th scope="col"> Quantity</th>
+                                                <th scope="col"> Customer Name</th>
+                                            </tr>
+
+                                            <tbody>
+                                                <tr th:each="orderItems,status:${orderlists.orderItem}">
+                                                    <td> <a   th:text="${orderItems.salesOrder.id}">    </a>     </a></td>
+                                                    <td> <a   th:text="${orderItems.salesOrder.created}">    </a>     </a></td>
+                                                    <td> <a   th:text="${orderItems.quantity}">    </a>     </a></td>
+                                                    <td> <a   th:text="${orderItems.salesOrder.customer.name}">    </a>     </a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -73,5 +90,5 @@ and open the template in the editor.
             </div><!--  Main Content  end-->
 
         </div>
-            </div>
-        </div>   <!--  Layout end-->
+    </div>
+</div>   <!--  Layout end-->

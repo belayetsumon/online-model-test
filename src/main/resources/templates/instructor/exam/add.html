@@ -6,9 +6,8 @@ and open the template in the editor.
 -->
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-vendor-page">
     <div layout:fragment = "main_content">
-
-
-        <div> <h4> Exam  <small>Home>Exam> Add</small></h4>
+        
+        <div> <h4> Exam  <small> Home > Exam > Add</small></h4>
         </div>
         <hr/>
         <div class="row">
@@ -34,101 +33,122 @@ and open the template in the editor.
                                 <span  class="text-success"th:text="success"> </span>
                             </div> 
 
-                            <div class="form-group">
-                                <input type="hidden" class="form-control"  th:field="*{id}" />
+                            <div class="row">
 
-                                <input type="hidden" class="form-control"  th:field="*{userId}" />
-                                  <input type="hidden" class="form-control"  th:field="*{productsubcategory}" />
+                                <div class="col-sm-6">
+
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control"  th:field="*{id}" />
+
+                                        <input type="hidden" class="form-control"  th:field="*{userId}" />
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Title :<span class="text-danger"> *</span></label>
+                                        <input type="text"  minlength=" 2" required="true" class="form-control " th:field="*{title}" aria-describedby="emailHelp" placeholder="Enter name">
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Book Name</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Slug :<span class="text-danger"> *</span></label>
+                                        <input type="text"  minlength=" 2" required="true" class="form-control " th:field="*{slug}" aria-describedby="emailHelp" placeholder="Enter slug">
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">Book Name</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Sub Title:<span class="text-danger"> </span></label>
+                                        <textarea type="text"  rows="10" class="form-control " th:field="*{subtitle}" aria-describedby="emailHelp" placeholder="Enter Sub Title"></textarea>
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('subtitle')}" th:errors="*{subtitle}">Book Name</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Syllabus:<span class="text-danger"> </span></label>
+                                        <textarea type="text"  rows="10" class="form-control " id="tinymceid" th:field="*{syllabus}" aria-describedby="emailHelp" placeholder="Enter Syllabus"></textarea>
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('syllabus')}" th:errors="*{syllabus}">Book Name</span>
+                                    </div>
+
+                                    <!--                            <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Order Position No:<span class="text-danger"> </span></label>
+                                                                    <input type="number"  class="form-control col-sm-5" th:field="*{orderno}" aria-describedby="emailHelp" placeholder="Enter no">
+                                                                    <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('orderno')}" th:errors="*{orderno}">Book Name</span>
+                                                                </div>-->
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Price:<span class="text-danger"> *</span></label>
+                                        <input type="number"  minlength="1" required="true" class="form-control " th:field="*{price}" aria-describedby="emailHelp" placeholder="Enter price">
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Book Name</span>
+                                    </div>
+
+                                    <!--                            <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Discount:<span class="text-danger"></span></label>
+                                                                    <input type="text"  minlength="1"  class="form-control col-sm-5" th:field="*{discount}" aria-describedby="emailHelp" placeholder="Enter Discount">
+                                                                    <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}">Book Name</span>
+                                    
+                                                                </div>-->
+
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Description:<span class="text-danger"> </span></label>
+                                        <textarea type="text"  rows="10" class="form-control col-sm-8" th:field="*{description}" aria-describedby="emailHelp" placeholder="Enter Description"></textarea>
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Book Name</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Image<span class="text-danger"> </span></label>
+                                        <input type="hidden"  th:value="${exam.imageName}">
+                                        <input type="file"  
+                                               class="form-control " name="pic" 
+                                               data-validation=" dimension mime size"
+                                               data-validation-dimension="min150x150"
+
+                                               data-validation-allowing="jpg, png, gif"
+                                               />
+
+                                        <span  class="help-block "> Image Size 800px x 450px </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Level<span class="text-danger"> *</span></label>
+                                        <select id="inputState" class="form-control col-sm-3"  th:field="*{level}">
+                                            <option value=" "> Select one</option>              
+                                            <option th:each =" lavels : ${lavel}"
+                                                    th:value="${lavels} " 
+                                                    th:text="${lavels}"> Select one</option>
+                                        </select>
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('level')}" th:errors="*{level}">Book Name</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Status<span class="text-danger"> *</span></label>
+                                        <select id="inputState" class="form-control col-sm-3"  th:field="*{status}">
+                                            <option value=" "> Select one</option>              
+                                            <option th:each =" status : ${statuslist}"
+                                                    th:value="${status} " 
+                                                    th:text="${status}"> Select one</option>
+                                        </select>
+                                        <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Book Name</span>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    Select Exam Sub Category
+                                    <div class="form-group options">
+
+                                        <ul class="list-unstyled checkbox-group required">
+                                            <li th:each="productsubcategorylists: ${productsubcategorylist}">
+                                                <input type="checkbox"    th:field="*{productsubcategory}"
+                                                       th:value="${productsubcategorylists.id}"  />
+                                                <label 
+                                                    th:for="${#ids.prev('productsubcategory')}"
+                                                    th:text="${productsubcategorylists.name}"></label>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                             </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1"> Title :<span class="text-danger"> *</span></label>
-                                <input type="text"  minlength=" 2" required="true" class="form-control col-sm-5" th:field="*{title}" aria-describedby="emailHelp" placeholder="Enter name">
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Book Name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Slug :<span class="text-danger"> *</span></label>
-                                <input type="text"  minlength=" 2" required="true" class="form-control col-sm-5" th:field="*{slug}" aria-describedby="emailHelp" placeholder="Enter slug">
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}">Book Name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Sub Title:<span class="text-danger"> </span></label>
-                                <textarea type="text"  rows="10" class="form-control col-sm-8" th:field="*{subtitle}" aria-describedby="emailHelp" placeholder="Enter Sub Title"></textarea>
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('subtitle')}" th:errors="*{subtitle}">Book Name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Syllabus:<span class="text-danger"> </span></label>
-                                <textarea type="text"  rows="10" class="form-control col-sm-8" th:field="*{syllabus}" aria-describedby="emailHelp" placeholder="Enter Syllabus"></textarea>
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('syllabus')}" th:errors="*{syllabus}">Book Name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Order Position No:<span class="text-danger"> </span></label>
-                                <input type="number"  class="form-control col-sm-5" th:field="*{orderno}" aria-describedby="emailHelp" placeholder="Enter no">
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('orderno')}" th:errors="*{orderno}">Book Name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Price:<span class="text-danger"> *</span></label>
-                                <input type="number"  minlength="1" required="true" class="form-control col-sm-5" th:field="*{price}" aria-describedby="emailHelp" placeholder="Enter price">
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Book Name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Discount:<span class="text-danger"></span></label>
-                                <input type="text"  minlength="1"  class="form-control col-sm-5" th:field="*{discount}" aria-describedby="emailHelp" placeholder="Enter Discount">
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}">Book Name</span>
-
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Description:<span class="text-danger"> </span></label>
-                                <textarea type="text"  rows="10" class="form-control col-sm-8" th:field="*{description}" aria-describedby="emailHelp" placeholder="Enter Description"></textarea>
-                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Book Name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Image<span class="text-danger"> </span></label>
-                                <input type="hidden"  th:value="${exam.imageName}">
-                                <input type="file"  
-                                       class="form-control col-sm-5" name="pic" 
-                                       data-validation=" dimension mime size"
-                                       data-validation-dimension="min150x150"
-
-                                       data-validation-allowing="jpg, png, gif"
-                                       />
-
-                                <span  class="help-block "> Image Size 800px x 450px </span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Level<span class="text-danger"> *</span></label>
-                                <select id="inputState" class="form-control col-sm-3"  th:field="*{level}">
-                                    <option value=" "> Select one</option>              
-                                    <option th:each =" lavels : ${lavel}"
-                                            th:value="${lavels} " 
-                                            th:text="${lavels}"> Select one</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Status<span class="text-danger"> *</span></label>
-                                <select id="inputState" class="form-control col-sm-3"  th:field="*{status}">
-                                    <option value=" "> Select one</option>              
-                                    <option th:each =" status : ${statuslist}"
-                                            th:value="${status} " 
-                                            th:text="${status}"> Select one</option>
-                                </select>
-                            </div>
-
-
-
-
-
                             <button type="submit" class="btn btn-success">Submit</button>
                         </form>
                     </div>

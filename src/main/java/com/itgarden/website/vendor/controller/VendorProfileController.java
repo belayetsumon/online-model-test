@@ -5,14 +5,20 @@
  */
 package com.itgarden.website.vendor.controller;
 
+import com.itgarden.website.model.Contact;
+import com.itgarden.website.model.enumvalue.Status;
 import com.itgarden.website.module.user.model.Users;
 import com.itgarden.website.module.user.services.LoggedUserService;
 import com.itgarden.website.vendor.model.Vendorprofile;
 import com.itgarden.website.vendor.repository.VendorprofileRepository;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -30,12 +36,9 @@ public class VendorProfileController {
 
     @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model) {
-
         Users users = new Users();
         users.setId(loggedUserService.activeUserid());
-
         model.addAttribute("vendorprofile", vendorprofileRepository.findByUserId(users));
-
         return "vendor/profile/index";
     }
 
@@ -45,13 +48,26 @@ public class VendorProfileController {
         Users users = new Users();
         users.setId(loggedUserService.activeUserid());
         vendorprofile.setUserId(users);
-
-       // model.addAttribute("vendorprofile", vendorprofileRepository.findByUserId(users));
         return "vendor/profile/profile_add";
     }
-    
-    
-    
 
+    @RequestMapping("/save")
+    public String create(Model model, @Valid Vendorprofile vendorprofile, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            Users users = new Users();
+            users.setId(loggedUserService.activeUserid());
+            vendorprofile.setUserId(users);
+            return "vendor/profile/profile_add";
+        }
+        vendorprofileRepository.save(vendorprofile);
+        return "redirect:/vendorprofile/index";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable Long id, Vendorprofile vendorprofile) {
+        model.addAttribute("vendorprofile", vendorprofileRepository.getOne(id));
+        return "vendor/profile/profile_add";
+    }
 
 }

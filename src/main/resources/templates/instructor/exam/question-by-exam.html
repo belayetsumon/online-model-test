@@ -17,7 +17,7 @@ and open the template in the editor.
                         <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Question List.</div>
                             <div class="col-sm-7 "> 
 
-                                <span th:if="${examinfo.question.size()<50}">
+                                <span th:if="${examinfo.question.size()<100}">
                                     <a class="btn btn-success btn-sm float-right" th:href="@{/instructor-question/create/{examid}(examid=${examinfo.id})}"> Add Question</a>
                                 </span>
                                 <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/index}">Close</a>
@@ -73,7 +73,7 @@ and open the template in the editor.
                                                     <th scope="col">#</th>
 
                                                     <th scope="col">Title</th> 
-                                                    <th scope="col">Value</th>
+                                                    <th scope="col">Mark</th>
                                                 </tr>
                                                 <tbody>
                                                     <tr th:each="answerlists,status:${questionlists.answer}">

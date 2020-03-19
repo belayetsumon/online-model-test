@@ -7,7 +7,7 @@
         <section  class="border-bottom" style="padding: 50px 0px 50px 0px;background-color: #992337;">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-7">  <h3 class="font-weight-bold" style="color: #fff;">   Sub Category Name :  <span th:text="${subcategory.name}"></span></h3></div>
+                    <div class="col-sm-7">  <h3 class="font-weight-bold" style="color: #fff;">   <span th:text="${subcategory.name}"></span>:Model Test</h3></div>
                     <div class="col-sm-5 text-right" style="color: #ffffff">Home/Exam By Sub Category </div>
                 </div>
             </div>
@@ -15,16 +15,16 @@
 
 
         <section>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row mt-4">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 d-none d-sm-block">
 
-                        <div class="card border-danger" >
-                            <div class="card-header border-danger">
-                                <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> Exam Category</h5>
+                        <div class="card borderColor" >
+                            <div class="card-header bgMaroon">
+                                <h5 class="font-weight-bold text-white"> <i class="fas fa-list"></i> Exam Category</h5>
                             </div>
                             <ul class="list-group list-group-flush ">
-                                <li class="list-group-item"th:each="categorylists,status:${categorylist}" >
+                                <li   class="list-group-item"th:each="categorylists,status:${categorylist}" >
 
                                     <a   class="text-muted"  th:href="@{/front-view/sub-category-by-category/{prodcatid}(prodcatid=${categorylists.id})}" >  
 
@@ -35,19 +35,25 @@
                         </div> 
                     </div>
                     <div class="col-sm-9">
-                        <div class="card mb-4 border-danger">
+                        <div class="card mb-4 borderColor">
 
-                            <div class="card-header border-danger ">
-                                <h5 class="font-weight-bold text-danger"> <i class="fas fa-list"></i> <span th:text="${subcategory.name}"></span> Model Test List</h5>
+                            <div class="card-header bgMaroon">
+                                <h5 class="font-weight-bold text-white"> <i class="fas fa-list"></i> <span th:text="${subcategory.name}"></span> Model Test List</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item" th:each="examlists,status:${examlist}">
+                                    <ul class="list-inline">
+                                        <li   th:if="${ not #lists.isEmpty(examlist)}" class="list-inline-item" th:each="examlists,status:${examlist}">
 
                                             <a    class="text-muted" th:href="@{/front-view/exam-details/{examid}(examid=${examlists.id})}" > 
                                                 <span  th:text="${examlists.title}">    </span> <span  class="float-right badge badge-danger"><span  th:text="${examlists.test.size()}">    </span>  </span></a>
                                         </li>
+
+                                        <li   class="list-group-item" th:if="${  #lists.isEmpty(examlist)}" >
+
+                                            Sorry, no matching data found.
+                                        </li>
+
                                     </ul>
                                 </div>
                             </div>

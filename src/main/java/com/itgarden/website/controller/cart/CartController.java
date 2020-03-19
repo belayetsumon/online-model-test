@@ -5,9 +5,9 @@
  */
 package com.itgarden.website.controller.cart;
 
-import com.itgarden.website.model.Ourproduct;
+import com.itgarden.website.exam.model.Exam;
+import com.itgarden.website.exam.ripository.ExamRepository;
 import com.itgarden.website.model.cart.CartItem;
-import com.itgarden.website.ripository.OurproductRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class CartController {
 
     @Autowired
-    OurproductRepository ourproductRepository;
+    ExamRepository examRepository;
 
     @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model, HttpSession session) {
@@ -58,7 +58,7 @@ public class CartController {
 
             for (int i = 0; i < cartitem.size(); i++) {
 
-                subtotal += cartitem.get(i).getOurproduct().getPrice() * cartitem.get(i).getQuantity();
+                subtotal += cartitem.get(i).getExam().getPrice() * cartitem.get(i).getQuantity();
             }
             return subtotal;
         }
@@ -71,7 +71,7 @@ public class CartController {
             @RequestParam(value = "quantity", required = true) String quant,
             HttpSession session) {
 
-        Ourproduct ourproduct;
+        Exam exam;
         // convert product id int to long
         Long id = Long.valueOf(pid);
         int quantity = Integer.parseInt(quant);
@@ -81,9 +81,9 @@ public class CartController {
 
             List<CartItem> shoppingcart_list = new ArrayList<CartItem>();
 
-            ourproduct = ourproductRepository.getOne(id);
+            exam = examRepository.getOne(id);
 
-            shoppingcart_list.add(new CartItem(ourproduct, quantity));
+            shoppingcart_list.add(new CartItem(exam, quantity));
 
             session.setAttribute("sessioncart", shoppingcart_list);
             return "redirect:/cart/index";
@@ -95,8 +95,8 @@ public class CartController {
 
             //System.out.println("indexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + index);
             if (index == -1) {
-                ourproduct = ourproductRepository.getOne(id);
-                shoppingcart_list.add(new CartItem(ourproduct, quantity));
+                exam= examRepository.getOne(id);
+                shoppingcart_list.add(new CartItem(exam, quantity));
             } else {
                 int quantity2 = shoppingcart_list.get(index).getQuantity() + quantity;
                 shoppingcart_list.get(index).setQuantity(quantity2);
@@ -122,7 +122,7 @@ public class CartController {
 
         for (int i = 0; i < cart.size(); i++) {
 
-            if (cart.get(i).getOurproduct().getId() == id) {
+            if (cart.get(i).getExam().getId() == id) {
 
                 return i;
             }

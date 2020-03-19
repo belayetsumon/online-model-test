@@ -13,6 +13,7 @@ import com.itgarden.website.module.user.services.LoggedUserService;
 import com.itgarden.website.exam.ripository.ExamRepository;
 import com.itgarden.website.exam.ripository.QuestionRepository;
 import com.itgarden.website.exam.ripository.TestRepository;
+import com.itgarden.website.model.Productcategory;
 import com.itgarden.website.ripository.ProductcategoryRepository;
 import com.itgarden.website.ripository.ProductsubcategoryRepository;
 import com.itgarden.website.services.StorageProperties;
@@ -59,7 +60,7 @@ public class ExamController {
 
     @Autowired
     QuestionRepository questionRepository;
-    
+
     @Autowired
     TestRepository testRepository;
 
@@ -69,16 +70,28 @@ public class ExamController {
         return "catalog/exam/index";
     }
 
-    @RequestMapping("/create")
-    public String create(Model model, Exam exam) {
+    @RequestMapping("/categorylist")
+    public String categorylist(Model model, Productcategory productcategory) {
+
+        model.addAttribute("productcategorylist", productcategoryRepository.findByStatus(Status.Active));
+
+        return "catalog/exam/categorylist";
+    }
+
+    @RequestMapping("/create/{cid}")
+    public String create(Model model, @PathVariable Long cid, Exam exam) {
         model.addAttribute("statuslist", Status.values());
-        model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByStatus(Status.Active));
+
+        Productcategory productcategory = new Productcategory();
+        productcategory.setId(cid);
+        model.addAttribute("productsubcategorylist", productsubcategoryRepository.findByProductcategory(productcategory));
+
 
         Users userss = new Users();
         userss.setId(loggedUserService.activeUserid());
         exam.setUserId(userss);
-        
-         model.addAttribute("lavel", Lavelstatus.values());
+
+        model.addAttribute("lavel", Lavelstatus.values());
         return "catalog/exam/add";
     }
 
@@ -161,19 +174,17 @@ public class ExamController {
     }
 
     @RequestMapping("/details/{id}")
-    public String create(Model model, @PathVariable Long id, Exam exam) {
+    public String details(Model model, @PathVariable Long id, Exam exam) {
 
         model.addAttribute("exam_details", examRepository.getOne(id));
-        
+
         Exam examid = examRepository.getOne(id);
-        
+
         model.addAttribute("testlist", testRepository.findByExamOrderByIdDesc(examid));
 
         return "catalog/exam/exam_details";
 
     }
-    
-    
 
     @RequestMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id, Exam exam) {

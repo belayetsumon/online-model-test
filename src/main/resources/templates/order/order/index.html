@@ -10,11 +10,11 @@ and open the template in the editor.
         </div>
         <hr/>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Order List </div>
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Order List : Total      <span th:text="${orderlist.size()}">Otto</span></div>
                             <!--                            <div class="col-sm-7 "> <a class="btn btn-success btn-sm float-right" th:href="@{/testimonial/create}"> Add Testimonial</a></div>-->
                         </div>
 
@@ -35,6 +35,8 @@ and open the template in the editor.
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Customer</th>
+                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col"> Status </th>
                                     <th scope="col"> Total </th>
                                     <th scope="col"> Date Added </th>
@@ -46,7 +48,9 @@ and open the template in the editor.
                                 <tr th:each="orderlists,status:${orderlist}">
                                     <th th:text="${status.count}">1</th>
                                     <td> <a  th:href="@{/order/details/{oid}(oid=${orderlists.id})}" th:text="${orderlists.customer.name}">    </a></td>
-                                    <td th:text="${orderlists.status}">Otto</td>
+                                    <td th:text="${orderlists.customer.mobile}">Otto</td>
+                                    <td th:text="${orderlists.customer.email}">Otto</td>
+                                         <td th:text="${orderlists.status}">Otto</td>
                                     <td th:text="${orderlists.total}">Otto</td>
                                     <td th:text="${orderlists.created}">Otto</td>
                                     <td th:text="${orderlists.modified}">@mdo</td>
@@ -70,20 +74,4 @@ and open the template in the editor.
 
             </div><!--  Main Content  end-->
 
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Filter </div>
-                            <!--                            <div class="col-sm-7 "> <a class="btn btn-success btn-sm float-right" th:href="@{/testimonial/create}"> Add Testimonial</a></div>-->
-                        </div>
-
-                    </div>
-                    <div class="card-body">
-
-                    </div><!--  Card body end-->
-
-
-                </div><!--  Card  end-->
-
-            </div>
         </div>   <!--  Layout end-->
