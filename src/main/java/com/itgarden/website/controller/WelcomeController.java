@@ -7,6 +7,7 @@ package com.itgarden.website.controller;
 
 import com.itgarden.website.exam.ripository.ExamRepository;
 import com.itgarden.website.exam.ripository.QuestionRepository;
+import com.itgarden.website.exam.ripository.TestRepository;
 import com.itgarden.website.model.Contact;
 import com.itgarden.website.model.Productcategory;
 import com.itgarden.website.module.user.model.Role;
@@ -14,6 +15,7 @@ import com.itgarden.website.module.user.model.Status;
 import com.itgarden.website.module.user.ripository.RoleRepository;
 import com.itgarden.website.module.user.ripository.UsersRepository;
 import com.itgarden.website.ripository.BatchRepository;
+import com.itgarden.website.ripository.BlogRepository;
 import com.itgarden.website.ripository.GalleryRepository;
 import com.itgarden.website.ripository.ImageGalleryRepository;
 import com.itgarden.website.ripository.OurclientsRepository;
@@ -24,6 +26,7 @@ import com.itgarden.website.ripository.TestimonialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,6 +75,12 @@ public class WelcomeController {
     @Autowired
     QuestionRepository questionRepository;
 
+    @Autowired
+    TestRepository testRepository;
+
+    @Autowired
+    BlogRepository blogRepository;
+
     @RequestMapping(value = {"", "/", "/index"})
 
     public String index(Model model, Contact contact) {
@@ -113,8 +122,7 @@ public class WelcomeController {
 
         model.addAttribute("science_technology", productsubcategoryRepository.findByProductcategory(science_technology));
 
-       // public-engineering-universities-admission
-                
+        // public-engineering-universities-admission
         Productcategory engineering_universities = productcategoryRepository.findBySlug("public-engineering-universities-admission");
 
         model.addAttribute("engineering_universities", productsubcategoryRepository.findByProductcategory(engineering_universities));
@@ -123,9 +131,30 @@ public class WelcomeController {
 
         // Latest Exam
         model.addAttribute("examlist", examRepository.findByStatusOrderByIdDesc(latestExam, com.itgarden.website.model.enumvalue.Status.Active));
+
+        // best seller
+        Pageable bestseller = PageRequest.of(0, 10);
+        model.addAttribute("bestseller", examRepository.findByBestSeller(bestseller));
+
+        // top rated
+        Pageable toprated = PageRequest.of(0, 10);
+
+        model.addAttribute("toprated", examRepository.findByTopRated(toprated));
+
+        /// Blog
+        Pageable blog = PageRequest.of(0, 4, Sort.by(Direction.DESC, "id"));
+        model.addAttribute("bloglist", blogRepository.findAll(blog));
+
+        // Topper student
+        Pageable topper = PageRequest.of(0, 10);
+
+        model.addAttribute("topperstudent", testRepository.findByTopperStudent(topper));
         
-        // Laatest sale
-        //model.addAttribute("latestsale", examRepository.findByStatusOrderByIdDesc(latestExam, com.itgarden.website.model.enumvalue.Status.Active));
+        
+          // Best Instructor
+        Pageable bestinstructor = PageRequest.of(0, 10);
+
+        model.addAttribute("bestinstructor", examRepository.findByBestInstructor(bestinstructor));
 
         return "welcome/welcome";
 

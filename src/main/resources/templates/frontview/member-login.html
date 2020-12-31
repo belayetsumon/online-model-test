@@ -7,6 +7,7 @@ and open the template in the editor.
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-page">
     <div layout:fragment = "main_content">
 
+        <section class="d-none d-sm-block">
 
         <section  class="border-bottom" style="padding: 50px 0px 50px 0px;background-color: #992337;">
             <div class="container">
@@ -55,7 +56,7 @@ and open the template in the editor.
                                     <button type="submit" class="btn  btn-sm btn-warning">Submit</button>
                                 </form>
                                 <a th:href="@{/front-view/forgot-password}" class="btn btn-primary btn-sm m-1 btn-block btn-info">Forgot Password</a>
-                                <a  th:href="@{/front-view/front-registration}"class="btn btn-primary btn-sm m-1 btn-block  btn-success">New Member Registration</a>
+                                <a  th:href="@{/front-view/front-registration}"class="btn btn-primary btn-sm m-1 btn-block  btn-success">New Registration</a>
 
                             </div>
                         </div>
@@ -63,5 +64,70 @@ and open the template in the editor.
                 </div>  
             </div>
         </section>
+        
+        </section>
+        
+        
+        
+        <section class="mobile d-block d-sm-none">
+
+            <div th:replace="mobile-top-nav"></div>
+            
+            <div class="row mt-5"> </div>
+            <div class="row mt-3"> </div>
+
+  
+
+     
+            <div class="container">
+                <div class="row">
+                 
+                    <div class="col-sm-6 col-md-6 ">
+                        <div class="card">
+                            <div class="card-header">
+                                Login
+                            </div>
+                            <div class="card-body">
+                                <form th:action="@{/front-view/member-login}"  method="post">
+
+                                    <div class="alert alert-danger" th:if="${param.error}">
+                                        Invalid User Name or Password. Please try again.   
+                                    </div>
+                                    <div class="alert alert-warning" th:if="${param.logout}">
+                                        You have been logged out.
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email"  name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="" placeholder="Password">
+                                    </div>
+
+                                    <button type="submit" class="btn  btn-sm btn-warning">Submit</button>
+                                </form>
+                                <a th:href="@{/front-view/forgot-password}" class="btn btn-primary btn-sm m-1 btn-block btn-info">Forgot Password</a>
+                                <a  th:href="@{/front-view/front-registration}"class="btn btn-primary btn-sm m-1 btn-block  btn-success">New Member Registration</a>
+
+                            </div>
+                        </div>
+                    </div>  
+                </div>  
+            </div>
+  
+        
+          <section class="mb-5"></section>
+            
+               <div th:replace="bottom-nav">
+
+            <!-- Header  -->
+
+        </div>
+            
+
+        </section>
+        
     </div>
 </div>

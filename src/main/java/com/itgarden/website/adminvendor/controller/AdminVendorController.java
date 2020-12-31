@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -79,15 +80,16 @@ public class AdminVendorController {
 
         return "admin/vendor/profile_add";
     }
-    
-    
-      @RequestMapping("/save")
-      
-    public String save(Model model, Vendorprofile vendorprofile) {
 
- 
+    @RequestMapping("/save")
 
-          return "redirect:/admin-vendor/instructor_profile/{iid}";
+    public String save(Model model, Vendorprofile vendorprofile, RedirectAttributes redirectAttrs) {
+
+        vendorprofileRepository.save(vendorprofile);
+        
+        redirectAttrs.addAttribute("iid", vendorprofile.getUserId().getId());
+        
+        return "redirect:/admin-vendor/instructor_profile/{iid}";
     }
 
 }

@@ -39,17 +39,32 @@
                         </a>
                     </li>
 
-                           <li >
+                    <li >
                         <a class="nav-link" th:href="@{/exam/categorylist}">
                             <i class="far fa-file"></i>
                             Add Exam
                         </a>
                     </li>
-                    
+
                     <li >
                         <a class="nav-link" th:href="@{/exam/index}">
                             <i class="far fa-file"></i>
                             Exam List
+                        </a>
+                    </li>
+                    
+                    
+                         <li >
+                        <a class="nav-link" th:href="@{/examcomment/index}">
+                            <i class="far fa-file"></i>
+                            Comments List
+                        </a>
+                    </li>
+                    
+                                <li>
+                        <a class="nav-link" th:href="@{/rate/index}">
+                            <i class="far fa-file"></i>
+                            Rate List
                         </a>
                     </li>
                 </ul>
@@ -103,8 +118,8 @@
                     </li>
                 </ul>
             </li>
-            
-                  <li >
+
+            <li >
                 <a  href="#instructor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 
                     <i class="fas fa-user"></i> Instructor
@@ -207,6 +222,29 @@
                 </ul>
             </li>
 
+            <li>
+                <a href="#blog" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+                    <i class="fas fa-users"></i> Blog
+                </a>
+
+                <ul class="list-unstyled collapse " id="blog"  >
+                    <li class="">
+                        <a class="" th:href="@{/blogcategory/index}">
+                            <i class="far fa-file"></i>
+                            Blog Category
+                        </a>
+                    </li>
+                    <li class="">
+                        <a class="" th:href="@{/blog/index}">
+                            <i class="far fa-file"></i>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/subscriber/index}">
                     <span data-feather="layers"></span>
@@ -226,14 +264,14 @@
                 </a>
 
                 <ul class="list-unstyled collapse " id="user"  >
-                          <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" th:href="@{/module/index}">
                             <i class="far fa-file"></i>
                             Module
                         </a>
                     </li>
-                    
-                    
+
+
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/privilege/index}">
                             <i class="far fa-file"></i>
@@ -267,7 +305,6 @@
                 </ul>
             </li>
         </ul>
-
 
         <ul class="list-unstyled CTAs">
 

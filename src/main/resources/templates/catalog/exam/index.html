@@ -15,7 +15,7 @@ and open the template in the editor.
                 <div class="card">
                     <div class="card-header">
                         <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam  List <span th:text="${examlist.size()}"></span></div>
-                            <div class="col-sm-7 "> <a class="btn btn-success btn-sm float-right" th:href="@{/exam/create}"> Add Exam </a></div>
+                            <div class="col-sm-7 "> </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -44,52 +44,39 @@ and open the template in the editor.
                                         <th scope="col"> Price </th>
                                         <th scope="col"> Status </th>
                                         <th scope="col"> Created </th>
-                                        <th scope="col"> Updated </th>
+                                        <th scope="col"> Review/Rate </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="examlists,status:${examlist}">
 
                                         <th th:text="${status.count}">1</th>
-
-
                                         <td> <a th:href="@{/exam/details/{id}(id=${examlists.id})}" th:text="${examlists.title}">    </a></td>
-
                                         <td> <span th:text="${examlists.question.size()}"></span><a th:href="@{/exam/question-by-exam/{examid}(examid=${examlists.id})}">  Question List  </a> </td>
-
-                                        <td>Otto
-                                        
-                                                 <span th:each="subcategory,status:${examlists.productsubcategory}" >
-
+                                        <td>
+                                            <span th:each="subcategory,status:${examlists.productsubcategory}" >
                                                 <span th:text="${subcategory.name+','}">          </span>                            
-
                                             </span>
-
                                         </td>
-
-                                        <td th:text="${examlists.orderno}">Otto</td>
-
+                                       <td th:text="${examlists.orderno}">Otto</td>
                                         <td>
                                             <span th:if="${ not #strings.isEmpty(examlists.imageName)}" class="badge bg-green pull-right"> 
-                                                <img  class="img-responsive" th:src="@{/files/}+${examlists.imageName}" width="100px"  height="100px"/>
+                                                <img  class="img-responsive" th:src="@{/files/}+${examlists.imageName}" width="125px"  height="75px"/>
                                             </span>
-
                                             <span th:if="${#strings.isEmpty(examlists.imageName)}" > Image Not Found </span>
                                         </td>
                                         <td th:text="${examlists.price}">Otto</td>
                                         <td th:text="${examlists.status}">Otto</td>
-
                                         <td th:text="${examlists.created}">Otto</td>
-
-                                        <td th:text="${examlists.modified}">@mdo</td>
+                                        <td>
+                                            <a type="button" class="btn btn-primary btn-block text-white" th:href="@{/examcomment/create/{examid}(examid=${examlists.id})}"><i class="far fa-comments"></i> Add Comments </a>
+                                            <a type="button" class="btn btn-light btn-block text-danger" th:href="@{/rate/create/{examid}(examid=${examlists.id})}"><i class="fas fa-star-half-alt"></i> Add Rate</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div><!--  Card body end-->
-
-
                 </div><!--  Card  end-->
 
 

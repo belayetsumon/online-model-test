@@ -6,15 +6,18 @@
 package com.itgarden.website.model;
 
 import com.itgarden.website.model.enumvalue.Status;
+import com.itgarden.website.module.user.model.Users;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
@@ -38,6 +41,11 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull(message = " User cannot be blank.")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private Users userId;
+
     @NotNull(message = "Blog category cannot be blank.")
     @ManyToOne(optional = true)
     private BlogCategory blogcategory;
@@ -46,13 +54,18 @@ public class Blog {
     private String title;
 
     @Lob
-    @Column(nullable = false )
-    @Size(min = 5,max = 20000)
+    @Column(nullable = false)
+    @NotBlank(message = "Description  is required.")
+    @Size(min = 5, max = 20000)
     private String description;
 
     @NotNull(message = "Status is required.")
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    private String imageName;
+
+    private int viewcount;
 
 /// Audit /// 
     @CreatedBy
@@ -72,16 +85,18 @@ public class Blog {
     private LocalDateTime modified;
 
     /// End Audit //// 
-
     public Blog() {
     }
 
-    public Blog(Long id, BlogCategory blogcategory, String title, String description, Status status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
+    public Blog(Long id, Users userId, BlogCategory blogcategory, String title, String description, Status status, String imageName, int viewcount, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
         this.id = id;
+        this.userId = userId;
         this.blogcategory = blogcategory;
         this.title = title;
         this.description = description;
         this.status = status;
+        this.imageName = imageName;
+        this.viewcount = viewcount;
         this.createdBy = createdBy;
         this.created = created;
         this.modifiedBy = modifiedBy;
@@ -94,6 +109,14 @@ public class Blog {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
     public BlogCategory getBlogcategory() {
@@ -128,6 +151,22 @@ public class Blog {
         this.status = status;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public int getViewcount() {
+        return viewcount;
+    }
+
+    public void setViewcount(int viewcount) {
+        this.viewcount = viewcount;
+    }
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -160,4 +199,4 @@ public class Blog {
         this.modified = modified;
     }
 
-}
+ }

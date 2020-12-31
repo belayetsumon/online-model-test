@@ -4,11 +4,11 @@
      layout:decorator="front-layout-inner-page">
     <div layout:fragment="main_content">
 
+        <section class="d-none d-sm-block">
+        
         <section  class="border-bottom" style="padding: 50px 0px 50px 0px;background-color: #992337;">
  
         </section>
-
-
         <section>
             <div class="container-fluid">
                 <div class="row mt-4">
@@ -63,6 +63,81 @@
                 </div>
             </div>
         </section>
+    </section>
+        
+        
+        
+                <section class=" mobile d-block d-sm-none">
+   <div th:replace="mobile-top-nav"></div>
+            
+            <div class="row mt-5"> </div>
+            <div class="row mt-3"> </div>
+          <section>
+            <div class="container-fluid">
+                <div class="row mt-1">
+ 
+                    <div class="col-sm-12">
+                        <div class="card mb-4 borderColor">
 
+                            <div class="card-header bgMaroon">
+                                <h5 class="font-weight-bold text-white"> <i class="fas fa-list"></i> Exam Category List</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <ul class="list-group list-group-flush ">
+                                        <li   class="list-group-item"th:each="categorylists,status:${categorylist}" >
+                                            
+                                                       <div class="card bg-light  home_box_effect"  >
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-left media-">
+                                        <span th:if="${ not #strings.isEmpty(categorylists.imageName)}" class="badge bg-green pull-right"> 
+                                            <img  class=" align-self-center img-thumbnail" th:src="@{/files/}+${categorylists.imageName}" width="100px"  height="100px"/>
+                                        </span>
+
+                                        <span th:if="${#strings.isEmpty(categorylists.imageName)}" > 
+
+                                            <img  class="align-self-center img-thumbnail" th:src="@{/img/no_image.png}" width="100px"  height="100px"/>
+                                        </span>
+                                    </div>
+                                    <div class="media-body ml-3">
+                                        <a    class=" textMaroon font-weight-bold" th:href="@{/front-view/sub-category-by-category/{catid}(catid=${categorylists.id})}" > <h5>  <span  th:text="${categorylists.name}">    </span> </h5> </a> 
+
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                                            
+                                            
+                                            
+                                            
+                                            
+
+<!--                                            <a   class="text-muted"  th:href="@{/front-view/sub-category-by-category/{prodcatid}(prodcatid=${categorylists.id})}" >  
+
+
+                                                <span th:text="${categorylists.name}" ></span> <span  class="float-right badge badge-danger " th:text="${categorylists.productsubcategory.size()}" ></span>
+                                            </a></li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <section class="mb-5"></section>
+            
+               <div th:replace="bottom-nav">
+
+            <!-- Header  -->
+
+        </div>
+            
+            </section>
+
+        
+        
     </div>
 </div>

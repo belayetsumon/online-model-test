@@ -6,103 +6,211 @@ and open the template in the editor.
 -->
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-customar-page">
     <div layout:fragment = "main_content">
-        <div> <h4> Exam  <small>Home>Exam</small></h4>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-sm-12">
+     
+            <section class=" d-none d-sm-block">
+            <div class="row">
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam  List </div>
-                            <div class="col-sm-7 "></div>
-                        </div>
+                <div class="col-sm-3">
+
+                    <div   th:replace="customer-left-menu">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
                     </div>
-                    <div class="card-body">
+                </div>
+                <div class="col-sm-9">
 
-                        <span th:if="${ not #strings.isEmpty(message)}">
-
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <span th:text="${message}" > </span>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                  <div class="card">
+                        <div class="card-header">
+                            <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam  List </div>
+                                <div class="col-sm-7 "></div>
                             </div>
-                        </span>
-                        <div class="table-responsive">
-
-                            <table class="table table-bordered">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Total Question </th>
-
-
-
-                                        <th scope="col"> Created </th>
-                                        <th scope="col"> Updated </th>
-                                    </tr>
-                                </thead>
-                            </table>         
-
-                            <table class="">           
-                                <tr  th:each="orderlist,status:${examlist}">
-
-
-                                    <td>
-
-                                        <span th:if="${ not #sets.isEmpty(orderlist.orderItem)}"> 
-
-
-                                            <table class="table table-bordered">
-
-                                                <tr    th:each="examlists,status:${orderlist.orderItem}">
-
-                                                    <th th:text="${status.count}"> 1 </th>
-
-                                                    <td> 
-
-                                                        <a th:href="@{/student-exam/details/{id}(id=${examlists.exam.id})}" th:text="${examlists.exam.title}">    </a>
-                                                    </td>
-                                                    <td> 
-                                                        <span th:if="${ not #lists.isEmpty(examlists.exam.question)}">
-                                                            <span th:text="${ not #lists.isEmpty(examlists.exam.question.size())}"></span>                                                     
-                                                        </span>
-                                                        <span th:if="${#lists.isEmpty(examlists.exam.question)}">
-                                                            <span > No Questions are available </span>                                                     
-                                                        </span>
-                                                    </td>
-                                                    <td th:text="${ examlists.exam.created}"> </td>
-
-                                                    <td th:text="${ examlists.exam.modified}"> </td>
-
-                                                </tr>
-
-
-                                            </table>            
-                                        </span>
-
-                                        <span th:if="${#sets.isEmpty(orderlist.orderItem)}" >
-
-                                            Sorry no order item found.
-
-
-                                        </span>
-                                    </td>
-                                </tr>
-                            </table>
-
                         </div>
+                        <div class="card-body">
 
-                    </div><!--  Card body end-->
+                            <span th:if="${ not #strings.isEmpty(message)}">
+
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span th:text="${message}" > </span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </span>
+                            <div class="table-responsive">
 
 
-                </div><!--  Card  end-->
+
+                                <table class="">           
+                                    <tr  th:each="orderlist,status:${examlist}">
 
 
-            </div><!--  Main Content  end-->
-        </div>   <!--  Layout end-->
+                                        <td>
+
+                                            <span th:if="${ not #sets.isEmpty(orderlist.orderItem)}"> 
+
+
+                                                <table class="table table-bordered">
+
+                                                    <tr    th:each="examlists,status:${orderlist.orderItem}">
+
+                                                        <th th:text="${status.count}"> 1 </th>
+
+                                                        <td> 
+
+                                                            <a th:href="@{/student-exam/details/{id}(id=${examlists.exam.id})}" th:text="${examlists.exam.title}">    </a>
+                                                        </td>
+                                                        <td> 
+                                                            <span th:if="${ not #lists.isEmpty(examlists.exam.question)}">
+                                                                <span th:text="${examlists.exam.question.size()}"></span>                                                     
+                                                            </span>
+                                                            <span th:if="${#lists.isEmpty(examlists.exam.question)}">
+                                                                <span > No Questions are available </span>                                                     
+                                                            </span>
+                                                        </td>
+                                                        <td th:text="${ examlists.exam.created}"> </td>
+
+                                                        <td th:text="${ examlists.exam.modified}"> </td>
+
+                                                    </tr>
+
+
+                                                </table>            
+                                            </span>
+
+                                            <span th:if="${#sets.isEmpty(orderlist.orderItem)}" >
+
+                                                Sorry no order item found.
+
+
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div><!--  Card body end-->
+
+
+                    </div><!--  Card  end-->
+                </div>
+        </section>
+        
+        
+
+        <section class=" mobile d-block d-sm-none">
+
+
+            <div th:replace="mobile-top-nav"></div>
+            <div class="row mt-5"> </div>
+            <div class="row mt-3"> </div> 
+            <div th:replace="customer_mobile_top_navigation"></div>
+
+
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="font-weight-bold text-danger"><i class="fas fa-list"></i> Exam  List </div>
+                        </div>
+                        <div class="card-body">
+
+                            <span th:if="${ not #strings.isEmpty(message)}">
+
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span th:text="${message}" > </span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </span>
+                            <div class="table-responsive">
+
+
+                                <table class="table">           
+                                    <tr  th:each="orderlist,status:${examlist}">
+
+
+                                        <td>
+
+                                            <span th:if="${ not #sets.isEmpty(orderlist.orderItem)}"> 
+
+
+                                                <span th:each="examlists,status:${orderlist.orderItem}">         
+
+
+                                                    <table class="table table-bordered">
+
+                                                        <tr>
+                                                            <td colspan="2"> 
+
+                                                                <a th:href="@{/student-exam/details/{id}(id=${examlists.exam.id})}" th:text="${examlists.exam.title}">    </a>
+                                                            </td>
+                                                        </tr><tr>
+                                                            <td> Total Question </td>
+                                                            
+                                                            <td> 
+                                                                <span th:if="${ not #lists.isEmpty(examlists.exam.question)}">
+                                                                    <span th:text="${examlists.exam.question.size()}"></span>                                                     
+                                                                </span>
+                                                                <span th:if="${#lists.isEmpty(examlists.exam.question)}">
+                                                                    <span > No Questions are available </span>                                                     
+                                                                </span>
+                                                            </td>
+                                                        </tr><tr>
+
+                                                            <td> Created</td>
+
+                                                            <td th:text="${ examlists.exam.created}"> </td>
+                                                        </tr><tr>
+
+                                                            <td>Updated</td>
+                                                            <td th:text="${ examlists.exam.modified}"> </td>
+
+                                                        </tr>
+
+
+                                                    </table>  
+
+
+                                                </span>
+                                            </span>
+
+                                            <span th:if="${#sets.isEmpty(orderlist.orderItem)}" >
+
+                                                Sorry no order item found.
+
+
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div><!--  Card body end-->
+
+
+                    </div><!--  Card  end-->
+
+                </div>   <!--  Layout end-->
+            </div>
+            
+            
+            <section class="mb-5"></section>
+
+            <div th:replace="bottom-nav">
+
+                <!-- Header  -->
+
+            </div>
+
+
+        </section>
 
     </div></div>

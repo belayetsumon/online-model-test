@@ -7,6 +7,7 @@ package com.itgarden.website.controller;
 
 import com.itgarden.website.exam.model.Exam;
 import com.itgarden.website.exam.ripository.ExamRepository;
+import com.itgarden.website.model.BlogCategory;
 import com.itgarden.website.model.Contact;
 import com.itgarden.website.model.Gallery;
 import com.itgarden.website.model.News;
@@ -18,7 +19,10 @@ import com.itgarden.website.module.user.model.Status;
 import com.itgarden.website.module.user.model.Users;
 import com.itgarden.website.module.user.ripository.RoleRepository;
 import com.itgarden.website.module.user.ripository.UsersRepository;
+import com.itgarden.website.order.model.OrderItem;
 import com.itgarden.website.ripository.BatchRepository;
+import com.itgarden.website.ripository.BlogCategoryRepository;
+import com.itgarden.website.ripository.BlogRepository;
 import com.itgarden.website.ripository.ContactRepository;
 import com.itgarden.website.ripository.FaqRepository;
 import com.itgarden.website.ripository.GalleryRepository;
@@ -30,7 +34,6 @@ import com.itgarden.website.ripository.OurservicesRepository;
 import com.itgarden.website.ripository.ProductcategoryRepository;
 import com.itgarden.website.ripository.ProductsubcategoryRepository;
 import com.itgarden.website.ripository.ProfileRepository;
-import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -97,6 +100,12 @@ public class FrontController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    BlogRepository blogRepository;
+
+    @Autowired
+    BlogCategoryRepository blogCategoryRepository;
 
     @RequestMapping("/about-us")
     public String aboutUs(Model model) {
@@ -218,6 +227,7 @@ public class FrontController {
     public String newsEvents(Model model, @RequestParam(defaultValue = "0") int page) {
 
         Pageable pageable;
+
         pageable = new PageRequest(page, 5, Sort.by("id").descending());
 
         Page<News> pagelist = newsRepository.findAll(pageable);
@@ -350,9 +360,7 @@ public class FrontController {
 
     @RequestMapping("/exam-details/{examid}")
     public String exam_details(Model model, @PathVariable Long examid, Exam exam) {
-
         model.addAttribute("exam", examRepository.getOne(examid));
-
         return "frontview/exam-details";
     }
 
@@ -361,7 +369,7 @@ public class FrontController {
 
         model.addAttribute("categorylist", productcategoryRepository.findAll());
 
-        Pageable pageable = new PageRequest(0, 100, Sort.Direction.ASC, "id");
+        Pageable pageable = new PageRequest(0, 100);
 
         model.addAttribute("examlist", examRepository.findByStatusOrderByIdDesc(pageable, com.itgarden.website.model.enumvalue.Status.Active));
 
@@ -372,6 +380,7 @@ public class FrontController {
     public String allinstructor(Model model) {
 
         Role instructor = roleRepository.findBySlug("instructor");
+
         model.addAttribute("instructorlist", usersRepository.findByRoleAndStatusOrderByIdDesc(instructor, Status.Active));
 
         return "frontview/all-instructor";
@@ -401,6 +410,48 @@ public class FrontController {
         model.addAttribute("customer", customer);
 
         return "frontview/front-registration";
+    }
+
+    @RequestMapping("/blog")
+    public String blog(Model model, Users users) {
+        model.addAttribute("bloglist", blogRepository.findByStatusOrderByIdDesc(com.itgarden.website.model.enumvalue.Status.Active));
+        model.addAttribute("blogcategorylist", blogCategoryRepository.findAll());
+
+        return "frontview/blog";
+    }
+    
+    
+
+    @RequestMapping("/blogdetails/{blogid}")
+    public String blogdetails(Model model, @PathVariable Long blogid, Users users) {
+
+        model.addAttribute("bloglist", blogRepository.findByIdAndStatus(blogid, com.itgarden.website.model.enumvalue.Status.Active));
+
+        model.addAttribute("blogcategorylist", blogCategoryRepository.findAll());
+
+        return "frontview/blogdetails";
+    }
+    
+    
+
+    @RequestMapping("/blog-by-cat/{catid}")
+    public String blogByCat(Model model, @PathVariable Long catid, Users users) {
+
+        BlogCategory blogCategory = new BlogCategory();
+
+        blogCategory.setId(catid);
+
+        model.addAttribute("bloglist", blogRepository.findByBlogcategoryAndStatusOrderByIdDesc(blogCategory, com.itgarden.website.model.enumvalue.Status.Active));
+
+        model.addAttribute("blogcategorylist", blogCategoryRepository.findAll());
+
+        return "frontview/blog-by-category";
+    }
+
+    @RequestMapping("/privacy_policy")
+    public String privacyPolicy() {
+        return "frontview/privacy_policy";
+
     }
 
 }

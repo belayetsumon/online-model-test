@@ -7,101 +7,295 @@ and open the template in the editor.
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-customar-page">
     <div layout:fragment = "main_content">
 
-       <div class="card">
-            <div class="card-header bgMaroon ">
-                <div class="row">  <div class="col-sm-12">    <h5 class="font-weight-bold text-white"><i class="fas fa-list"></i> Customer Dashboards . <small>Welcome Mr.<span th:text="${username}"> </span></small></h5></div>
 
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
+        <section class=" d-none d-sm-block">
+            <div class="row">
 
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-cart-plus"></i> Pending Order List: 
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                
-                                <table class="table table-bordered" th:if="${ not #lists.isEmpty(orderlist_panding)}">
-                                    
-                                    আপনি যদি পেমেন্ট করতে কোন সমস্যার সম্মুখীন হন  এই  ০১৭১৪১১৭০৩২ নাম্বার এ যোগাযোগ করুন ।
-                                    
-                                    <tr>
-                                        <td>#</td>
-                                        <td>Order Date</td>
-                                        <td>Status</td>
-                                        <td>Payment</td>
-                                    </tr>
-                                    <tr th:each="orderlists,status:${orderlist_panding}">
-                                        <td th:text="${orderlists.id}"></td>
-                                        <td th:text="${orderlists.created}"></td>
-                                        <td th:text="${orderlists.status}"></td>
-                                        <td> <a  type=" button"  class=" btn btn-sm btn-success" th:href="@{/customer-order/payment/{orderid}(orderid=${orderlists.id})}"> Pay Now </a> </td>
-                                    </tr>
-                                </table>
-                                <table class="table table-bordered" th:if="${ #lists.isEmpty(orderlist_panding)}">
-                                    <tr>
-                                        <td> Sorry no order pending for payment ! </td>
-                                    </tr>
+                <div class="col-sm-3">
 
+                    <div   th:replace="customer-left-menu">
+                        Left side column. contains the sidebar 
 
-                                </table>
-</div>
-                            </div>
-                            <div class="card-footer ">
-
-                            </div>
-                        </div>
-
-<!--                        <div class="card">
-                            <div class="card-header">
-                                <i class="fas fa-list"></i>  Exam List
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered" th:if="${ not #lists.isEmpty(examlist)}">
-
-                                    <tr>
-                                        <td>#</td>
-                                        <td>Image</td>
-                                        <td>Name</td>
-
-                                    </tr>
-                                    <tr th:each="examlists,status:${examlist}">
-                                        <td th:text="${status.count}"></td>
-                                        <td>
-                                            <span th:if="${ not #strings.isEmpty(examlists.exam.imageName)}" class="badge bg-green pull-right"> 
-                                                <img  class="img-responsive" th:src="@{/files/}+${examlists.exam.imageName}" width="100px"  height="100px"/>
-                                            </span>
-
-                                            <span th:if="${#strings.isEmpty(examlists.exam.imageName)}" > Image Not Found </span></td>
-
-
-                                        <td>
-                                            <a th:href="@{/student-exam/details/{id}(id=${examlists.exam.id})}" th:text="${examlists.exam.title}">    </a>
-                                        </td>
-
-
-                                    </tr>
-                                </table>
-                                <table class="table table-bordered" th:if="${ #lists.isEmpty(examlist)}">
-                                    <tr>
-                                        <td> Sorry Data Found ! </td>
-                                    </tr>
-
-
-                                </table>
-                            </div>
-                            <div class="card-footer ">
-
-                            </div>
-                        </div>-->
-
+                        Left Side 
+                        =============================================== 
                     </div>
 
 
-                </div>    </div>
-        </div>
+
+                </div>
+                <div class="col-sm-9">
+
+
+                    <div class="card">
+                        <div class="card-header bgMaroon ">
+                            <div class="row">  <div class="col-sm-12">  
+
+                                    <h5 class="font-weight-bold text-white"><i class="fas fa-list"></i> Customer Dashboards . <small>Welcome Mr.<span th:text="${username}"> </span></small></h5></div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <i class="fas fa-cart-plus"></i> Pending Order List: 
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+
+                                                <table class="table table-bordered" th:if="${ not #lists.isEmpty(orderlist_panding)}">
+
+                                                    আপনি যদি পেমেন্ট করতে কোন সমস্যার সম্মুখীন হন  এই  ০১৭১৪১১৭০৩২ নাম্বার এ যোগাযোগ করুন ।
+
+                                                    <tr>
+                                                        <td>#</td>
+                                                        <td>Order Date</td>
+                                                        <td>Status</td>
+                                                        <td>Payment</td>
+                                                    </tr>
+                                                    <tr th:each="orderlists,status:${orderlist_panding}">
+                                                        <td th:text="${orderlists.id}"></td>
+                                                        <td th:text="${orderlists.created}"></td>
+                                                        <td th:text="${orderlists.status}"></td>
+                                                        <td> <a  type=" button"  class=" btn btn-sm btn-success" th:href="@{/customer-order/payment/{orderid}(orderid=${orderlists.id})}"> Pay Now </a> </td>
+                                                    </tr>
+                                                </table>
+                                                <table class="table table-bordered" th:if="${ #lists.isEmpty(orderlist_panding)}">
+                                                    <tr>
+                                                        <td> Sorry no order pending for payment ! </td>
+                                                    </tr>
+
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer ">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <i class="fas fa-list"></i>  Exam List
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="table-responsive">
+
+
+
+                                                <table class="">           
+                                                    <tr  th:each="orderlist,status:${examlist}">
+
+
+                                                        <td>
+
+                                                            <span th:if="${ not #sets.isEmpty(orderlist.orderItem)}"> 
+
+
+                                                                <table class="table table-bordered">
+
+                                                                    <tr    th:each="examlists,status:${orderlist.orderItem}">
+
+                                                                        <th th:text="${status.count}"> 1 </th>
+
+                                                                        <td> 
+
+                                                                            <a th:href="@{/student-exam/details/{id}(id=${examlists.exam.id})}" th:text="${examlists.exam.title}">    </a>
+                                                                        </td>
+                                                                        <td> 
+                                                                            <span th:if="${ not #lists.isEmpty(examlists.exam.question)}">
+                                                                                <span th:text="${examlists.exam.question.size()}"></span>                                                     
+                                                                            </span>
+                                                                            <span th:if="${#lists.isEmpty(examlists.exam.question)}">
+                                                                                <span > No Questions are available </span>                                                     
+                                                                            </span>
+                                                                        </td>
+                                                                        <td th:text="${ examlists.exam.created}"> </td>
+
+                                                                        <td th:text="${ examlists.exam.modified}"> </td>
+
+                                                                    </tr>
+
+
+                                                                </table>            
+                                                            </span>
+
+                                                            <span th:if="${#sets.isEmpty(orderlist.orderItem)}" >
+
+                                                                Sorry no order item found.
+
+
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>      </div>
+                        </div>
+                    </div></div></div>
+
+        </section>
+
+
+
+
+        <section class=" mobile d-block d-sm-none">
+            <div class="row">
+
+                <div class="col-12">
+
+                    <div   th:replace="mobile-top-nav">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
+
+
+                    <div class="row mt-4"> </div> 
+                    <div   th:replace="customer_mobile_top_navigation">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
+
+
+
+                </div>
+                <div class="col-12">
+
+
+                    <div class="card">
+                        <div class="card-header bgMaroon ">
+                            <div class="row">  <div class="col-sm-12">  
+
+                                    <h5 class="font-weight-bold text-white"><i class="fas fa-list"></i> Customer Dashboards . <small>Welcome Mr.<span th:text="${username}"> </span></small></h5></div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <i class="fas fa-cart-plus"></i> Pending Order List: 
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+
+                                                <table class="table table-bordered" th:if="${ not #lists.isEmpty(orderlist_panding)}">
+
+                                                    আপনি যদি পেমেন্ট করতে কোন সমস্যার সম্মুখীন হন  এই  ০১৭১৪১১৭০৩২ নাম্বার এ যোগাযোগ করুন ।
+
+                                                    <tr>
+                                                        <td>#</td>
+                                                        <td>Order Date</td>
+                                                        <td>Status</td>
+                                                        <td>Payment</td>
+                                                    </tr>
+                                                    <tr th:each="orderlists,status:${orderlist_panding}">
+                                                        <td th:text="${orderlists.id}"></td>
+                                                        <td th:text="${orderlists.created}"></td>
+                                                        <td th:text="${orderlists.status}"></td>
+                                                        <td> <a  type=" button"  class=" btn btn-sm btn-success" th:href="@{/customer-order/payment/{orderid}(orderid=${orderlists.id})}"> Pay Now </a> </td>
+                                                    </tr>
+                                                </table>
+                                                <table class="table table-bordered" th:if="${ #lists.isEmpty(orderlist_panding)}">
+                                                    <tr>
+                                                        <td> Sorry no order pending for payment ! </td>
+                                                    </tr>
+
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer ">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <i class="fas fa-list"></i>  Exam List
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="table-responsive">
+
+
+
+                                                <table class="">           
+                                                    <tr  th:each="orderlist,status:${examlist}">
+
+
+                                                        <td>
+
+                                                            <span th:if="${ not #sets.isEmpty(orderlist.orderItem)}"> 
+
+
+                                                                <table class="table table-bordered">
+
+                                                                    <tr    th:each="examlists,status:${orderlist.orderItem}">
+
+                                                                        <th th:text="${status.count}"> 1 </th>
+
+                                                                        <td> 
+
+                                                                            <a th:href="@{/student-exam/details/{id}(id=${examlists.exam.id})}" th:text="${examlists.exam.title}">    </a>
+                                                                        </td>
+                                                                        <td> 
+                                                                            <span th:if="${ not #lists.isEmpty(examlists.exam.question)}">
+                                                                                <span th:text="${examlists.exam.question.size()}"></span>                                                     
+                                                                            </span>
+                                                                            <span th:if="${#lists.isEmpty(examlists.exam.question)}">
+                                                                                <span > No Questions are available </span>                                                     
+                                                                            </span>
+                                                                        </td>
+                                                                        
+
+                                                                        
+
+                                                                    </tr>
+
+
+                                                                </table>            
+                                                            </span>
+
+                                                            <span th:if="${#sets.isEmpty(orderlist.orderItem)}" >
+
+                                                                Sorry no order item found.
+
+
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>      </div>
+                        </div>
+
+                    </div></div></div>
+            
+            
+            <section class="mb-5"></section>
+
+            <div th:replace="bottom-nav"> </div>
+        </section>
+
+
+
     </div>
 </div>

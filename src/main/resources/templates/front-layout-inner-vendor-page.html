@@ -23,6 +23,8 @@
 
         <!-- End Google Tag Manager -->
         <link rel="stylesheet" th:href="@{/bootstrap/dist/css/bootstrap.min.css}"/>
+        
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
         <!--  Font Awsome  -->
         <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
@@ -35,6 +37,8 @@
         <link rel="stylesheet" th:href="@{/css/hover-min.css}">
         <!-- Custom css -->
         <link rel="stylesheet" th:href="@{/css/app.css}"/> 
+        
+          <link rel="stylesheet" th:href="@{/css/mobile_apps.css}"/> 
 
         <title> Oxford Model Test: First Online University Admission, B C S and Jobs Model Test Bangladesh</title>
 
@@ -49,30 +53,12 @@
             </div>
             <!-- =============================================== -->
         </header>
-        <section class="pt-4 pb-4 bg-light border-top border-danger"> <!-- main -->
-            <div class="container-fluid ">
-                <div class="row">
-                    <div class="col-sm-3 col-md-3 ">
-
-                        <div   th:replace="vendor-left-menu">
-                            Left side column. contains the sidebar 
-
-                            Left Side 
-                            =============================================== 
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="col-sm-9 col-md-9 ">
-                        <div layout:fragment="main_content">main Content</div>
-
-                    </div> 
-                </div>  
-            </div>
-
+        
+        
+         <section class="mt-4 mb-4"> <!-- main -->
+                       <div layout:fragment="main_content">main Content</div>
         </section>
+        
         <div class="row ma"></div>
         <!-- /.content-wrapper -->
         <footer>

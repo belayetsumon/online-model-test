@@ -29,3 +29,24 @@ tinymce.init({
     '//www.tiny.cloud/css/codepen.min.css'
   ]
 });
+
+
+
+function openNav() {
+  document.getElementById("front_side_menu").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("front_side_menu").style.width = "0";
+} 
+
+
+function studentMenuopenNav() {
+  document.getElementById("").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function studentMenucloseNav() {
+  document.getElementById("student_menu").style.width = "0";
+} 

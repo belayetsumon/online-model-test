@@ -16,7 +16,7 @@ and open the template in the editor.
                         Add   Your Profile
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/vendorprofile/save}" th:object="${vendorprofile}" enctype="multipart/form-data" method="post" >
+                        <form th:action="@{/admin-vendor/save}" th:object="${vendorprofile}" enctype="multipart/form-data" method="post" >
                             <div class="form-group">
                                 <input type="hidden" class="form-control"  th:field="*{id}" />
                                 <input type="hidden" class="form-control"  th:field="*{userId}" />

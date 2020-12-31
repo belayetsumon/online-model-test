@@ -5,130 +5,284 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-vendor-page">
-    <div layout:fragment = "main_content">
+    <div layout:fragment = "main_content">       
+        <section class=" d-none d-sm-block">
+            <div class="row">
 
-        <div> <h4> Instructor Exam <small>Home> Instructor Exam </small></h4>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam Details</div>
-                            <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/index}">Close</a></div>
-                        </div>
+                <div class="col-sm-3">
+
+                    <div   th:replace="vendor-left-menu">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
                     </div>
-                    <div class="card-body">
+                </div>
+                <div class="col-sm-9">
 
-                        <table class="table table-bordered">
-                            <tr>
-                                <td> Name</td>
-                                <td> :</td>
-                                <td th:text="${exam_details.title}">Otto</td>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam Details</div>
+                                <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/index}">Close</a></div>
+                            </div>
+                        </div>
+                        <div class="card-body">
 
-                            </tr>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td> Name</td>
+                                    <td> :</td>
+                                    <td th:text="${exam_details.title}">Otto</td>
 
-                            <tr>
-                                <td> Slug</td>
-                                <td>: </td>
-                                <td th:text="${exam_details.slug}">Otto</td>
+                                </tr>
 
-                            </tr>
+                                <tr>
+                                    <td> Slug</td>
+                                    <td>: </td>
+                                    <td th:text="${exam_details.slug}">Otto</td>
 
-                            <tr> <td> Image</td>
-                                <td> :</td>
-                                <td> 
-                                    <span th:if="${ not #strings.isEmpty(exam_details.imageName)}" class="badge bg-green pull-right"> 
-                                        <img  class="img-responsive" th:src="@{/files/}+${exam_details.imageName}" width="300px"  height="250px"/>
-                                    </span>
+                                </tr>
 
-                                    <span th:if="${#strings.isEmpty(exam_details.imageName)}" > Image Not Found </span></td>
-                            </tr>
+                                <tr> <td> Image</td>
+                                    <td> :</td>
+                                    <td> 
+                                        <span th:if="${ not #strings.isEmpty(exam_details.imageName)}" class="badge bg-green pull-right"> 
+                                            <img  class="img-responsive" th:src="@{/files/}+${exam_details.imageName}" width="300px"  height="250px"/>
+                                        </span>
 
-                            <tr> <td> Description</td>
-                                <td> :</td>
-                                <td th:text="${exam_details.description}"> </td>
+                                        <span th:if="${#strings.isEmpty(exam_details.imageName)}" > Image Not Found </span></td>
+                                </tr>
 
-                            </tr>
+                                <tr> <td> Description</td>
+                                    <td> :</td>
+                                    <td th:utext="${exam_details.description}"> </td>
 
-                            <tr> <td> Created</td>
-                                <td> :</td>
-                                <td>  <span th:text="${exam_details.created}"> </span> </td>
+                                </tr>
 
-                            </tr>
+                                <tr> <td> Created</td>
+                                    <td> :</td>
+                                    <td>  <span th:text="${exam_details.created}"> </span> </td>
 
-                            <tr> <td> Created By</td>
-                                <td> :</td>
-                                <td>  <span th:text="${exam_details.createdBy}"> </span> </td>
-                            </tr>
+                                </tr>
 
-                            <tr> <td>Updated </td>
-                                <td> :</td>
-                                <td>  <span th:text="${exam_details.modified}"> </span></td>
-                            </tr>
+                                <tr> <td> Created By</td>
+                                    <td> :</td>
+                                    <td>  <span th:text="${exam_details.createdBy}"> </span> </td>
+                                </tr>
 
-                            <tr> <td> Updated By</td>
-                                <td> :</td>
-                                <td> <span th:text="${exam_details.modifiedBy}"> </span></td>
-                            </tr>
-                            <tr> 
-                                <td> <a th:href="@{/instructor-exam/edit/{id}(id=${exam_details.id})}"> Edit  </a></td>
+                                <tr> <td>Updated </td>
+                                    <td> :</td>
+                                    <td>  <span th:text="${exam_details.modified}"> </span></td>
+                                </tr>
 
-                                <td> </td>
+                                <tr> <td> Updated By</td>
+                                    <td> :</td>
+                                    <td> <span th:text="${exam_details.modifiedBy}"> </span></td>
+                                </tr>
+                                <tr> 
+                                    <td> <a th:href="@{/instructor-exam/edit/{id}(id=${exam_details.id})}"> Edit  </a></td>
 
-                                <td><a th:href="@{/instructor-exam/delete/{id}(id=${exam_details.id})}"> Delete </a></td>
-                            </tr>
+                                    <td> </td>
 
-                            <tr> 
-                                <td> 
-                                    <span >
-                                    <a  type="button" class="btn btn-sm" th:href="@{/instructor-test/save/{eid}(eid=${exam_details.id})}"> Test Start </a> 
-                                    </span>
-                                </td>
+                                    <td><a th:href="@{/instructor-exam/delete/{id}(id=${exam_details.id})}"> Delete </a></td>
+                                </tr>
 
-                                <td> :</td>
-                                <td> 
-                                    <table class="table table-bordered">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">#</th>
+                                <tr> 
+                                    <td> 
+                                        <span >
+                                            <a  type="button" class="btn btn-sm" th:href="@{/instructor-test/save/{eid}(eid=${exam_details.id})}"> Test Start </a> 
+                                        </span>
+                                    </td>
 
-                                                <th scope="col">Test Title</th>
-                                                <th scope="col">User</th>
+                                    <td> :</td>
+                                    <td> 
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">#</th>
 
-                                                <th scope="col"> Answer List </th>
-                                                <th scope="col"> Status </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="testlists,status:${testlist}">
-                                                <td th:text="${status.count}">   </td>
-                                                <td>  
-                                                    <a th:href="@{/instructor-test/testdashboard/{tid}(tid=${testlists.id})}"> 
-                                                        <span th:text="${testlists.exam.title}"></span>
-                                                    </a> 
-                                                </td>
-                                                <td  th:text="${testlists.userId.name}">   </td>
-                                                <td>
-                                                    <span th:text="${testlists.mark.size()}"></span>
-                                                </td>
-                                                <td th:text="${testlists.status}"> </td>
+                                                    <th scope="col">Test Title</th>
+                                                    <th scope="col">User</th>
 
-                                            </tr>
-                                        </tbody>
-                                    </table>  
+                                                    <th scope="col"> Answer List </th>
+                                                    <th scope="col"> Status </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="testlists,status:${testlist}">
+                                                    <td th:text="${status.count}">   </td>
+                                                    <td>  
+                                                        <a th:href="@{/instructor-test/testdashboard/{tid}(tid=${testlists.id})}"> 
+                                                            <span th:text="${testlists.exam.title}"></span>
+                                                        </a> 
+                                                    </td>
+                                                    <td  th:text="${testlists.userId.name}">   </td>
+                                                    <td>
+                                                        <span th:text="${testlists.mark.size()}"></span>
+                                                    </td>
+                                                    <td th:text="${testlists.status}"> </td>
 
-                                </td>
-                            </tr>
-                        </table>
+                                                </tr>
+                                            </tbody>
+                                        </table>  
 
-                    </div><!--  Card body end-->
+                                    </td>
+                                </tr>
+                            </table>
 
-                    <div class="card-footer">
-                    </div> <!--  Card footer end-->
-                </div><!--  Card  end-->
+                        </div><!--  Card body end-->
 
+                        <div class="card-footer">
+                        </div> <!--  Card footer end-->
+                    </div><!--  Card  end-->
+                </div>
+        </section>
+
+        <section class=" mobile d-block d-sm-none">
+
+
+            <div th:replace="mobile-top-nav"></div>
+            <div class="row mt-5"> </div>
+            <div class="row mt-3"> </div> 
+            <div th:replace="instructor_mobile_top_navigation"></div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam Details</div>
+                                <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/index}">Close</a></div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive"> 
+
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td> Name</td>
+                                        <td> :</td>
+                                        <td th:text="${exam_details.title}">Otto</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td> Slug</td>
+                                        <td>: </td>
+                                        <td th:text="${exam_details.slug}">Otto</td>
+
+                                    </tr>
+
+                                    <tr> <td> Image</td>
+                                        <td> :</td>
+                                        <td> 
+                                            <span th:if="${ not #strings.isEmpty(exam_details.imageName)}" class="badge bg-green pull-right"> 
+                                                <img  class="img-fluid" th:src="@{/files/}+${exam_details.imageName}" width="300px"  height="250px"/>
+                                            </span>
+
+                                            <span th:if="${#strings.isEmpty(exam_details.imageName)}" > Image Not Found </span></td>
+                                    </tr>
+
+                                    <tr> <td> Description</td>
+                                        <td> :</td>
+                                        <td th:utext="${exam_details.description}"> </td>
+
+                                    </tr>
+
+                                    <tr> <td> Created</td>
+                                        <td> :</td>
+                                        <td>  <span th:text="${exam_details.created}"> </span> </td>
+
+                                    </tr>
+
+                                    <tr> <td> Created By</td>
+                                        <td> :</td>
+                                        <td>  <span th:text="${exam_details.createdBy}"> </span> </td>
+                                    </tr>
+
+                                    <tr> <td>Updated </td>
+                                        <td> :</td>
+                                        <td>  <span th:text="${exam_details.modified}"> </span></td>
+                                    </tr>
+
+                                    <tr> <td> Updated By</td>
+                                        <td> :</td>
+                                        <td> <span th:text="${exam_details.modifiedBy}"> </span></td>
+                                    </tr>
+                                    <tr> 
+                                        <td> <a th:href="@{/instructor-exam/edit/{id}(id=${exam_details.id})}"> Edit  </a></td>
+
+                                        <td> </td>
+
+                                        <td><a th:href="@{/instructor-exam/delete/{id}(id=${exam_details.id})}"> Delete </a></td>
+                                    </tr>
+
+                                    <tr> 
+                                        <td colspan="3"> 
+                                            <span >
+                                                <a  type="button" class="btn btn-sm" th:href="@{/instructor-test/save/{eid}(eid=${exam_details.id})}"> Test Start </a> 
+                                            </span>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col">#</th>
+
+                                                            <th scope="col">Test Title</th>
+                                                            <th scope="col">User</th>
+
+                                                            <th scope="col"> Answer List </th>
+                                                            <th scope="col"> Status </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="testlists,status:${testlist}">
+                                                            <td th:text="${status.count}">   </td>
+                                                            <td>  
+                                                                <a th:href="@{/instructor-test/testdashboard/{tid}(tid=${testlists.id})}"> 
+                                                                    <span th:text="${testlists.exam.title}"></span>
+                                                                </a> 
+                                                            </td>
+                                                            <td  th:text="${testlists.userId.name}">   </td>
+                                                            <td>
+                                                                <span th:text="${testlists.mark.size()}"></span>
+                                                            </td>
+                                                            <td th:text="${testlists.status}"> </td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>  
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div><!--  Card body end-->
+
+                        <div class="card-footer">
+                        </div> <!--  Card footer end-->
+                    </div><!--  Card  end-->
+
+                </div>   <!--  Layout end-->
+            </div>
+
+
+            <section class="mb-5"></section>
+
+            <div th:replace="bottom-nav">
+
+                <!-- Header  -->
 
             </div>
-        </div>
-    </div></div>
+
+
+        </section>  
+
+
+
+
+
+    </div><!--  Main Content  end-->
+</div>   <!--  Layout end-->

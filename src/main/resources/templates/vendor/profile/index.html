@@ -5,12 +5,20 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-vendor-page">
-    <div layout:fragment = "main_content">
-        <div> <h4> Instructor Profile  <small>Home> Instructor profile </small></h4>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-sm-12">
+    <div layout:fragment = "main_content">        
+        <section class=" d-none d-sm-block">
+            <div class="row">
+
+                <div class="col-sm-3">
+
+                    <div   th:replace="vendor-left-menu">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
+                </div>
+                <div class="col-sm-9">
 
                 <div class="card">
                     <div class="card-header bgMaroon ">
@@ -79,11 +87,99 @@ and open the template in the editor.
 
                     </div>
                 </div>
+                </div>
+        </section>
+
+        <section class=" mobile d-block d-sm-none">
+
+
+            <div th:replace="mobile-top-nav"></div>
+            <div class="row mt-5"> </div>
+            <div class="row mt-3"> </div> 
+            <div th:replace="instructor_mobile_top_navigation"></div>
+            <div class="row">
+                <div class="col-12">
+              <div class="card">
+                    <div class="card-header bgMaroon ">
+                        <div class="row">  <div class="col-sm-5">  <h4 class="font-weight-bold text-white"> Profile</h4></div>
+                            <div class="col-sm-7 "> 
+
+                                <span th:if="${ #strings.isEmpty(vendorprofile)}">
+                                    <a class="btn btn-success btn-sm float-right" th:href="@{/vendorprofile/create}"> Add Profile Info</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered" th:if="${ not #strings.isEmpty(vendorprofile)}">
+                            <tr>
+                                <td> First Name:</td>
+                                <td th:text="${vendorprofile.firstName}">Otto</td>
+
+                            </tr>
+
+                            <tr>
+                                <td>Last Name:</td>
+                                <td th:text="${vendorprofile.lastName}">Otto</td>
+
+                            </tr>
+                            <tr>
+                                <td> Designation:</td>
+                                <td th:text="${vendorprofile.designation}">Otto</td>
+
+                            </tr>
+
+                            <tr>
+                                <td> Profile Description:</td>
+                                <td th:text="${vendorprofile.description}">Otto</td>
+
+                            </tr> 
+
+                            <tr>
+                                <td> Created: <span th:text="${vendorprofile.created}"> </span> </td>
+                                <td> Created By: <span th:text="${vendorprofile.createdBy}"> </span> </td>
+                            </tr>
+
+                            <tr>
+                                <td> Updated: <span th:text="${vendorprofile.modified}"> </span></td>
+
+                                <td>Updated By: <span th:text="${vendorprofile.modifiedBy}"> </span></td>
+                            </tr>
+
+                            <tr>
+                                <td> <a  type="button"  class="btn btn-sm btn-success" th:href="@{/vendorprofile/edit/{id}(id=${vendorprofile.id})}"> Edit  </a></td>
+
+                                <td></td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-bordered" th:if="${ #strings.isEmpty(vendorprofile)}">
+                            <tr>
+                                <td> Sorry no data found . Please add your profile info </td>
+                            </tr>
+
+
+                        </table>
 
 
 
+                    </div>
+                </div>
+
+                </div>   <!--  Layout end-->
+            </div>
 
 
-            </div><!--  Main Content  end-->
-        </div>   <!--  Layout end-->
+            <section class="mb-5"></section>
+
+            <div th:replace="bottom-nav">
+
+                <!-- Header  -->
+
+            </div>
+
+
+        </section>   
+        
     </div></div>

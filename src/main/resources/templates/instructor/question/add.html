@@ -8,11 +8,112 @@ and open the template in the editor.
     <div layout:fragment = "main_content">
 
 
-        <div> <h4> Question <small>Home>Question> Add</small></h4>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-sm-12">
+      
+        
+        
+          <section class=" d-none d-sm-block">
+            <div class="row">
+
+                <div class="col-sm-3">
+
+                    <div   th:replace="vendor-left-menu">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
+                </div>
+                <div class="col-sm-9">
+
+                    <div class="card">
+                    <div class="card-header">
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Question</div>
+                            <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/question-by-exam/{examid}(examid=${question.exam.id})}">Close</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/instructor-question/save/{examid}(examid=${question.exam.id})}" th:object="${question}" enctype="multipart/form-data" method="post" >
+
+                            <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('*')}">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h4><i class="icon fa fa-ban"></i> Error </h4>
+                                <ul th:if="${#fields.hasErrors('*')}">
+                                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                                </ul>
+                            </div>
+                            <div class="row" th:if="${!#strings.isEmpty(success)}"> 
+                                <span  class="text-success"th:text="success"> </span>
+                            </div> 
+                            <div class="form-group">
+                                <input type="hidden" class="form-control"  th:field="*{id}" />
+
+                                <input type="hidden" class="form-control"  th:field="*{exam}" />
+                                <input type="hidden" class="form-control"  th:field="*{questionno}" />
+                            </div>
+                            
+                                <div class="form-group">
+                                <label for="exampleInputEmail1"> Question No:<span class="text-danger"> </span></label>
+                                <span  class=" text-danger" th:text="${question.questionno}">Book Name</span>
+                               
+                                </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Question :<span class="text-danger"> *</span></label>
+                                <input type="text"  minlength=" 2" required="true" class="form-control col-sm-5" th:field="*{title}" aria-describedby="emailHelp" placeholder="Enter Question">
+                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Book Name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Sub Title:<span class="text-danger"> </span></label>
+                                
+                                <input type="text"  minlength=" 2"  class="form-control col-sm-5" th:field="*{subtitle}" aria-describedby="emailHelp" placeholder="Enter sub title">
+                                
+                                
+                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('subtitle')}" th:errors="*{subtitle}">Book Name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description:<span class="text-danger"> </span></label>
+                                <textarea type="text"  rows="10" class="form-control col-sm-8" th:field="*{description}" aria-describedby="emailHelp" placeholder="Enter Description"></textarea>
+                                <span  class="help-block has-error text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Book Name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Image<span class="text-danger"> </span></label>
+                                <input type="hidden"  th:value="${question.imageName}">
+                                <input type="file"  
+                                       class="form-control col-sm-5" name="pic" 
+                                       data-validation=" dimension mime size"
+                                       data-validation-dimension="min150x150"
+                                       data-validation-allowing="jpg, png, gif" />
+                                <span  class="help-block "> Image Size 800px x 450px </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Status<span class="text-danger"> *</span></label>
+                                <select id="inputState" class="form-control col-sm-3"  th:field="*{status}">
+                                    <option value=" "> Select one</option>              
+                                    <option th:each =" status : ${statuslist}"
+                                            th:value="${status} " 
+                                            th:text="${status}"> Select one</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+        </section>
+
+        <section class=" mobile d-block d-sm-none">
+
+
+            <div th:replace="mobile-top-nav"></div>
+            <div class="row mt-5"> </div>
+            <div class="row mt-3"> </div> 
+            <div th:replace="instructor_mobile_top_navigation"></div>
+            <div class="row">
+                <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Question</div>
@@ -90,6 +191,20 @@ and open the template in the editor.
                         </form>
                     </div>
                 </div>
+
+                </div>   <!--  Layout end-->
             </div>
-        </div>
+
+
+            <section class="mb-5"></section>
+
+            <div th:replace="bottom-nav">
+
+                <!-- Header  -->
+
+            </div>
+
+
+        </section>
+        
     </div></div>

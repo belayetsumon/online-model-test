@@ -44,14 +44,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Exam implements Serializable{
+public class Exam implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull(message = " User cannot be blank.")
-    @ManyToOne(optional = false,fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Users userId;
 
@@ -121,6 +121,12 @@ public class Exam implements Serializable{
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<OrderItem> orderItem = new ArrayList<>();
+
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<ExamComment> examComment = new ArrayList<>();
+
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<Rate> rate = new ArrayList<>();
 
     public Exam() {
     }
@@ -314,7 +320,20 @@ public class Exam implements Serializable{
         this.orderItem = orderItem;
     }
 
+    public List<ExamComment> getExamComment() {
+        return examComment;
+    }
 
+    public void setExamComment(List<ExamComment> examComment) {
+        this.examComment = examComment;
+    }
 
-    
+    public List<Rate> getRate() {
+        return rate;
+    }
+
+    public void setRate(List<Rate> rate) {
+        this.rate = rate;
+    }
+
 }

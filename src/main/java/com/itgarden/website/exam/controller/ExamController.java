@@ -133,7 +133,7 @@ public class ExamController {
 
                 originalImage = ImageIO.read(pic.getInputStream());
 
-                Thumbnails.of(originalImage).forceSize(800, 600).toFile(serverFile);
+                Thumbnails.of(originalImage).forceSize(1040, 576).toFile(serverFile);
 
                 model.addAttribute("message", "You successfully uploaded");
 

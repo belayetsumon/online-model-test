@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="admin-layout">
+    <div layout:fragment = "main_content">
+        <div> <h4> Comments <small>Home>Comments</small></h4>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">  <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Comments List </div>
+                            <div class="col-sm-7 "> </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <span th:if="${ not #strings.isEmpty(message)}">
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span th:text="${message}" > </span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </span>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+
+                                        <th scope="col">Exam Title</th>
+
+                                        <th scope="col">Comments </th>
+
+                                        <th scope="col"> Status </th>
+
+                                        <th scope="col"> Created </th>
+
+                                        <th scope="col"> Updated </th>
+
+                                        <th scope="col"> Edit</th>
+
+                                        <th scope="col"> Delete </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="commentlists,status:${commentslist}">
+
+                                        <th th:text="${status.count}">1</th>
+
+
+                                        <td> <a th:text="${commentlists.exam.title}">    </a></td>
+                                        <td th:utext="${commentlists.comment}">Otto</td>
+                                        <td th:text="${commentlists.status}">Otto</td>
+                                        <td th:text="${commentlists.created}">Otto</td>
+                                        <td th:text="${commentlists.modified}">Otto</td>
+                                        <td>
+                                            <a type="button" class="btn btn-primary btn-block text-white" th:href="@{/examcomment/edit/{id}(id=${commentlists.id})}"><i class="far fa-comments"></i> Edit </a>
+                                        </td>
+                                        <td>
+                                            <a type="button" class="btn btn-light btn-block text-danger" th:href="@{/examcomment/delete/{id}(id=${commentlists.id})}"><i class="fas fa-star-half-alt"></i> Delete </a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div><!--  Card body end-->
+
+
+                </div><!--  Card  end-->
+
+
+            </div><!--  Main Content  end-->
+        </div>   <!--  Layout end-->

@@ -7,12 +7,23 @@ and open the template in the editor.
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-customar-page">
     <div layout:fragment = "main_content">
 
-        <div> <h4> Exam <small>Home>Exam </small></h4>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
+       
+        
+     <section class=" d-none d-sm-block">
+            <div class="row">
+
+                <div class="col-sm-3">
+
+                    <div   th:replace="customer-left-menu">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
+                </div>
+                <div class="col-sm-9">
+
+                  <div class="card">
                     <div class="card-header">
                         <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam Details</div>
                             <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/student-exam/index}">Close</a></div>
@@ -123,8 +134,149 @@ and open the template in the editor.
                     <div class="card-footer">
                     </div> <!--  Card footer end-->
                 </div><!--  Card  end-->
+                </div>
+        </section>
+
+        <section class=" mobile d-block d-sm-none">
+            <div class="row">
+
+                <div class="col-12">
+
+                    <div   th:replace="mobile-top-nav">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
 
 
-            </div>
-        </div>
-    </div></div>
+                    <div class="row mt-4"> </div> 
+                    <div   th:replace="customer_mobile_top_navigation">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
+                </div>
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                        <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Exam Details</div>
+                            <div class="col-sm-7 "> <a class="btn btn-danger btn-sm float-right" th:href="@{/student-exam/index}">Close</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <td> Name</td>
+                                <td> :</td>
+                                <td th:text="${exam_details.title}">Otto</td>
+
+                            </tr>
+
+
+                            <tr> <td> Image</td>
+                                <td> :</td>
+                                <td> 
+                                    <span th:if="${ not #strings.isEmpty(exam_details.imageName)}" class="badge bg-green pull-right"> 
+                                        <img  class="img-fluid" th:src="@{/files/}+${exam_details.imageName}" width="300px"  height="250px"/>
+                                    </span>
+
+                                    <span th:if="${#strings.isEmpty(exam_details.imageName)}" > Image Not Found </span></td>
+                            </tr>
+
+                            <tr> <td> Description</td>
+                                <td> :</td>
+                                <td th:text="${exam_details.description}"> </td>
+
+                            </tr>
+
+                            <tr> <td> Created</td>
+                                <td> :</td>
+                                <td>  <span th:text="${exam_details.created}"> </span> </td>
+
+                            </tr>
+
+                            <tr> <td> Created By</td>
+                                <td> :</td>
+                                <td>  <span th:text="${exam_details.createdBy}"> </span> </td>
+                            </tr>
+
+                            <tr> 
+
+                                <td> 
+
+                                    <a  type="button" class="btn btn-sm btn-warning" th:href="@{/student-test/save/{eid}(eid=${exam_details.id})}"> Create Test </a> 
+
+                                </td>
+
+                                <td> :</td>
+                                <td> 
+
+
+
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Test Start</th>
+
+                                        <th scope="col">Test Title</th>
+                                        <th scope="col">User</th>
+
+                                        <th scope="col"> Answer </th>
+
+                                        <th scope="col"> Marks</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="testlists,status:${testlist}">
+                                        <td th:text="${status.count}">   </td>
+                                        <td>  
+                                            <a  type="button" class="btn btn-sm btn-warning" th:href="@{/student-test/testdashboard/{tid}(tid=${testlists.id})}"> 
+                                                Start Test
+                                            </a> 
+
+                                        </td>
+                                        <td>  
+                                            <a th:href="@{/student-test/testdashboard/{tid}(tid=${testlists.id})}"> 
+
+                                                <span th:text="${testlists.exam.title}"></span>
+
+                                            </a> 
+
+                                        </td>
+                                        <td  th:text="${testlists.userId.name}">   </td>
+                                        <td>
+                                            <span th:text="${testlists.mark.size()}"></span>
+                                        </td>
+                                        <td>
+                                            <span th:text="${#aggregates.sum(testlists.mark.![value])}" ></span>
+                                        </td>
+
+
+                                    </tr>
+                                </tbody>
+                            </table>  
+                        </div>
+                    </div><!--  Card body end-->
+
+                    <div class="card-footer">
+                    </div> <!--  Card footer end-->
+                </div><!--  Card  end-->
+                </div>
+
+                <section class="mb-5"></section>
+                <div th:replace="bottom-nav"> </div>
+        </section>
+
+
+
+    </div>
+</div>

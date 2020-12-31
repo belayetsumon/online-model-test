@@ -6,12 +6,20 @@ and open the template in the editor.
 -->
 <div xmlns:th="http://www.thymeleaf.org" layout:decorator="front-layout-inner-vendor-page">
     <div layout:fragment = "main_content">
+          <section class=" d-none d-sm-block">
+            <div class="row">
 
-        <div> <h4> Instructor Question <small>Home>Question Details  </small></h4>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-sm-12">
+                <div class="col-sm-3">
+
+                    <div   th:replace="vendor-left-menu">
+                        Left side column. contains the sidebar 
+
+                        Left Side 
+                        =============================================== 
+                    </div>
+                </div>
+                <div class="col-sm-9">
+
                 <div class="card">
                     <div class="card-header">
                         <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Question  Details</div>
@@ -55,7 +63,129 @@ and open the template in the editor.
 
                             <tr> <td> Description</td>
                                 <td> :</td>
-                                <td th:text="${question_details.description}"> </td>
+                                <td th:utext="${question_details.description}"> </td>
+
+                            </tr>
+
+                            <tr> <td> Answer</td>
+                                <td> :</td>
+                                <td> 
+
+
+                                    <table class="table table-bordered">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Value</th>
+                                                <th scope="col">Title</th>                              
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr th:each="answerlists,status:${question_details.answer}">
+                                                <th th:text="${answerlists.answerno}">1</th>
+                                                <td th:text="${answerlists.value}">Otto</td>
+                                                <td th:text="${answerlists.title}">  </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr> <td> Created</td>
+                                <td> :</td>
+                                <td>  <span th:text="${question_details.created}"> </span> </td>
+
+                            </tr>
+
+                            <tr> <td> Created By</td>
+                                <td> :</td>
+                                <td>  <span th:text="${question_details.createdBy}"> </span> </td>
+                            </tr>
+
+                            <tr> <td>Updated </td>
+                                <td> :</td>
+                                <td>  <span th:text="${question_details.modified}"> </span></td>
+                            </tr>
+
+                            <tr> <td> Updated By</td>
+                                <td> :</td>
+                                <td> <span th:text="${question_details.modifiedBy}"> </span></td>
+                            </tr>
+                            <tr> 
+                                <td> <a th:href="@{/instructor-question/edit/{id}(id=${question_details.id})}"> Edit  </a></td>
+
+                                <td> </td>
+
+                                <td><a th:href="@{/instructor-question/delete/{id}(id=${question_details.id})}"> Delete </a></td>
+                            </tr>
+                        </table>
+
+                    </div><!--  Card body end-->
+
+                    <div class="card-footer">
+                    </div> <!--  Card footer end-->
+                </div><!--  Card  end-->
+                </div>
+        </section>
+
+        <section class=" mobile d-block d-sm-none">
+
+
+            <div th:replace="mobile-top-nav"></div>
+            <div class="row mt-5"> </div>
+            <div class="row mt-3"> </div> 
+            <div th:replace="instructor_mobile_top_navigation"></div>
+            <div class="row">
+                <div class="col-12">
+             <div class="card">
+                    <div class="card-header">
+                        <div class="row"> <div class="col-sm-5 font-weight-bold text-danger"><i class="fas fa-list"></i> Question  Details</div>
+                            <div class="col-sm-7 ">  <a class="btn btn-danger btn-sm float-right" th:href="@{/instructor-exam/question-by-exam/{examid}(examid=${question_details.exam.id})}">Close</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <td> Exam Title/Name</td>
+                                <td> :</td>
+                                <td th:text="${question_details.exam.title}">Otto</td>
+
+                            </tr>
+
+                            <tr>
+                                <td> Question No</td>
+                                <td> :</td>
+                                <td th:text="${question_details.questionno}">Otto</td>
+
+                            </tr>
+                            <tr>
+                                <td> Question Title</td>
+                                <td> :</td>
+                                <td th:text="${question_details.title}">Otto</td>
+
+                            </tr>
+
+
+
+                            <tr> <td> Image</td>
+                                <td> :</td>
+                                <td> 
+                                    <span th:if="${ not #strings.isEmpty(question_details.imageName)}" class="badge bg-green pull-right"> 
+                                        <img  class="img-responsive" th:src="@{/files/}+${question_details.imageName}" width="300px"  height="250px"/>
+                                    </span>
+
+                                    <span th:if="${#strings.isEmpty(question_details.imageName)}" > Image Not Found </span></td>
+                            </tr>
+
+                            <tr> <td> Description</td>
+                                <td> :</td>
+                                <td th:utext="${question_details.description}"> </td>
 
                             </tr>
 
@@ -123,7 +253,21 @@ and open the template in the editor.
                     </div> <!--  Card footer end-->
                 </div><!--  Card  end-->
 
+                </div>   <!--  Layout end-->
+            </div>
+
+
+            <section class="mb-5"></section>
+
+            <div th:replace="bottom-nav">
+
+                <!-- Header  -->
 
             </div>
-        </div>
+
+
+        </section>  
+        
+        
+        
     </div></div>

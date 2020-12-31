@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
@@ -84,13 +86,19 @@ public class Productsubcategory implements Serializable{
     
     @OneToMany(mappedBy = "productsubcategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Exam> exam = new ArrayList<>();
+    
+    @ManyToMany(mappedBy = "productsubcategory",fetch = FetchType.LAZY)
+    public Set<Exam> exams ;
+    
+    
+    
 
     /// End Audit //// 
 
     public Productsubcategory() {
     }
 
-    public Productsubcategory(Long id, Productcategory productcategory, String name, String slug, int orderno, String description, String imageName, Status status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified) {
+    public Productsubcategory(Long id, Productcategory productcategory, String name, String slug, int orderno, String description, String imageName, Status status, String createdBy, LocalDateTime created, String modifiedBy, LocalDateTime modified, Set<Exam> exams) {
         this.id = id;
         this.productcategory = productcategory;
         this.name = name;
@@ -103,6 +111,7 @@ public class Productsubcategory implements Serializable{
         this.created = created;
         this.modifiedBy = modifiedBy;
         this.modified = modified;
+        this.exams = exams;
     }
 
     public Long getId() {
@@ -208,5 +217,15 @@ public class Productsubcategory implements Serializable{
     public void setExam(List<Exam> exam) {
         this.exam = exam;
     }
+
+    public Set<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(Set<Exam> exams) {
+        this.exams = exams;
+    }
+
+    
     
 }

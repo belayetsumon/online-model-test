@@ -1,7 +1,7 @@
-<section style="background-color: #992337;color: #ffffff;">
+<section  class="d-none d-sm-block"style="background-color: #992337;color: #ffffff;">
     <div class="container-fluid" >
         <div class="row">
-            <div class="col-sm-6 text-left">
+            <div class="col-sm-6  d-none d-sm-block">
                 <ul class="list-inline">
                     <li  
                         class="list-inline-item"><a class="text-white"
@@ -35,8 +35,38 @@
                 </ul>
             </div>
 
-            <div class="col-sm-6 text-right">
+            <div class=" col-xs-12 text-center d-block d-sm-none">
                 <ul class="list-inline">
+                    
+                    <li  
+                        class="list-inline-item"><a class="text-white"
+                                                th:href="@{/}"
+                                                aria-current="page">Home</a></li>                    
+                    <li class="list-inline-item"></li>
+
+                    <li sec:authorize="isAuthenticated()" class="list-inline-item">
+                        <a class="text-white" th:href="@{/customer/index}">My Account</a> </li>
+
+
+                    <!--                    <li sec:authorize="hasAuthority('admin')" class="list-inline-item">
+                                            <a class="text-white" th:href="@{/admin/index}"> Admin Account</a> </li>-->
+
+                    <li class="list-inline-item"  >
+
+                        <div sec:authorize="isAuthenticated()">
+                            <a class="text-white" th:href="@{/users/logout}">Log Out</a>
+                        </div>
+
+                        <div sec:authorize="!isAuthenticated()">
+                            <a class="text-white"
+                               th:href="@{/front-view/member-login}">Login</a>
+                        </div>
+
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a class="text-white" th:href="@{/cart/index}">Cart <span class="badge badge-pill badge-warning" th:text="${totaltest}">4</span></a>
+                    </li>
                     <li class="list-inline-item"><a th:class="text-white"  th:href="@{/front-view/exam-category}">Exam Category</a></li>
                     <li class="list-inline-item"><a th:class="text-white"  th:href="@{/front-view/all-exam}">All Exam</a></li>
                     <li class="list-inline-item"><a th:class="text-white"  th:href="@{/front-view/all-instructor}">All Instructor</a></li>
@@ -54,7 +84,7 @@
         </div>
     </div>
 </section>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class=" d-none d-sm-block navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <div class="d-flex flex-grow-">
             <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>

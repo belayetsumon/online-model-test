@@ -31,6 +31,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class BlogCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -41,8 +42,6 @@ public class BlogCategory {
     @NotBlank(message = "Slug  is required.")
     private String slug;
 
-    @Lob
-    @NotBlank(message = "Answer  is required.")
     private String description;
 
     /// Audit /// 
@@ -63,7 +62,6 @@ public class BlogCategory {
     private LocalDateTime modified;
 
     /// End Audit //// 
-    
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "blogcategory")
     public List<Blog> blog;
@@ -154,7 +152,5 @@ public class BlogCategory {
     public void setBlog(List<Blog> blog) {
         this.blog = blog;
     }
-    
-    
-    
+
 }

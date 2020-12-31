@@ -46,8 +46,11 @@ public class VendorProfileController {
     public String create(Model model, Vendorprofile vendorprofile) {
 
         Users users = new Users();
+        
         users.setId(loggedUserService.activeUserid());
+        
         vendorprofile.setUserId(users);
+        
         return "vendor/profile/profile_add";
     }
 
